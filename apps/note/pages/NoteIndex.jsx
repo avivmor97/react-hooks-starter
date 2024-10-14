@@ -66,8 +66,8 @@ export function NoteIndex() {
     }
 
     return (
-      <div>
-        <h1>My Notes</h1>
+      <div className="notes-container">
+        <h1 className="main-notes-header">My Notes</h1>
         <button onClick={handleAddNote}>Add New Note</button>
         <div className="notes-list">
           {notes.map(note => (

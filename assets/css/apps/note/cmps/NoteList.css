@@ -1,1 +1,11 @@
- /* note list */
+.notes-list {
+    display: flex;
+    gap: 20px;
+    justify-items: center;
+    max-width: 1400px;
+    flex-wrap: wrap;
+
+}
+
+
+

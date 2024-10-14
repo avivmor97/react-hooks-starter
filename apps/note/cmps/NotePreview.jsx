@@ -6,7 +6,9 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
     function getNoteComponent(note) {
       switch (note.type) {
         case 'NoteTxt':
-          return <div>{note.info.txt}</div>
+          return <div>
+            <h1>Title</h1>
+            {note.info.txt}</div>
         case 'NoteImg':
           return <div><img src={note.info.url} alt={note.info.title} /><h4>{note.info.title}</h4></div>
         case 'NoteTodos':
