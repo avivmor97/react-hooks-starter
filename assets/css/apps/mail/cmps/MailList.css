@@ -1,1 +1,17 @@
  /* mail list */
+
+ .mail-list{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr ;
+    grid-template-rows: 50px 100px 100px;
+ }
+
+ .new-email{
+    grid-row: 1 / 1 ;
+    border-radius: 15px;
+    width: 60%;
+ }
+ 
+ .side-nav{
+    grid-row: 2 / 2 ;
+ }

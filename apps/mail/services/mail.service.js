@@ -11,7 +11,7 @@ const loggedinUser = {
     fullname: 'Mahatma Appsus'
 }
 
-// _createEmailsDemo()
+_createEmailsDemo()
 
 export const emailsService = {
     query,
@@ -62,7 +62,7 @@ function getDefaultFilter() {
 
 function _createEmailsDemo() {
 
-    let emails = storageService.loadFromStorage(EMAIL_KEY)
+    let emails = utilService.loadFromStorage(EMAIL_KEY)
 
     if (!emails || !emails.length) {
         let emails = []
@@ -93,7 +93,7 @@ function _createEmailsDemo() {
         'english-personalized-digest@quora.com',
         'user@appsus.com'
         ))
-        storageService.saveToStorage(EMAIL_KEY, emails)
+        utilService.saveToStorage(EMAIL_KEY, emails)
     }
 }
 

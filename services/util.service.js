@@ -7,6 +7,8 @@ export const utilService = {
     getDayName,
     getMonthName,
     getTimeStamp,
+    saveToStorage,
+    loadFromStorage,
 }
 
 function makeId(length = 6) {
@@ -68,3 +70,11 @@ function getTimeStamp(dateToStamp){
     return newDate
 }
 
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+}
+
+function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
+}
