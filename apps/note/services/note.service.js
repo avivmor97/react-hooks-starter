@@ -1,60 +1,29 @@
-import { utilService } from '../services/util.service.js'
+import { utilService } from '../services/utilService.js'
 
-
-export const noteService = {
-    getNotes,
-    createNote,
-    updateNote,
-    deleteNote,
-    duplicateNote
-
-
-
-}
 
 const notes = [
     {
-      id: 'n101',
+      id: utilService.makeId(),
       createdAt: Date.now(),
       type: 'NoteTxt',
-      isPinned: true,
+      isPinned: false,
       style: {
-        backgroundColor: '#00d'
+        backgroundColor: utilService.getRandomColor(),
       },
       info: {
-        txt: 'Fullstack Me Baby!'
-      }
-    },
-
-    {
-        id: 'n102',
-        createdAt: Date.now(),
-        type: 'NoteTxt',
-        isPinned: true,
-        style: {
-          backgroundColor: '#00d'
-        },
-        info: {
-          txt: 'Fullstack Me Baby!'
-        }
+        txt: 'Sample note',
       },
-
-      {
-        id: 'n103',
-        createdAt: Date.now(),
-        type: 'NoteTxt',
-        isPinned: true,
-        style: {
-          backgroundColor: '#00d'
-        },
-        info: {
-          txt: 'Fullstack Me Baby!'
-        }
-      }
-
+    },
   ]
-
-
+  
+  export const noteService = {
+    getNotes,
+    createNote,
+    deleteNote,
+    duplicateNote,
+    togglePin,
+  }
+  
   function getNotes() {
     return notes
   }
@@ -62,14 +31,7 @@ const notes = [
   function createNote(note) {
     note.id = utilService.makeId()
     note.createdAt = Date.now()
-    note.style.backgroundColor = utilService.getRandomColor()
     notes.push(note)
-  }
-  
-  
-  function updateNote(noteId, updatedNote) {
-    const idx = notes.findIndex(note => note.id === noteId)
-    if (idx !== -1) notes[idx] = updatedNote
   }
   
   function deleteNote(noteId) {
@@ -84,5 +46,10 @@ const notes = [
       notes.push(newNote)
     }
   }
-
-
+  
+  function togglePin(noteId) {
+    const note = notes.find(note => note.id === noteId)
+    if (note) {
+      note.isPinned = !note.isPinned
+    }
+  }
