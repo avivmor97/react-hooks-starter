@@ -8,7 +8,7 @@
 }
 
 .new-note-input {
-    width: 100% ;
+    width: 100%;
     max-width: 400px;
     padding: 12px;
     font-size: 16px;
@@ -58,7 +58,7 @@
     gap: 10px;
 }
 
-.note-edit-btns button {
+.note-edit-btn {
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
@@ -70,3 +70,4 @@
 .note-edit-btns button:last-child {
     background-color: #dc3545;
 }
+

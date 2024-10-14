@@ -1,44 +1,46 @@
 .note-preview {
     width: 238px;
-    padding: 16px;
-
+    padding: 24px;
+    cursor: pointer;
     margin-top: 10px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, height 0.3s ease;
     position: relative;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 16px;
     letter-spacing: 0.1px;
-
+    
+    overflow: hidden;
 }
 
-.note:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
 
-.note-btns {
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: none;
-}
-
-.note:hover .note-btns {
-    display: flex;
-}
-
-.note-btn {
-    background: none;
+.note-preview-btn {
+    opacity: 0; 
+    transform: translateY(10px); 
+    padding: 8px 16px;
     border: none;
-    margin: 0 4px;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
     cursor: pointer;
-    font-size: 14px;
+    margin-right: 8px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+
+.note-preview:hover .note-preview-btn {
+    opacity: 1;
+    transform: translateY(0); 
+    display: inline-block;
+}
+
+.note-preview-btn:last-child {
+    margin-right: 0;
 }
 
 .note-btn img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 70%;
 }

@@ -67,7 +67,6 @@ export function NoteIndex() {
 
     return (
         <div className="notes-container">
-        <h1 className="main-notes-header">My Notes</h1>
         {!isEditing && (
             <input 
                 type="text" 
