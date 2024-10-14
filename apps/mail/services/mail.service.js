@@ -1,7 +1,8 @@
 // mail service
 import { storageService } from "../../../services/async-storage.service"
-// import { storageService } from "../../../services/storage.service"
 import { utilService } from "../../../services/util.service.js"
+
+// import { storageService } from '../../../services/storage.service.js'
 
 const EMAIL_KEY = 'email-key'
 
@@ -10,7 +11,7 @@ const loggedinUser = {
     fullname: 'Mahatma Appsus'
 }
 
-_createEmailsDemo()
+// _createEmailsDemo()
 
 export const emailsService = {
     query,
@@ -61,9 +62,9 @@ function getDefaultFilter() {
 
 function _createEmailsDemo() {
 
-    //let emails = storageServiceA.loadFromStorage(EMAIL_KEY)
+    let emails = storageService.loadFromStorage(EMAIL_KEY)
 
-    //if (!emails || !emails.length) {
+    if (!emails || !emails.length) {
         let emails = []
         emails.push(_createEmail(utilService.getTimeStamp('05-06-2024'),
             'Accelerate development with AI',
@@ -93,7 +94,7 @@ function _createEmailsDemo() {
         'user@appsus.com'
         ))
         storageService.saveToStorage(EMAIL_KEY, emails)
-    //}
+    }
 }
 
 function getEmail(createdAt = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {

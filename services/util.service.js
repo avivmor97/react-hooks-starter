@@ -67,3 +67,12 @@ function getTimeStamp(dateToStamp){
     let newDate = new Date( dateToStamp[2], dateToStamp[1] - 1, dateToStamp[0]);
     return newDate
 }
+
+export function saveToStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+export function loadFromStorage(key) {
+    const data = localStorage.getItem(key)
+    return (data) ? JSON.parse(data) : undefined
+}
