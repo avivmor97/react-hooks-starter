@@ -9,7 +9,7 @@ export function MailList(mails) {
                 <tbody>
                 <tr key={mail.id}>
                     <td >{mail.subject}</td>
-                    <td >{mails.count}</td>
+                    <td >{mail.body}</td>
                 </tr></tbody>))}
             </table>
     </selection>
