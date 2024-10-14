@@ -1,17 +1,75 @@
  /* mail list */
-
- .mail-list{
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr ;
-    grid-template-rows: 50px 100px 100px;
+ .mail-list {
+    display: flex;
+    height: 100vh;
+    background-color: #F1F3F4;
+    padding: 20px;
  }
-
- .new-email{
-    grid-row: 1 / 1 ;
-    border-radius: 15px;
-    width: 60%;
+ .side-nav {
+    width: 250px;
+    background-color: white;
+    padding: 20px;
+    margin-right: 20px;
+    border-right: 1px solid #E0E0E0;
+    list-style-type: none;
  }
- 
- .side-nav{
-    grid-row: 2 / 2 ;
+ .side-nav li {
+    padding: 12px 0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+ }
+ .side-nav li:hover {
+    background-color: #E8F0FE;
+    border-radius: 4px;
+    padding-left: 10px;
+ }
+ .new-email {
+    display: block;
+    width: 150px;
+    height: 100px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .new-email:hover {
+    background-color: #0056B3;
+ }
+ .mail-table {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    table-layout: fixed;
+ }
+ .mail-table tbody tr {
+    border-bottom: 1px solid #E0E0E0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+ }
+ .mail-table tbody tr:hover {
+    background-color: #F1F3F4;
+ }
+ .mail-table td {
+    padding: 16px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+ }
+ .mail-table td:first-child {
+    font-weight: bold;
+    color: #202124;
+    width: 40%;
+ }
+ .mail-table td:last-child {
+    color: #5F6368;
  }
