@@ -52,18 +52,17 @@ function duplicateNote(noteId) {
 }
 
 function togglePin(noteId) {
-    return new Promise((resolve, reject) => {
-      const note = notes.find(note => note.id === noteId)
-      if (note) {
-        note.isPinned = !note.isPinned
-        _saveNotes()
-        resolve(note)  
-      } else {
-        reject(new Error('Note not found'))  
-      }
-    })
-  }
-  
+  return new Promise((resolve, reject) => {
+    const note = notes.find(note => note.id === noteId)
+    if (note) {
+      note.isPinned = !note.isPinned
+      _saveNotes()
+      resolve(note)  
+    } else {
+      reject(new Error('Note not found'))  
+    }
+  })
+}
 
 function _saveNotes() {
   storageService.saveToStorage(NOTE_KEY, notes)
