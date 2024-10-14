@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    getTimeStamp,
 }
 
 function makeId(length = 6) {
@@ -59,4 +60,10 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+function getTimeStamp(dateToStamp){
+    dateToStamp=dateToStamp.split('-')
+    let newDate = new Date( dateToStamp[2], dateToStamp[1] - 1, dateToStamp[0]);
+    return newDate
 }
