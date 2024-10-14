@@ -22,7 +22,7 @@ export function MailIndex() {
     if (!emails) return
     return (
         <section className="emails-index">
-            <MailList mail={emails}/>
+            <MailList mails={emails}/>
         </section>
     )
 }
