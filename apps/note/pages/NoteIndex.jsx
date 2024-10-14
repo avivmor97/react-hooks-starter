@@ -66,9 +66,17 @@ export function NoteIndex() {
     }
 
     return (
-      <div className="notes-container">
+        <div className="notes-container">
         <h1 className="main-notes-header">My Notes</h1>
-        <button onClick={handleAddNote}>Add New Note</button>
+        {!isEditing && (
+            <input 
+                type="text" 
+                placeholder="New note..." 
+                onClick={handleAddNote}
+                readOnly
+                className="new-note-input"
+            />
+        )}
         <div className="notes-list">
           {notes.map(note => (
             <NotePreview 
