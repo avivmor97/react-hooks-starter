@@ -1,5 +1,6 @@
 // mail service
 import { storageService } from "../../../services/async-storage.service"
+// import { storageServiceA } from "../../../services/storage.service"
 import { utilService } from "../../../services/util.service.js"
 
 const EMAIL_KEY = 'email-key'
@@ -8,6 +9,7 @@ const loggedinUser = {
     email: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
 }
+
 _createEmailsDemo()
 
 export const emailsService = {
@@ -58,10 +60,12 @@ function getDefaultFilter() {
 }
 
 function _createEmailsDemo() {
-    let emailS = utilService.loadFromStorage(EMAIL_KEY)
-    if (!emailS || !emailS.length) {
-        emailS = []
-        emailS.push(_createEmail(utilService.getTimeStamp('05-06-2024'),
+
+    //let emails = storageServiceA.loadFromStorage(EMAIL_KEY)
+
+    //if (!emails || !emails.length) {
+        let emails = []
+        emails.push(_createEmail(utilService.getTimeStamp('05-06-2024'),
             'Accelerate development with AI',
             'Were excited to share three ways you can use AI to accelerate your development on Pipedream! AI is no longer a secret weapon in software development and we are embedding AI functionality in all parts of the the product, including building, testing, and maintaining workflows.',
             false,
@@ -70,7 +74,7 @@ function _createEmailsDemo() {
             'sacerdoti@pipedream.com',
             'user@appsus.com'
         ))
-        emailS.push(_createEmail(utilService.getTimeStamp('05-10-2024'),
+        emails.push(_createEmail(utilService.getTimeStamp('05-10-2024'),
             'Why is ReactJS so bad?',
             'Abdallah Yashir, Expert Software Developer • Answered April 19, 2018 : Why is ReactJS so bad? ReactJS is not a bad Javascript library by no means. It is actually in high demand in the marketplace around the world.',
             false,
@@ -79,7 +83,7 @@ function _createEmailsDemo() {
             'english-personalized-digest@quora.com',
             'user@appsus.com'
         ))
-        emailS.push(_createEmail(utilService.getTimeStamp('08-05-2024'),
+        emails.push(_createEmail(utilService.getTimeStamp('08-05-2024'),
         'What are some interesting SQL queries?',
         'Here’s some of my personal favorites, from the “queries that don"t do much, but are still useful” department',
         false,
@@ -88,8 +92,8 @@ function _createEmailsDemo() {
         'english-personalized-digest@quora.com',
         'user@appsus.com'
         ))
-        storageService.saveToStorage(EMAIL_KEY, emailS)
-    }
+        storageService.saveToStorage(EMAIL_KEY, emails)
+    //}
 }
 
 function getEmail(createdAt = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {
@@ -106,7 +110,7 @@ function getEmail(createdAt = '', subject = '', body = '', isRead = false, sentA
 }
 
 function _createEmail(createdAt = '', subject = '', body = '', isRead = false, sentAt = '', removedAt = null, from = '', to = '') {
-    const book = getBook(createdAt, subject, body, isRead, sentAt, removedAt, from, to)
-    book.id = utilService.makeId(10)
-    return book
+    const email = getEmail(createdAt, subject, body, isRead, sentAt, removedAt, from, to)
+    email.id = utilService.makeId(10)
+    return email
 }
