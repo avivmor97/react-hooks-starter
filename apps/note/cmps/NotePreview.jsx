@@ -1,39 +1,43 @@
+import { NoteTxt } from '../cmps/NoteTxt .jsx'
+import { NoteImg } from '../cmps/NoteImg.jsx'
+import { NoteTodos } from '../cmps/NoteTodos.jsx'
+
 export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
+    function getNoteComponent(note) {
+      switch (note.type) {
+        case 'NoteTxt':
+          return <div>{note.info.txt}</div>
+        case 'NoteImg':
+          return <div><img src={note.info.url} alt={note.info.title} /><h4>{note.info.title}</h4></div>
+        case 'NoteTodos':
+          return (
+            <div>
+              <h4>{note.info.title}</h4>
+              <ul>
+                {note.info.todos.map((todo, idx) => (
+                  <li key={idx}>{todo.txt} {todo.doneAt ? '✔' : ''}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        default:
+          return <div>Unknown note type</div>
+      }
+    }
+  
     return (
       <div className="note-preview" style={{ backgroundColor: note.style.backgroundColor }}>
-        <DynamicNote note={note} />
-        <div className="note-controls">
-          <button onClick={() => onPin(note.id)}>{note.isPinned ? 'Unpin' : 'Pin'}</button>
-          <button onClick={() => onDuplicate(note.id)}>Duplicate</button>
-          <button onClick={() => onDelete(note.id)}>Delete</button>
-        </div>
+        {getNoteComponent(note)}
+        <button onClick={() => onDelete(note.id)}>Delete</button>
+        <button onClick={() => onDuplicate(note.id)}>Duplicate</button>
+        <button onClick={() => onPin(note.id)}>{note.isPinned ? 'Unpin' : 'Pin'}</button>
       </div>
     )
   }
   
-  function DynamicNote({ note }) {
-    switch (note.type) {
-      case 'NoteTxt':
-        return <NoteTxt note={note} />
-      case 'NoteImg':
-        return <NoteImg note={note} />
-      case 'NoteTodos':
-        return <NoteTodos note={note} />
-      case 'NoteAudio':
-        return <NoteAudio note={note} />
-      case 'NoteMap':
-        return <NoteMap note={note} />
-      // Add other note types here...
-      default:
-        return null
-    }
-  }
-  
-  function NoteTxt({ note }) {
-    return <p>{note.info.txt}</p>
-  }
-  
-  function NoteImg({ note }) {
-    return <img src={note.info.url} alt="Note" />
-  }
+
+
+
+
+
   

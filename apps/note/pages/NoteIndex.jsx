@@ -2,10 +2,12 @@ const { useState, useEffect } = React
 
 import { noteService } from '../services/note.service.js'
 import { NotePreview } from '../cmps/NotePreview.jsx'
-
+import { NoteEdit } from '../cmps/NoteEdit.jsx'
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    const [isEditing, setIsEditing] = useState(false)
+    const [selectedNote, setSelectedNote] = useState(null)
 
     useEffect(() => {
       loadNotes()
@@ -20,11 +22,9 @@ export function NoteIndex() {
         noteService.deleteNote(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-                console.log('Note removed successfully')  
             })
             .catch(err => {
                 console.error('Error removing note:', err)
-                
             })
     }
 
@@ -32,31 +32,43 @@ export function NoteIndex() {
         noteService.duplicateNote(noteId)
             .then(newNote => {
                 setNotes(prevNotes => [...prevNotes, newNote])
-                console.log('Note duplicated successfully')  
             })
             .catch(err => {
                 console.error('Error duplicating note:', err)
-                
             })
     }
+
     function onPinNote(noteId) {
         noteService.togglePin(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.map(note => 
                     note.id === noteId ? { ...note, isPinned: !note.isPinned } : note
                 ))
-                console.log('Note pin status toggled successfully')  
             })
             .catch(err => {
                 console.error('Error toggling pin status:', err)
-                
             })
     }
-    
+
+    function handleAddNote() {
+        setSelectedNote(null)
+        setIsEditing(true)
+    }
+
+    function handleSaveNote(newNote) {
+        noteService.createNote(newNote)
+        setNotes(prevNotes => [...prevNotes, newNote])
+        setIsEditing(false)
+    }
+
+    function handleCloseEdit() {
+        setIsEditing(false)
+    }
 
     return (
       <div>
         <h1>My Notes</h1>
+        <button onClick={handleAddNote}>Add New Note</button>
         <div className="notes-list">
           {notes.map(note => (
             <NotePreview 
@@ -68,6 +80,14 @@ export function NoteIndex() {
             />
           ))}
         </div>
+
+        {isEditing && (
+          <NoteEdit 
+            onSaveNote={handleSaveNote} 
+            note={selectedNote} 
+            onClose={handleCloseEdit} 
+          />
+        )}
       </div>
     )
 }
