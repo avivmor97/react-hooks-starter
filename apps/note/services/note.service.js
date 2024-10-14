@@ -39,6 +39,8 @@ function deleteNote(noteId) {
 }
 
 function duplicateNote(noteId) {
+    
+    
   const note = notes.find(note => note.id === noteId)
   if (note) {
     const newNote = { ...note, id: utilService.makeId() }
