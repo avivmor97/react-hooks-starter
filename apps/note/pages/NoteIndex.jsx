@@ -2,23 +2,13 @@ const { useState, useEffect } = React
 
 import { noteService } from '../services/note.service.js'
 import { NotePreview } from '../cmps/NotePreview.jsx'
-import { eventBusService } from '../../../services/event-bus.service.js'
+
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
 
     useEffect(() => {
       loadNotes()
-
-      // Subscribe to the 'notes-updated' event to update notes whenever changes occur
-      const unsubscribe = eventBusService.on('notes-updated', (updatedNotes) => {
-          setNotes(updatedNotes)
-      })
-
-      // Cleanup on component unmount
-      return () => {
-        unsubscribe()
-      }
     }, [])
 
     function loadNotes() {
@@ -27,22 +17,42 @@ export function NoteIndex() {
     }
 
     function onDeleteNote(noteId) {
-      noteService.deleteNote(noteId)
-      // Emit the 'notes-updated' event after deletion
-      eventBusService.emit('notes-updated', noteService.getNotes())
+        noteService.deleteNote(noteId)
+            .then(() => {
+                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+                console.log('Note removed successfully')  
+            })
+            .catch(err => {
+                console.error('Error removing note:', err)
+                
+            })
     }
 
     function onDuplicateNote(noteId) {
-      noteService.duplicateNote(noteId)
-      // Emit the 'notes-updated' event after duplication
-      eventBusService.emit('notes-updated', noteService.getNotes())
+        noteService.duplicateNote(noteId)
+            .then(newNote => {
+                setNotes(prevNotes => [...prevNotes, newNote])
+                console.log('Note duplicated successfully')  
+            })
+            .catch(err => {
+                console.error('Error duplicating note:', err)
+                
+            })
     }
-
     function onPinNote(noteId) {
-      noteService.togglePin(noteId)
-      // Emit the 'notes-updated' event after pin toggle
-      eventBusService.emit('notes-updated', noteService.getNotes())
+        noteService.togglePin(noteId)
+            .then(() => {
+                setNotes(prevNotes => prevNotes.map(note => 
+                    note.id === noteId ? { ...note, isPinned: !note.isPinned } : note
+                ))
+                console.log('Note pin status toggled successfully')  
+            })
+            .catch(err => {
+                console.error('Error toggling pin status:', err)
+                
+            })
     }
+    
 
     return (
       <div>

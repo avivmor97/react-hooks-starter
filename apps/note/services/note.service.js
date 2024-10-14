@@ -1,6 +1,6 @@
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/storage.service.js'
-import { eventBusService } from '../../../services/event-bus.service.js'
+
 
 const NOTE_KEY = 'notesDB'
 let notes = _loadNotes()
@@ -22,38 +22,49 @@ function createNote(note) {
   note.createdAt = Date.now()
   notes.push(note)
   _saveNotes()
-  eventBusService.emit('notes-updated', notes) // Emit an event after creating a note
 }
 
 function deleteNote(noteId) {
-  const idx = notes.findIndex(note => note.id === noteId)
-  if (idx !== -1) {
-    notes.splice(idx, 1)
-    _saveNotes()
-    eventBusService.emit('notes-updated', notes) // Emit an event after deleting a note
-  }
+  return new Promise((resolve, reject) => {
+    const idx = notes.findIndex(note => note.id === noteId)
+    if (idx !== -1) {
+      notes.splice(idx, 1)
+      _saveNotes()
+      resolve()  
+    } else {
+      reject(new Error('Note not found'))  
+    }
+  })
 }
 
 function duplicateNote(noteId) {
-  const note = notes.find(note => note.id === noteId)
-  if (note) {
-    const newNote = { ...note, id: utilService.makeId() }
-    notes.push(newNote)
-    _saveNotes()
-    eventBusService.emit('notes-updated', notes) // Emit an event after duplicating a note
-  }
+  return new Promise((resolve, reject) => {
+    const note = notes.find(note => note.id === noteId)
+    if (note) {
+      const newNote = { ...note, id: utilService.makeId() }
+      notes.push(newNote)
+      _saveNotes()
+      resolve(newNote)  
+    } else {
+      reject(new Error('Note not found'))  
+    }
+  })
 }
 
 function togglePin(noteId) {
-  const note = notes.find(note => note.id === noteId)
-  if (note) {
-    note.isPinned = !note.isPinned
-    _saveNotes()
-    eventBusService.emit('notes-updated', notes) // Emit an event after toggling a note's pin
+    return new Promise((resolve, reject) => {
+      const note = notes.find(note => note.id === noteId)
+      if (note) {
+        note.isPinned = !note.isPinned
+        _saveNotes()
+        resolve(note)  
+      } else {
+        reject(new Error('Note not found'))  
+      }
+    })
   }
-}
+  
 
-// Private functions
 function _saveNotes() {
   storageService.saveToStorage(NOTE_KEY, notes)
 }
