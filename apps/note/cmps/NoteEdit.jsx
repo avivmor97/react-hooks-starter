@@ -32,26 +32,25 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
 
     return (
         <div className="note-edit">
-            <h2>{note ? 'Edit Note' : 'Create New Note'}</h2>
-            <input
+            <input className="note-edit-cmp"
                 type="text"
                 placeholder="Note Header"
                 value={noteHeader}
                 onChange={(e) => setNoteHeader(e.target.value)}
             />
-            <textarea
+            <textarea className="note-edit-cmp"
                 placeholder={noteType === 'NoteTodos' ? 'Todos (comma separated)' : 'Note Content'}
                 value={noteText}
                 onChange={(e) => setNoteText(e.target.value)}
             />
-            <select value={noteType} onChange={(e) => setNoteType(e.target.value)}>
+            <select className="note-type-selector" value={noteType} onChange={(e) => setNoteType(e.target.value)}>
                 <option value="NoteTxt">Text Note</option>
                 <option value="NoteImg">Image Note</option>
                 <option value="NoteVideo">Video Note</option>
                 <option value="NoteTodos">Todo List</option>
             </select>
-            <button onClick={handleSave}>Save Note</button>
-            <button onClick={onClose}>Cancel</button>
+            <button className="note-edit-btn" onClick={handleSave}>Save Note</button>
+            <button className="note-edit-btn" onClick={onClose}>Cancel</button>
         </div>
     );
 }

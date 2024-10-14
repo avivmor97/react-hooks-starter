@@ -1,0 +1,74 @@
+.new-note-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+
+.note-edit {
+    margin-top: 30px; /* Aligning with the margin-top of .note-preview */
+    width: 238px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+    transition: box-shadow 0.3s ease, height 0.3s ease;
+    position: relative;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Keeping this for the form structure */
+    border: none; /* Removing the border to match .note-preview */
+}
+
+.note-edit-header {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.note-content-input {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.note-edit-cmp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: #fff;
+    margin-top: 1em;
+    
+}
+
+.note-type-selector {
+    flex-grow: 1;
+    margin-top: 1em;
+
+}
+
+.note-edit-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.note-edit-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #449eff;
+    color: white;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-top: 1em;
+}
+

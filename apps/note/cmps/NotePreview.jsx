@@ -7,8 +7,8 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
       switch (note.type) {
         case 'NoteTxt':
           return <div>
-            <h1 className="note-title">{note.info.title}</h1> {/* Render the note title */}
-            {note.info.txt}
+            <h1 className="note-title">{note.info.title}</h1> 
+            <div className="note-content">{note.info.txt}</div>
           </div>
         case 'NoteImg':
           return <div><img src={note.info.url} alt={note.info.title} /><h4>{note.info.title}</h4></div>
