@@ -23,13 +23,12 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
         return <NoteAudio note={note} />
       case 'NoteMap':
         return <NoteMap note={note} />
-      // Add other note types
+      // Add other note types here...
       default:
         return null
     }
   }
   
-  // Individual note type components
   function NoteTxt({ note }) {
     return <p>{note.info.txt}</p>
   }
@@ -37,6 +36,4 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
   function NoteImg({ note }) {
     return <img src={note.info.url} alt="Note" />
   }
-  
-  // Add more components for other note types...
   

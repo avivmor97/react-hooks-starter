@@ -7,18 +7,18 @@ import { Home } from "./pages/Home.jsx"
 import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
 import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
 
-
-
 export function App() {
-    return <Router>
+    return (
+      <Router>
         <section className="app">
-            <AppHeader />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/mail" element={<MailIndex />} />
-                <Route path="/note" element={<NoteIndex />} />
-            </Routes>
+          <AppHeader />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/mail" element={<MailIndex />} />
+            <Route path="/note" element={<NoteIndex />} />
+          </Routes>
         </section>
-    </Router>
+      </Router>
+    )
 }
