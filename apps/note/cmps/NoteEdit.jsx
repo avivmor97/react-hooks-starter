@@ -1,5 +1,7 @@
 const { useState } = React
 
+import { utilService } from '../../../services/util.service.js'
+
 export function NoteEdit({ onSaveNote, note = null, onClose }) {
     const [noteType, setNoteType] = useState(note ? note.type : 'NoteTxt')
     const [noteText, setNoteText] = useState(note ? note.info.txt : '')
@@ -10,7 +12,7 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             type: noteType,
             info: {},
             style: {
-                backgroundColor: '#00d',
+                backgroundColor: utilService.getRandomColor(),
             },
         }
 
