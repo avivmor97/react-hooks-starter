@@ -6,16 +6,16 @@ export function MailList({ mails }) {
         <section className="mail-list">
             <button className="new-email">Compose</button>
             <ul className="side-nav">
-                <li>Inbox</li>
-                <li>Starred</li>
-                <li>Important</li>
-                <li>Sent</li>
-                <li>Draft</li>
-                <li>Categories</li>
+                <li className="menu-item">Inbox</li>
+                <li className="menu-item">Starred</li>
+                <li className="menu-item">Important</li>
+                <li className="menu-item">Sent</li>
+                <li className="menu-item">Draft</li>
+                <li className="menu-item">Categories</li>
             </ul>
             <table className="mail-table">
                 {mails.map(mail => (
-                    <tbody>
+                    <tbody key={mail.id}>
                         <tr key={mail.id}>
                             <td >{mail.subject}</td>
                             <td >{mail.body}</td>
