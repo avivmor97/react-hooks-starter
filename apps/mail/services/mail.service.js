@@ -1,6 +1,6 @@
 // mail service
 import { storageService } from "../../../services/async-storage.service"
-// import { storageServiceA } from "../../../services/storage.service"
+// import { storageService } from "../../../services/storage.service"
 import { utilService } from "../../../services/util.service.js"
 
 const EMAIL_KEY = 'email-key'
@@ -26,11 +26,11 @@ function query(filterBy = {}) {
         .then(email => {
             if (filterBy.title) {
                 const regex = new RegExp(filterBy.subject, 'i')
-                book = book.filter(book => regex.test(email.subject))
+                email = email.filter(book => regex.test(email.subject))
             }
             if (filterBy.description) {
                 const regex = new RegExp(filterBy.body, 'i')
-                book = book.filter(book => regex.test(email.body))
+                email = email.filter(book => regex.test(email.body))
             }
             if (filterBy.createdAt) {
                 email = email.filter(email => email.createdAt >= filterBy.createdAt)
@@ -47,7 +47,7 @@ function remove(emailId) {
     return storageService.remove(EMAIL_KEY, emailId)
 }
 
-function save(book) {
+function save(email) {
     if (email.id) {
         return storageService.put(EMAIL_KEY, email)
     } else {

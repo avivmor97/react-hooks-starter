@@ -7,22 +7,22 @@ import { emailsService} from "../services/mail.service.js"
 
 export function MailIndex() {
     // return <div>mail app</div>
-    const [emails,setEmails]=useState(null)
+    // const [emails,setEmails]=useState(null)
 
-    useEffect(()=>{
-        loadEmails()
-    },[])
+    // useEffect(()=>{
+    //     loadEmails()
+    // },[])
 
-    function loadEmails(){
-        emailsService.query().then(setEmails).catch(err=>{
-            console.log('err', err)
-        })
-    }
+    // function loadEmails(){
+    //     emailsService.query().then(setEmails).catch(err=>{
+    //         console.log('err', err)
+    //     })
+    // }
 
-    if (!emails) return
+    // if (!emails) return
     return (
         <section className="emails-index">
-            <h2>Books on-line</h2>
+            <h2>emails list</h2>
 
         </section>
     )
