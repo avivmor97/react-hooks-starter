@@ -4,8 +4,9 @@ import { noteService } from '../services/note.service.js'
 export function NotePreview({ note, onDelete, onDuplicate, onPin, onArchiveNote }) {
   const [bgColor, setBgColor] = useState(note.style.backgroundColor)
 
+  // Call the parent's onArchiveNote to trigger the state update in NoteIndex
   function onMoveToArchive() {
-    noteService.archiveNote(note.id)
+    onArchiveNote(note.id)
   }
 
   function onChangeBgColor() {

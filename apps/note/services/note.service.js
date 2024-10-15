@@ -18,21 +18,17 @@ export const noteService = {
   saveNoteColor
 }
 
-
 function getNotes() {
   return notes.filter(note => !note.isArchived && !note.isTrash)
 }
-
 
 function getPinnedNotes() {
   return notes.filter(note => note.isPinned && !note.isArchived && !note.isTrash)
 }
 
-
 function getArchivedNotes() {
   return notes.filter(note => note.isArchived)
 }
-
 
 function getTrashNotes() {
   return notes.filter(note => note.isTrash)
@@ -47,22 +43,30 @@ function createNote(note) {
   _saveNotes()
 }
 
-
 function archiveNote(noteId) {
-  const note = notes.find(note => note.id === noteId)
-  if (note) {
-    note.isArchived = !note.isArchived
-    _saveNotes()
-  }
+  return new Promise((resolve, reject) => {
+    const note = notes.find(note => note.id === noteId)
+    if (note) {
+      note.isArchived = !note.isArchived
+      _saveNotes()
+      resolve(note) 
+    } else {
+      reject(new Error('Note not found'))
+    }
+  })
 }
 
-
 function trashNote(noteId) {
-  const note = notes.find(note => note.id === noteId)
-  if (note) {
-    note.isTrash = !note.isTrash
-    _saveNotes()
-  }
+  return new Promise((resolve, reject) => {
+    const note = notes.find(note => note.id === noteId)
+    if (note) {
+      note.isTrash = !note.isTrash
+      _saveNotes()
+      resolve(note) 
+    } else {
+      reject(new Error('Note not found'))
+    }
+  })
 }
 
 function deleteNote(noteId) {
@@ -98,7 +102,7 @@ function togglePin(noteId) {
     if (note) {
       note.isPinned = !note.isPinned
       _saveNotes()
-      resolve(note)
+      resolve(note) 
     } else {
       reject(new Error('Note not found'))
     }
@@ -138,7 +142,7 @@ function _loadNotes() {
       },
       info: {
         title: 'Love Letter',
-        txt: 'This is my Love Letter to you, my love. I wanted to reach out and say hello. Life has been busy on my end, but I always think about the good times we shared ets catch up soon over coffee or a video call. Id love to hear how youve been.'
+        txt: 'This is my Love Letter to you, my love. I wanted to reach out and say hello. Life has been busy on my end, but I always think about the good times we shared. Lets catch up soon over coffee or a video call. I\'d love to hear how you\'ve been.'
       }
     },
     {
@@ -154,7 +158,6 @@ function _loadNotes() {
       info: {
         title: 'Grocery List',
         todos: [
-          
           { txt: 'Buy milk', doneAt: null },
           { txt: 'Buy bread', doneAt: Date.now() },
           { txt: 'Buy eggs', doneAt: null }
@@ -197,8 +200,6 @@ function _loadNotes() {
     }
   ];
 }
-
-
 
 function saveNoteColor(noteId, color) {
   const note = notes.find(note => note.id === noteId);

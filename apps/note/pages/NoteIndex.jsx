@@ -5,50 +5,48 @@ import { NotePreview } from '../cmps/NotePreview.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
 
 export function NoteIndex() {
-    const [notes, setNotes] = useState([]) // State to store notes
-    const [isEditing, setIsEditing] = useState(false) // State for note editing
-    const [selectedNote, setSelectedNote] = useState(null) // State for currently selected note for editing
-    const [currentView, setCurrentView] = useState('notes') // State for current view (notes, pinned, archive, trash)
+    const [notes, setNotes] = useState([])
+    const [isEditing, setIsEditing] = useState(false)
+    const [selectedNote, setSelectedNote] = useState(null)
+    const [currentView, setCurrentView] = useState('notes')
 
     useEffect(() => {
-        loadNotes() // Load notes whenever the view changes
+        loadNotes()
     }, [currentView])
 
-    // Function to load notes based on the current view
+
     function loadNotes() {
         let filteredNotes
         switch (currentView) {
             case 'pinned':
-                filteredNotes = noteService.getPinnedNotes() // Get only pinned notes
+                filteredNotes = noteService.getPinnedNotes()
                 break
             case 'archive':
-                filteredNotes = noteService.getArchivedNotes() // Get only archived notes
+                filteredNotes = noteService.getArchivedNotes()
                 break
             case 'trash':
-                filteredNotes = noteService.getTrashNotes() // Get only trashed notes
+                filteredNotes = noteService.getTrashNotes()
                 break
             default:
-                filteredNotes = noteService.getNotes() // Get regular notes (non-archived, non-trashed)
+                filteredNotes = noteService.getNotes()
         }
         setNotes(filteredNotes)
     }
 
-
     function onDeleteNote(noteId) {
         noteService.deleteNote(noteId)
             .then(() => {
-                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId)) // Remove note from the state
+                loadNotes()
             })
             .catch(err => {
                 console.error('Error removing note:', err)
             })
     }
 
-   
     function onDuplicateNote(noteId) {
         noteService.duplicateNote(noteId)
-            .then(newNote => {
-                setNotes(prevNotes => [...prevNotes, newNote]) 
+            .then(() => {
+                loadNotes()
             })
             .catch(err => {
                 console.error('Error duplicating note:', err)
@@ -58,40 +56,38 @@ export function NoteIndex() {
     function onPinNote(noteId) {
         noteService.togglePin(noteId)
             .then(() => {
-                setNotes(prevNotes => prevNotes.map(note =>
-                    note.id === noteId ? { ...note, isPinned: !note.isPinned } : note
-                )) 
+                loadNotes()
             })
             .catch(err => {
                 console.error('Error toggling pin status:', err)
             })
     }
 
-   
     function onArchiveNote(noteId) {
         noteService.archiveNote(noteId)
-        setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId)) 
+            .then(() => {
+                loadNotes()
+            })
+            .catch(err => {
+                console.error('Error archiving note:', err)
+            })
     }
 
-   
     function handleAddNote() {
-        setSelectedNote(null) 
-        setIsEditing(true) 
+        setSelectedNote(null)
+        setIsEditing(true)
     }
 
-   
     function handleSaveNote(newNote) {
-        noteService.createNote(newNote) 
-        setNotes(prevNotes => [...prevNotes, newNote]) 
-        setIsEditing(false) 
+        noteService.createNote(newNote)
+        setNotes(prevNotes => [...prevNotes, newNote])
+        setIsEditing(false)
     }
 
-    
     function handleCloseEdit() {
-        setIsEditing(false) 
+        setIsEditing(false)
     }
 
-    
     function handleSidenavClick(view) {
         setCurrentView(view)
     }
@@ -132,8 +128,9 @@ export function NoteIndex() {
                             onDelete={onDeleteNote}
                             onDuplicate={onDuplicateNote}
                             onPin={onPinNote}
-                            onArchiveNote={onArchiveNote}  
+                            onArchiveNote={onArchiveNote}
                         />
+
                     ))}
                 </div>
             </div>
