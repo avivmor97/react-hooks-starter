@@ -17,10 +17,10 @@ export function MailContainer({ mails }) {
         <Fragment>
             <button className="new-email">Compose</button>
             <section className="mail-list">
-                <MailSideNav mails={mails}/>
-                {!selectedMailId 
-                    ?  <MailList onSelectMailId={onSelectMailId} mails={mails}/>
-                    : <MailDetails onBack={() => setSelectedMailId(null)} carId={mailId} />
+                <MailSideNav mails={mails} />
+                {!selectedMailId
+                    ? <MailList onSelectMailId={onSelectMailId} mails={mails} />
+                    : <MailDetails onBack={() => setSelectedMailId(null)} emailId={selectedMailId} />
                 }
             </section>
         </Fragment>

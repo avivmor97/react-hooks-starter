@@ -1,0 +1,26 @@
+.nav-toolbar{
+    display: flex;
+    list-style-type: none;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.toolbar-item{
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.email-body{
+    display: grid;
+}
+
+.email-from,.email-to{
+    margin-block-end: 0px;
+}
+.subject-header{
+    font-size: 1.65em;
+}
+
+.email-from{
+    font-size: 1.1em;
+}
