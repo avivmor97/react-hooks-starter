@@ -5,48 +5,50 @@ import { NotePreview } from '../cmps/NotePreview.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
 
 export function NoteIndex() {
-    const [notes, setNotes] = useState([])
-    const [isEditing, setIsEditing] = useState(false)
-    const [selectedNote, setSelectedNote] = useState(null)
-    const [currentView, setCurrentView] = useState('notes')
+    const [notes, setNotes] = useState([]) // State to store notes
+    const [isEditing, setIsEditing] = useState(false) // State for note editing
+    const [selectedNote, setSelectedNote] = useState(null) // State for currently selected note for editing
+    const [currentView, setCurrentView] = useState('notes') // State for current view (notes, pinned, archive, trash)
 
     useEffect(() => {
-        loadNotes()
+        loadNotes() // Load notes whenever the view changes
     }, [currentView])
 
+    // Function to load notes based on the current view
     function loadNotes() {
-        const allNotes = noteService.getNotes()
         let filteredNotes
         switch (currentView) {
             case 'pinned':
-                filteredNotes = noteService.getPinnedNotes()
+                filteredNotes = noteService.getPinnedNotes() // Get only pinned notes
                 break
             case 'archive':
-                filteredNotes = noteService.getArchivedNotes()
+                filteredNotes = noteService.getArchivedNotes() // Get only archived notes
                 break
             case 'trash':
-                filteredNotes = noteService.getTrashNotes()
+                filteredNotes = noteService.getTrashNotes() // Get only trashed notes
                 break
             default:
-                filteredNotes = allNotes.filter(note => !note.isArchived && !note.isTrash)
+                filteredNotes = noteService.getNotes() // Get regular notes (non-archived, non-trashed)
         }
         setNotes(filteredNotes)
     }
 
+
     function onDeleteNote(noteId) {
         noteService.deleteNote(noteId)
             .then(() => {
-                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId)) // Remove note from the state
             })
             .catch(err => {
                 console.error('Error removing note:', err)
             })
     }
 
+   
     function onDuplicateNote(noteId) {
         noteService.duplicateNote(noteId)
             .then(newNote => {
-                setNotes(prevNotes => [...prevNotes, newNote])
+                setNotes(prevNotes => [...prevNotes, newNote]) 
             })
             .catch(err => {
                 console.error('Error duplicating note:', err)
@@ -58,28 +60,38 @@ export function NoteIndex() {
             .then(() => {
                 setNotes(prevNotes => prevNotes.map(note =>
                     note.id === noteId ? { ...note, isPinned: !note.isPinned } : note
-                ))
+                )) 
             })
             .catch(err => {
                 console.error('Error toggling pin status:', err)
             })
     }
 
+   
+    function onArchiveNote(noteId) {
+        noteService.archiveNote(noteId)
+        setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId)) 
+    }
+
+   
     function handleAddNote() {
-        setSelectedNote(null)
-        setIsEditing(true)
+        setSelectedNote(null) 
+        setIsEditing(true) 
     }
 
+   
     function handleSaveNote(newNote) {
-        noteService.createNote(newNote)
-        setNotes(prevNotes => [...prevNotes, newNote])
-        setIsEditing(false)
+        noteService.createNote(newNote) 
+        setNotes(prevNotes => [...prevNotes, newNote]) 
+        setIsEditing(false) 
     }
 
+    
     function handleCloseEdit() {
-        setIsEditing(false)
+        setIsEditing(false) 
     }
 
+    
     function handleSidenavClick(view) {
         setCurrentView(view)
     }
@@ -120,6 +132,7 @@ export function NoteIndex() {
                             onDelete={onDeleteNote}
                             onDuplicate={onDuplicateNote}
                             onPin={onPinNote}
+                            onArchiveNote={onArchiveNote}  
                         />
                     ))}
                 </div>

@@ -15,6 +15,7 @@ export const noteService = {
   getPinnedNotes,
   getArchivedNotes,
   getTrashNotes,
+  saveNoteColor
 }
 
 
@@ -113,16 +114,96 @@ function _loadNotes() {
     {
       id: utilService.makeId(),
       createdAt: Date.now(),
+      type: 'NoteImg',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        url: 'https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&w=600',
+        title: 'Beautiful Landscape'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
       type: 'NoteTxt',
       isPinned: false,
       isArchived: false,
       isTrash: false,
       style: {
-        backgroundColor: utilService.getRandomColor(),
+        backgroundColor: '#ffffff',
       },
       info: {
-        txt: 'Sample note 1',
-      },
+        title: 'Love Letter',
+        txt: 'This is my Love Letter to you, my love. I wanted to reach out and say hello. Life has been busy on my end, but I always think about the good times we shared ets catch up soon over coffee or a video call. Id love to hear how youve been.'
+      }
     },
-  ]
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTodos',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        title: 'Grocery List',
+        todos: [
+          
+          { txt: 'Buy milk', doneAt: null },
+          { txt: 'Buy bread', doneAt: Date.now() },
+          { txt: 'Buy eggs', doneAt: null }
+        ]
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteImg',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        url: 'https://images.unsplash.com/photo-1533450718592-29d45635f0a9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anBnfGVufDB8fDB8fHww',
+        title: 'Tiger'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTodos',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        title: 'Workout Plan',
+        todos: [
+          { txt: 'Morning run', doneAt: null },
+          { txt: 'Evening yoga', doneAt: null },
+          { txt: 'Strength training', doneAt: Date.now() }
+        ]
+      }
+    }
+  ];
+}
+
+
+
+function saveNoteColor(noteId, color) {
+  const note = notes.find(note => note.id === noteId);
+  if (note) {
+    note.style.backgroundColor = color;
+    _saveNotes();
+  }
 }
