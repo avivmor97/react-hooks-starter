@@ -21,7 +21,7 @@ export function MailDetails({ emailId, onBack }) {
         <Fragment>
             <section>
             <ul className="nav-toolbar">
-                <li className="toolbar-item back">Back</li>
+                <li onClick={onBack} className="toolbar-item back">Back</li>
                 <li className="toolbar-item">Unread</li>
                 <li className="toolbar-item">Notes</li>
                 <li className="toolbar-item">Delete</li>
