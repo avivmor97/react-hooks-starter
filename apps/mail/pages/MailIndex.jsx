@@ -4,11 +4,11 @@ const Router = ReactRouterDOM.HashRouter
 const { Routes, Route, Navigate } = ReactRouterDOM
 
 import { MailContainer } from "../pages/MailContainer.jsx"
+import { MailDetails } from "./MailDetails.jsx"
 import { emailsService } from "../services/mail.service.js"
 
 
 export function MailIndex() {
-    //return <div>mail app</div>
     const [emails, setEmails] = useState(null)
 
     useEffect(() => {
@@ -22,18 +22,12 @@ export function MailIndex() {
     }
 
     if (!emails) return
-    console.log('emails', emails);
+    // console.log('emails', emails);
     return (
-        // <Router>
-            <section className="emails-index">
-                {/* <Routes>
-                <Route path="/mail" element={<MailContainer />} />
-                <Route path="/car/:carId" element={<CarDetails />} />
+        <section className="emails-index">
+            <MailContainer mails={emails} />
+        </section>
 
-                </Routes> */}
-                <MailContainer mails={emails} />
-            </section>
-        // </Router>
     )
 }
 
