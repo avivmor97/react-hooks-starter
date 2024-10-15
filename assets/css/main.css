@@ -17,6 +17,7 @@
 @import './apps/note/cmps/NoteList.css';
 @import './apps/note/cmps/main-notes-header.css';
 @import './apps/note/cmps/note-container.css';
+@import './apps/note/cmps/note-edit.css';
 
 /* @import './apps/mail/pages/MailIndex.css'; */
 

@@ -7,8 +7,9 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
       switch (note.type) {
         case 'NoteTxt':
           return <div>
-            <h1>Title</h1>
-            {note.info.txt}</div>
+            <h1 className="note-title">{note.info.title}</h1> 
+            <div className="note-content">{note.info.txt}</div>
+          </div>
         case 'NoteImg':
           return <div><img src={note.info.url} alt={note.info.title} /><h4>{note.info.title}</h4></div>
         case 'NoteTodos':
@@ -30,12 +31,12 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
     return (
       <div className="note-preview" style={{ backgroundColor: note.style.backgroundColor }}>
         {getNoteComponent(note)}
-        <button onClick={() => onDelete(note.id)}>Delete</button>
-        <button onClick={() => onDuplicate(note.id)}>Duplicate</button>
-        <button onClick={() => onPin(note.id)}>{note.isPinned ? 'Unpin' : 'Pin'}</button>
+        <button className="note-preview-btn" onClick={() => onDelete(note.id)}>Delete</button>
+        <button className="note-preview-btn"onClick={() => onDuplicate(note.id)}>Duplicate</button>
+        <button className="note-preview-btn" onClick={() => onPin(note.id)}>{note.isPinned ? 'Unpin' : 'Pin'}</button>
       </div>
-    )
-  }
+    );
+}
   
 
 
