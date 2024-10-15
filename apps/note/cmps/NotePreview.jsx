@@ -6,7 +6,6 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin, onArchiveNote 
 
   function onMoveToArchive() {
     noteService.archiveNote(note.id)
-
   }
 
   function onChangeBgColor() {
@@ -31,7 +30,6 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin, onArchiveNote 
             <h1 className="note-title">{note.info.title}</h1>
             <img className="note-btn-img" src={note.info.url} alt={note.info.title} />
             <div className="note-content">{note.info.txt}</div>
-
           </div>
         )
       case 'NoteTodos':
@@ -55,13 +53,21 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin, onArchiveNote 
   return (
     <div className="note-preview" style={{ backgroundColor: bgColor }}>
       {getNoteComponent(note)}
-      <button className="note-preview-btn" onClick={() => onDelete(note.id)}>Delete</button>
-      <button className="note-preview-btn" onClick={() => onDuplicate(note.id)}>Duplicate</button>
-      <button className="note-preview-btn" onClick={() => onPin(note.id)}>
-        {note.isPinned ? 'Unpin' : 'Pin'}
+      <button className="note-preview-btn" onClick={() => onDelete(note.id)}>
+        <img src="assets/css/apps/note/icons/Delete.png" alt="Delete" />
       </button>
-      <button className="note-preview-btn" onClick={onMoveToArchive}>Move to Archive</button>
-      <button className="note-preview-btn" onClick={onChangeBgColor}>Change Background Color</button>
+      <button className="note-preview-btn" onClick={() => onDuplicate(note.id)}>
+        <img src="assets/css/apps/note/icons/Duplicate.png" alt="Duplicate" />
+      </button>
+      <button className="note-preview-btn" onClick={() => onPin(note.id)}>
+        <img src={note.isPinned ? "assets/css/apps/note/icons/UnPin.png" : "assets/css/apps/note/icons/Pin.png"} alt={note.isPinned ? "Unpin" : "Pin"} />
+      </button>
+      <button className="note-preview-btn" onClick={onMoveToArchive}>
+        <img src="assets/css/apps/note/icons/Archive.png" alt="Move to Archive" />
+      </button>
+      <button className="note-preview-btn" onClick={onChangeBgColor}>
+        <img src="assets/css/apps/note/icons/ColorPalette.png" alt="Change Background Color" />
+      </button>
     </div>
   )
 }

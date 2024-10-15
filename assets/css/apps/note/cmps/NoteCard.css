@@ -11,8 +11,8 @@
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 16px;
     letter-spacing: 0.1px;
-    overflow: hidden; /* Keep this if you want to handle large content */
-    min-height: 100px; /* Optional: set a minimum height if desired */
+    overflow: hidden; 
+    min-height: 100px; 
 }
 
 .note-title {
@@ -28,13 +28,14 @@
 }
 
 .note-preview-btn {
+    width: 40px;
     margin-top: 2em;
     opacity: 0;
     transform: translateY(10px);
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #e7e7e7ab;
     color: white;
     cursor: pointer;
     margin-right: 8px;
@@ -54,4 +55,10 @@
 .note-btn img {
     width: 30px;
     height: 70%;
+}
+
+
+.note-btn-img{
+    border-radius: 10px;
+
 }
