@@ -1,11 +1,9 @@
-const { useState } = React;
-
-import { utilService } from '../../../services/util.service.js';
+const { useState } = React
 
 export function NoteEdit({ onSaveNote, note = null, onClose }) {
-    const [noteType, setNoteType] = useState(note ? note.type : 'NoteTxt');
-    const [noteText, setNoteText] = useState(note ? note.info.txt : '');
-    const [noteHeader, setNoteHeader] = useState(note ? note.info.title : '');
+    const [noteType, setNoteType] = useState(note ? note.type : 'NoteTxt')
+    const [noteText, setNoteText] = useState(note ? note.info.txt : '')
+    const [noteHeader, setNoteHeader] = useState(note ? note.info.title : '')
 
     function handleSave() {
         const newNote = {
@@ -14,20 +12,20 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             style: {
                 backgroundColor: '#ffffff',
             },
-        };
-
-        if (noteType === 'NoteTxt') {
-            newNote.info.txt = noteText;
-            newNote.info.title = noteHeader;  // Ensure the header is included for text notes
-        } else if (noteType === 'NoteImg' || noteType === 'NoteVideo') {
-            newNote.info.url = noteText;
-            newNote.info.title = noteHeader;
-        } else if (noteType === 'NoteTodos') {
-            newNote.info.title = noteHeader;
-            newNote.info.todos = noteText.split(',').map(todo => ({ txt: todo.trim(), doneAt: null }));
         }
 
-        onSaveNote(newNote);
+        if (noteType === 'NoteTxt') {
+            newNote.info.txt = noteText
+            newNote.info.title = noteHeader
+        } else if (noteType === 'NoteImg' || noteType === 'NoteVideo') {
+            newNote.info.url = noteText
+            newNote.info.title = noteHeader
+        } else if (noteType === 'NoteTodos') {
+            newNote.info.title = noteHeader
+            newNote.info.todos = noteText.split(',').map(todo => ({ txt: todo.trim(), doneAt: null }))
+        }
+
+        onSaveNote(newNote)
     }
 
     return (
@@ -52,5 +50,5 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             <button className="note-edit-btn" onClick={handleSave}>Save Note</button>
             <button className="note-edit-btn" onClick={onClose}>Cancel</button>
         </div>
-    );
+    )
 }

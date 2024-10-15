@@ -8,25 +8,24 @@ export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [isEditing, setIsEditing] = useState(false)
     const [selectedNote, setSelectedNote] = useState(null)
-    const [currentView, setCurrentView] = useState('notes') // 'notes', 'reminders', 'archive', 'trash'
+    const [currentView, setCurrentView] = useState('notes')
 
     useEffect(() => {
         loadNotes()
-    }, [])
+    }, [currentView])
 
     function loadNotes() {
         const allNotes = noteService.getNotes()
-        // Filter notes based on the current view (e.g., notes, archive, trash)
         let filteredNotes
         switch (currentView) {
-            case 'reminders':
-                filteredNotes = allNotes.filter(note => note.isReminder) // Add isReminder logic in note service
+            case 'pinned':
+                filteredNotes = noteService.getPinnedNotes()
                 break
             case 'archive':
-                filteredNotes = allNotes.filter(note => note.isArchived)
+                filteredNotes = noteService.getArchivedNotes()
                 break
             case 'trash':
-                filteredNotes = allNotes.filter(note => note.isTrash)
+                filteredNotes = noteService.getTrashNotes()
                 break
             default:
                 filteredNotes = allNotes.filter(note => !note.isArchived && !note.isTrash)
@@ -81,7 +80,6 @@ export function NoteIndex() {
         setIsEditing(false)
     }
 
-    // Handle switching views in sidenav
     function handleSidenavClick(view) {
         setCurrentView(view)
     }
@@ -89,10 +87,10 @@ export function NoteIndex() {
     return (
         <div className="app-container">
             <div className="sidenav">
-                <a href="#notes" onClick={() => handleSidenavClick('notes')}>Notes</a>
-                <a href="#reminders" onClick={() => handleSidenavClick('reminders')}>Reminders</a>
-                <a href="#archive" onClick={() => handleSidenavClick('archive')}>Archive</a>
-                <a href="#trash" onClick={() => handleSidenavClick('trash')}>Trash</a>
+                <a href="#/note" onClick={() => handleSidenavClick('notes')}>Notes</a>
+                <a href="#/note/pinned" onClick={() => handleSidenavClick('pinned')}>Pinned</a>
+                <a href="#/note/archive" onClick={() => handleSidenavClick('archive')}>Archive</a>
+                <a href="#/note/trash" onClick={() => handleSidenavClick('trash')}>Trash</a>
             </div>
 
             <div className="main-content">
@@ -105,9 +103,9 @@ export function NoteIndex() {
                 )}
 
                 {!isEditing && (
-                    <input 
-                        type="text" 
-                        placeholder="New note..." 
+                    <input
+                        type="text"
+                        placeholder="New note..."
                         onClick={handleAddNote}
                         readOnly
                         className="new-note-input"
@@ -116,12 +114,12 @@ export function NoteIndex() {
 
                 <div className="notes-list">
                     {notes.map(note => (
-                        <NotePreview 
-                            key={note.id} 
-                            note={note} 
-                            onDelete={onDeleteNote} 
-                            onDuplicate={onDuplicateNote} 
-                            onPin={onPinNote} 
+                        <NotePreview
+                            key={note.id}
+                            note={note}
+                            onDelete={onDeleteNote}
+                            onDuplicate={onDuplicateNote}
+                            onPin={onPinNote}
                         />
                     ))}
                 </div>

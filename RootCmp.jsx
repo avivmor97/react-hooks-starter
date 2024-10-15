@@ -17,6 +17,9 @@ export function App() {
             <Route path="/about" element={<About />} />
             <Route path="/mail" element={<MailIndex />} />
             <Route path="/note" element={<NoteIndex />} />
+            <Route path="/note/pinned" element={<NoteIndex view="pinned" />} />
+            <Route path="/note/archive" element={<NoteIndex view="archive" />} />
+            <Route path="/note/trash" element={<NoteIndex view="trash" />} />
           </Routes>
         </section>
       </Router>

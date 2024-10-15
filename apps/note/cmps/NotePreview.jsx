@@ -1,7 +1,3 @@
-import { NoteTxt } from '../cmps/NoteTxt .jsx'
-import { NoteImg } from '../cmps/NoteImg.jsx'
-import { NoteTodos } from '../cmps/NoteTodos.jsx'
-
 export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
     function getNoteComponent(note) {
       switch (note.type) {
@@ -37,10 +33,3 @@ export function NotePreview({ note, onDelete, onDuplicate, onPin }) {
       </div>
     );
 }
-  
-
-
-
-
-
-  
