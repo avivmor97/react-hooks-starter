@@ -17,6 +17,7 @@
 .email-from,.email-to{
     margin-block-end: 0px;
 }
+
 .subject-header{
     font-size: 1.65em;
 }
@@ -36,6 +37,7 @@
     list-style-type: none;
     cursor: pointer;
 }
+
 .nav-rep-for li:hover {
     background-color: #E8F0FE;
     border-radius: 4px;

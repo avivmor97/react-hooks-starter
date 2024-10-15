@@ -75,7 +75,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
  }
- .mail-table td:first-child {
+ .mail-table td:first-child:nth-child(2) {
     font-weight: bold;
     color: #202124;
     width: 40%;
@@ -86,4 +86,7 @@
 .menu-item{
     display: flex;
     justify-content: space-between;
+}
+.readed{
+   color: #5F6368;
 }
