@@ -28,8 +28,7 @@
 }
 
 .note-preview-btn {
-    width: 41px;
-    
+    width: 40px;
     opacity: 0;
     transform: translateY(10px);
     padding: 8px ;
@@ -45,6 +44,7 @@
 .note-preview:hover .note-preview-btn {
     opacity: 1;
     transform: translateY(0);
+    
     display: inline-block;
 }
 
@@ -64,19 +64,19 @@
 /* Responsive behavior */
 @media (max-width: 768px) {
     .note-preview {
-        max-width: 100%; /* Take up full width on smaller screens */
-        margin: 10px 0; /* Adjust margin for spacing */
+        max-width: 100%; 
+        margin: 10px 0; 
     }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .note-preview {
-        max-width: 45%; /* Adjust width for tablet screens */
+        max-width: 45%; 
     }
 }
 
 @media (min-width: 1025px) {
     .note-preview {
-        max-width: 238px; /* Use the original width on larger screens */
+        max-width: 238px; 
     }
 }

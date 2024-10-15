@@ -160,7 +160,9 @@ function _loadNotes() {
         todos: [
           { txt: 'Buy milk', doneAt: null },
           { txt: 'Buy bread', doneAt: Date.now() },
-          { txt: 'Buy eggs', doneAt: null }
+          { txt: 'Buy eggs', doneAt: null },
+          { txt: 'Buy soda', doneAt: Date.now() },
+          { txt: 'Buy tomato', doneAt: Date.now() }
         ]
       }
     },
