@@ -1,7 +1,8 @@
 const { Link } = ReactRouterDOM
 const { useState, useEffect } = React
 
-import { MailList } from "../cmps/MailList.jsx"
+
+import { MailContainer } from "../pages/MailContainer.jsx"
 import { emailsService} from "../services/mail.service.js"
 
 
@@ -22,7 +23,7 @@ export function MailIndex() {
     if (!emails) return
     return (
         <section className="emails-index">
-            <MailList mails={emails}/>
+            <MailContainer mails={emails}/>
         </section>
     )
 }
