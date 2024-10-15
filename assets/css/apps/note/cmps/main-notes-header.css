@@ -5,3 +5,14 @@
     justify-content: center;
     justify-self: center;
 }
+
+
+.new-note-input {
+    margin-left: 40%;
+    width: 100%; 
+    max-width: 400px;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
