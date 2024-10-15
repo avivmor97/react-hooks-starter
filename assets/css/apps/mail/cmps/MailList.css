@@ -5,6 +5,9 @@
     background-color: #F1F3F4;
     padding: 20px;
  }
+ .mail-list,body{
+    font-size: 20px;
+ }
  .side-nav {
     width: 250px;
     background-color: white;
@@ -13,11 +16,13 @@
     border-right: 1px solid #E0E0E0;
     list-style-type: none;
  }
+
  .side-nav li {
     padding: 12px 0;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    font-size: 20px;
  }
  .side-nav li:hover {
     background-color: #E8F0FE;
@@ -26,12 +31,12 @@
  }
  .new-email {
     display: block;
-    width: 150px;
-    height: 100px;
-    background-color: #007BFF;
-    color: white;
+    width: 250px;
+    height: 70px;
+    background-color:rgb(153, 210, 230);
+    color: black;
     border: none;
-    border-radius: 20%;
+    border-radius: 20px;
     padding: 0;
     font-size: 16px;
     margin-bottom: 16px;
@@ -40,16 +45,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
  }
+
  .new-email:hover {
     background-color: #0056B3;
  }
+ 
  .mail-table {
     width: 100%;
     background-color: white;
     border-collapse: collapse;
     table-layout: fixed;
     height: 1em;
+    margin-top: 20px;
  }
  .mail-table tbody tr {
     border-bottom: 1px solid #E0E0E0;
@@ -74,3 +83,7 @@
  .mail-table td:last-child {
     color: #5F6368;
  }
+.menu-item{
+    display: flex;
+    justify-content: space-between;
+}

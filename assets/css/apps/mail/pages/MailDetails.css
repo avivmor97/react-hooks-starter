@@ -1,0 +1,42 @@
+.nav-toolbar{
+    display: flex;
+    list-style-type: none;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.toolbar-item{
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.email-body{
+    display: grid;
+}
+
+.email-from,.email-to{
+    margin-block-end: 0px;
+}
+.subject-header{
+    font-size: 1.65em;
+}
+
+.email-from{
+    font-size: 1.1em;
+}
+
+.nav-rep-for{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    margin-right: 20px;
+    border: 1px solid #E0E0E0;
+    list-style-type: none;
+    cursor: pointer;
+}
+.nav-rep-for li:hover {
+    background-color: #E8F0FE;
+    border-radius: 4px;
+ }
