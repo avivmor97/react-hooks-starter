@@ -5,91 +5,103 @@ import { NotePreview } from '../cmps/NotePreview.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
 
 export function NoteIndex() {
-    const [notes, setNotes] = useState([])
-    const [isEditing, setIsEditing] = useState(false)
-    const [selectedNote, setSelectedNote] = useState(null)
-    const [currentView, setCurrentView] = useState('notes')
+    const [notes, setNotes] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [selectedNote, setSelectedNote] = useState(null);
+    const [currentView, setCurrentView] = useState('notes');
 
     useEffect(() => {
-        loadNotes()
-    }, [currentView])
-
+        loadNotes();
+    }, [currentView]);
 
     function loadNotes() {
-        let filteredNotes
+        let filteredNotes;
         switch (currentView) {
             case 'pinned':
-                filteredNotes = noteService.getPinnedNotes()
-                break
+                filteredNotes = noteService.getPinnedNotes();
+                break;
             case 'archive':
-                filteredNotes = noteService.getArchivedNotes()
-                break
+                filteredNotes = noteService.getArchivedNotes();
+                break;
             case 'trash':
-                filteredNotes = noteService.getTrashNotes()
-                break
+                filteredNotes = noteService.getTrashNotes();
+                break;
             default:
-                filteredNotes = noteService.getNotes()
+                filteredNotes = noteService.getNotes();
         }
-        setNotes(filteredNotes)
+        setNotes(filteredNotes);
     }
 
     function onDeleteNote(noteId) {
         noteService.deleteNote(noteId)
             .then(() => {
-                loadNotes()
+                loadNotes();
             })
             .catch(err => {
-                console.error('Error removing note:', err)
-            })
+                console.error('Error removing note:', err);
+            });
     }
 
     function onDuplicateNote(noteId) {
         noteService.duplicateNote(noteId)
             .then(() => {
-                loadNotes()
+                loadNotes();
             })
             .catch(err => {
-                console.error('Error duplicating note:', err)
-            })
+                console.error('Error duplicating note:', err);
+            });
     }
 
     function onPinNote(noteId) {
         noteService.togglePin(noteId)
             .then(() => {
-                loadNotes()
+                loadNotes();
             })
             .catch(err => {
-                console.error('Error toggling pin status:', err)
-            })
+                console.error('Error toggling pin status:', err);
+            });
     }
 
     function onArchiveNote(noteId) {
         noteService.archiveNote(noteId)
             .then(() => {
-                loadNotes()
+                loadNotes();
             })
             .catch(err => {
-                console.error('Error archiving note:', err)
-            })
+                console.error('Error archiving note:', err);
+            });
     }
 
     function handleAddNote() {
-        setSelectedNote(null)
-        setIsEditing(true)
+        setSelectedNote(null);
+        setIsEditing(true);
     }
 
-    function handleSaveNote(newNote) {
-        noteService.createNote(newNote)
-        setNotes(prevNotes => [...prevNotes, newNote])
-        setIsEditing(false)
+    function handleSaveNote(updatedNote) {
+        if (selectedNote) {
+            // Ensure the updated note keeps the same ID as the selected note
+            updatedNote.id = selectedNote.id;
+            noteService.updateNote(updatedNote)
+                .then(() => loadNotes())
+                .catch(err => console.error('Error updating note:', err));
+        } else {
+            noteService.createNote(updatedNote);
+            loadNotes();
+        }
+        setIsEditing(false);
     }
 
     function handleCloseEdit() {
-        setIsEditing(false)
+        setIsEditing(false);
     }
 
     function handleSidenavClick(view) {
-        setCurrentView(view)
+        setCurrentView(view);
+    }
+
+    function onSelectNote(note) {
+        setSelectedNote(note);
+        setIsEditing(true);
     }
 
     return (
@@ -112,7 +124,6 @@ export function NoteIndex() {
                     <span className="nav-text">Trash</span>
                 </a>
             </div>
-
 
             <div className="main-content">
                 {isEditing && (
@@ -142,11 +153,11 @@ export function NoteIndex() {
                             onDuplicate={onDuplicateNote}
                             onPin={onPinNote}
                             onArchiveNote={onArchiveNote}
+                            onSelectNote={onSelectNote}
                         />
-
                     ))}
                 </div>
             </div>
         </div>
-    )
+    );
 }

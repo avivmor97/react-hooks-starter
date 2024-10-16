@@ -15,7 +15,8 @@ export const noteService = {
   getPinnedNotes,
   getArchivedNotes,
   getTrashNotes,
-  saveNoteColor
+  saveNoteColor,
+  updateNote
 }
 
 function getNotes() {
@@ -95,6 +96,20 @@ function duplicateNote(noteId) {
     }
   })
 }
+
+function updateNote(updatedNote) {
+  return new Promise((resolve, reject) => {
+    const idx = notes.findIndex(note => note.id === updatedNote.id);
+    if (idx !== -1) {
+      notes[idx] = updatedNote; // Replace the old note with the updated one
+      _saveNotes();
+      resolve(updatedNote);
+    } else {
+      reject(new Error('Note not found'));
+    }
+  });
+}
+
 
 function togglePin(noteId) {
   return new Promise((resolve, reject) => {
