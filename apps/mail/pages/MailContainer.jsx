@@ -27,7 +27,10 @@ export function MailContainer() {
         loadEmails()
         // console.log('onBack mails', mails);
     }
-
+    function onStarredRow(mail){
+        mail.starred=true
+        emailsService.save(mail)
+    }
     if (!mails) return
     
     return (
@@ -38,7 +41,7 @@ export function MailContainer() {
             <section className="mail-list">
                 <MailSideNav mails={mails} />
                 {!selectedMailId
-                    ? <MailList onSelectMailId={onSelectMailId} mails={mails} />
+                    ? <MailList onSelectMailId={onSelectMailId} onStarrRow={onStarredRow} mails={mails} />
                     : <MailDetails onBack={() => setSelectedMailId(null)} emailId={selectedMailId} />
                 }
             </section>

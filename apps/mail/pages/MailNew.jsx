@@ -20,7 +20,7 @@ export function MailNew() {
         // setCarToEdit(prevCar => ({ ...prevCar, [field]: value }))
     }
     return (
-        <section>
+        <dialog className="new-mail">
             <h1>New Massage
                 <button>x</button>
             </h1>
@@ -37,7 +37,7 @@ export function MailNew() {
                 <li className="toolbar-item">Delete</li>
             </ul>
 
-        </section>
+        </dialog>
 
     )
 }

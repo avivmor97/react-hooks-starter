@@ -64,9 +64,9 @@ function getMonthName(date) {
     return monthNames[date.getMonth()]
 }
 
-function getTimeStamp(dateToStamp){
-    dateToStamp=dateToStamp.split('-')
-    let newDate = new Date( dateToStamp[2], dateToStamp[1] - 1, dateToStamp[0]);
+function getTimeStamp(dateToStamp) {
+    dateToStamp = dateToStamp.split('-')
+    let newDate = new Date(dateToStamp[2], dateToStamp[1] - 1, dateToStamp[0]);
     return newDate
 }
 
@@ -77,4 +77,8 @@ function saveToStorage(key, val) {
 function loadFromStorage(key) {
     var val = localStorage.getItem(key)
     return JSON.parse(val)
+}
+function getEmailDate(date){
+    const adate = new Date(date)
+
 }

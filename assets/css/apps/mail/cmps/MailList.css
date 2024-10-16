@@ -67,6 +67,7 @@
  }
  .mail-table tbody tr:hover {
     background-color: #F1F3F4;
+    visibility:visible;
  }
  .mail-table td {
     padding: 16px;
@@ -80,9 +81,16 @@
     color: #202124;
     width: 40%;
  }
- .mail-table td:last-child {
-    color: #5F6368;
- }
+ .mail-table td:nth-child(2) {
+   width: 200px;
+}
+
+ .mail-table td:last-child:hover{
+   visibility:visible
+}
+ .mail-table td:nth-child(4){
+   color: #5F6368;
+}
 .menu-item{
     display: flex;
     justify-content: space-between;
@@ -90,3 +98,13 @@
 .readed{
    color: #5F6368;
 }
+
+.starred{
+   padding: 0px;
+   width: 9px;
+}
+
+.td-hidden{
+   width: 30px;
+}
+
