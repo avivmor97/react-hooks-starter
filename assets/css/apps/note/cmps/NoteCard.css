@@ -28,7 +28,7 @@
 }
 
 .note-preview-btn {
-    width: 40px;
+    width: 38px;
     opacity: 0;
     transform: translateY(10px);
     padding: 8px ;
@@ -48,6 +48,13 @@
     display: inline-block;
 }
 
+
+.note-preview-btn img {
+    width: 24px;
+    height: 20px;
+    vertical-align: middle;
+  }
+
 .note-preview-btn:last-child {
     margin-right: 0;
 }
@@ -60,6 +67,21 @@
 .note-btn-img {
     border-radius: 10px;
 }
+
+.color-picker-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .color-input {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hide the input, but keep it clickable */
+    width: 24px; /* Adjust width to match icon size */
+    height: 24px; /* Adjust height to match icon size */
+    cursor: pointer; /* Make the cursor consistent with clickable input */
+  }
 
 /* Responsive behavior */
 @media (max-width: 768px) {

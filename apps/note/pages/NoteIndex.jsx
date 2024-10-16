@@ -95,11 +95,24 @@ export function NoteIndex() {
     return (
         <div className="app-container">
             <div className="sidenav">
-                <a href="#/note" onClick={() => handleSidenavClick('notes')}>Notes</a>
-                <a href="#/note/pinned" onClick={() => handleSidenavClick('pinned')}>Pinned</a>
-                <a href="#/note/archive" onClick={() => handleSidenavClick('archive')}>Archive</a>
-                <a href="#/note/trash" onClick={() => handleSidenavClick('trash')}>Trash</a>
+                <a href="#/note" onClick={() => handleSidenavClick('notes')}>
+                    <img className="nav-icons" src="assets/css/apps/note/icons/Notes.png" alt="Notes" />
+                    <span className="nav-text">Notes</span>
+                </a>
+                <a href="#/note/pinned" onClick={() => handleSidenavClick('pinned')}>
+                    <img className="nav-icons" src="assets/css/apps/note/icons/Pin.png" alt="Pinned" />
+                    <span className="nav-text">Pinned</span>
+                </a>
+                <a href="#/note/archive" onClick={() => handleSidenavClick('archive')}>
+                    <img className="nav-icons" src="assets/css/apps/note/icons/Archive.png" alt="Archive" />
+                    <span className="nav-text">Archive</span>
+                </a>
+                <a href="#/note/trash" onClick={() => handleSidenavClick('trash')}>
+                    <img className="nav-icons" src="assets/css/apps/note/icons/Delete.png" alt="Trash" />
+                    <span className="nav-text">Trash</span>
+                </a>
             </div>
+
 
             <div className="main-content">
                 {isEditing && (

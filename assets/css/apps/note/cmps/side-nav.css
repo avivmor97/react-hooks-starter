@@ -33,13 +33,31 @@
     padding: 10px 15px;
     text-decoration: none;
     font-size: 18px;
-    color:#202124
-    ;
+    color: #202124;
     display: block;
+    position: relative;
+  }
+  
+  .nav-text {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    position: absolute;
+    left: 50px; /* Adjust based on icon width */
+    white-space: nowrap; /* Prevents text wrapping */
+  }
+  
+  .sidenav a:hover .nav-text {
+    opacity: 1;
   }
   
   .sidenav a:hover {
-   border-radius: 20px;
+    border-radius: 20px;
     background-color: #feefc3;
   }
   
+  .nav-icons {
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
