@@ -5,9 +5,11 @@
     background-color: #F1F3F4;
     padding: 20px;
  }
+
  .mail-list,body{
     font-size: 20px;
  }
+
  .side-nav {
     width: 250px;
     background-color: white;
@@ -60,15 +62,17 @@
     height: 1em;
     margin-top: 20px;
  }
+
  .mail-table tbody tr {
     border-bottom: 1px solid #E0E0E0;
     cursor: pointer;
     transition: background-color 0.3s ease;
  }
+
  .mail-table tbody tr:hover {
     background-color: #F1F3F4;
-    visibility:visible;
  }
+
  .mail-table td {
     padding: 16px;
     text-align: left;
@@ -76,25 +80,34 @@
     overflow: hidden;
     text-overflow: ellipsis;
  }
+
  .mail-table td:first-child:nth-child(2) {
     font-weight: bold;
     color: #202124;
     width: 40%;
  }
+
  .mail-table td:nth-child(2) {
    width: 200px;
 }
 
- .mail-table td:last-child:hover{
-   visibility:visible
-}
  .mail-table td:nth-child(4){
    color: #5F6368;
 }
+
+.mail-table td:nth-child(6){
+   width: 30px;
+}
+
+.mail-table td:nth-child(7){
+   width: 100px;
+}
+
 .menu-item{
     display: flex;
     justify-content: space-between;
 }
+
 .readed{
    color: #5F6368;
 }
@@ -104,7 +117,19 @@
    width: 9px;
 }
 
-.td-hidden{
+.extra{
+   display: none;
+}
+
+tr:hover .td-hidden{
+   display: none;
+}
+
+tr:hover .extra{
+   display: table-cell;
    width: 30px;
 }
 
+.starred{
+   color: rgb(229, 229, 23);
+}

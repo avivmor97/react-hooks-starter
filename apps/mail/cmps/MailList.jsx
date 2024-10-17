@@ -9,11 +9,13 @@ export function MailList({ mails, onSelectMailId , onStarrRow}) {
                 <tbody key={mail.id}>
                     <tr className={!mail.isRead ? '' : `readed`}  key={mail.id}>
                         <td onClick={() => onStarrRow(mail)} className='starred'>{!mail.starred ? '☆' : '⭐'}</td>
+                        {/* <td onClick={() => onStarrRow(mail)} className='starred'>{!mail.starred ? '☆' : '⭐'}</td> */}
                         <td >{FromDisplay(mail.from)}</td>
                         <td onClick={() => onSelectMailId(mail.id)} >{mail.subject}</td>
                         <td >{mail.body}</td>
-                        {/* <td className="td-hidden">{utilService.getDayName(mail.createdAt)}</td> */}
-                        {/* <td className="td-hidden" >{utilService.getMonthName(mail.createdAt)}</td> */}
+                        <td className="extra" >🗑</td>
+                        <td className="extra" >🖆</td>
+                        <td className="td-hidden" >{utilService.getEmailDate(mail.createdAt)}</td>
                     </tr></tbody>))}
         </table>
 

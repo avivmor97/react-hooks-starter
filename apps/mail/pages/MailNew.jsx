@@ -1,7 +1,7 @@
 
 const { useState, useEffect } = React
 
-export function MailNew() {
+export function MailNew({ onClose }) {
 
     function handleChange({ target }) {
         const field = target.name
@@ -22,7 +22,7 @@ export function MailNew() {
     return (
         <dialog className="new-mail">
             <h1>New Massage
-                <button>x</button>
+                <button onClick={onClose}>x</button>
             </h1>
             <label htmlFor="to">To</label>
             <input onChange={handleChange} type="text" name="to" id="to" />

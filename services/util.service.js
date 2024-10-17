@@ -9,6 +9,7 @@ export const utilService = {
     getTimeStamp,
     saveToStorage,
     loadFromStorage,
+    getEmailDate,
 }
 
 function makeId(length = 6) {
@@ -79,6 +80,6 @@ function loadFromStorage(key) {
     return JSON.parse(val)
 }
 function getEmailDate(date){
-    const adate = new Date(date)
-
+    const gDate = new Date(date)
+    return gDate.getDate() + ' ' + getMonthName(gDate)
 }

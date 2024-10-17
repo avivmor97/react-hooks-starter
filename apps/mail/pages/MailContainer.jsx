@@ -6,11 +6,13 @@ import { emailsService } from "../services/mail.service.js"
 import { MailSideNav } from "../cmps/SideNav.jsx"
 import { MailList } from "../cmps/MailList.jsx"
 import { MailDetails } from "./MailDetails.jsx"
+import { MailNew } from './MailNew.jsx'
 
 export function MailContainer() {
 
     const [selectedMailId, setSelectedMailId] = useState(null)
     const [mails, setEmails] = useState(null)
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     useEffect(() => {
         loadEmails()
@@ -36,8 +38,15 @@ export function MailContainer() {
     return (
         <Fragment>
             {/* <button className="new-email">Compose</button> */}
-            <button className="new-email"><Link to={`/mail/new`}>Compose</Link></button>
             
+            <button className="new-email" onClick={() => setIsDialogOpen(true)}>
+                {/* {console.log('click')} */}
+                Compose
+            </button>
+            {isDialogOpen && (
+                <MailNew onClose={() => setIsDialogOpen(false)} />
+            )}     
+
             <section className="mail-list">
                 <MailSideNav mails={mails} />
                 {!selectedMailId
