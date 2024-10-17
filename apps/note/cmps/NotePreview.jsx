@@ -64,9 +64,17 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
             <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onMoveToArchive(); }}>
                 <img src="assets/css/apps/note/icons/Archive.png" alt="Archive" />
             </button>
+
+            {/* Prevent the color change action from triggering the onSelectNote event */}
             <div className="note-preview-btn color-picker-container">
                 <img src="assets/css/apps/note/icons/ColorPalette.png" alt="Change Background Color" />
-                <input type="color" value={bgColor} onChange={handleColorChange} className="color-input" />
+                <input
+                    type="color"
+                    value={bgColor}
+                    onChange={handleColorChange}
+                    onClick={(e) => e.stopPropagation()} /* Stop propagation for color input */
+                    className="color-input"
+                />
             </div>
         </div>
     );
