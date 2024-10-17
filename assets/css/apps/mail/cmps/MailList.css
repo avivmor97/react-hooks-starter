@@ -115,29 +115,25 @@
    color: #5F6368;
 }
 
-
-
 .extra{
-   visibility: hidden; /* Hidden but still takes space */
-   width: 30px; /* Fixed width to maintain table structure */
-   transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-   padding: 5px; /* Padding for clickable area */
-   border-radius: 4px; /* Rounded corners */
+   visibility: hidden; 
+   width: 30px; 
+   transition: background-color 0.3s ease; 
+   padding: 5px; 
+   border-radius: 4px; 
 }
 
 tr:hover .extra{
-   /* display: table-cell;
-   width: 30px; */
    visibility: visible;
 }
 
 .extra:hover {
-   background-color: #E0E0E0; /* Light gray background on hover */
+   background-color: #E0E0E0; 
 }
 
-/* Optionally, change the color of the icon on hover */
+
 .extra:hover svg {
-   fill: #007BFF; /* Change icon color on hover (if you use SVGs) */
+   fill: #007BFF; 
 }
 
 
@@ -148,9 +144,9 @@ tr:hover .td-hidden{
 
 .star-icon {
    cursor: pointer;
-   width: 25px; /* Set the desired width */
-   height: 24px; /* Set the desired height */
-   transition: transform 0.3s ease; /* Smooth scaling on hover */
+   width: 25px; 
+   height: 24px; 
+   transition: transform 0.3s ease; 
 }
 
 .star-icon:hover {
@@ -158,19 +154,46 @@ tr:hover .td-hidden{
 }
 
 .star-icon.filled {
-   fill: gold; /* Fill color for filled star */
+   fill: gold; 
 }
 
 .star-icon:not(.filled) {
-   fill: none; /* No fill for unfilled star */
+   fill: none; 
 }
 
-.starred{
-   padding: 0px;
-   width: 9px;
+.star-container {
+   display: flex; 
+   flex-direction: column;
+   align-items: flex-end; 
 }
 
-.starred{
-   color: rgb(229, 229, 23);
-}
 
+@media (max-width: 840px) {
+   .mail-table {
+       display: block; 
+   }
+
+   .mail-table tbody tr {
+       display: block; 
+       width: 100%; 
+       margin-bottom: 10px; 
+       position: relative; /
+   }
+
+   .mail-table td {
+       display: flex; 
+       justify-content: space-between; 
+       width: 100%; 
+       padding: 8px 5px; 
+       box-sizing: border-box; 
+   }
+
+   .starred {
+       margin-left: auto; 
+   }
+
+   .td-hidden {
+       position: relative; 
+       padding-bottom: 20px; 
+   }
+}

@@ -28,15 +28,17 @@ export function MailList({ mails, onSelectMailId, onStarrRow }) {
                 <tbody key={mail.id}>
                     <tr className={!mail.isRead ? '' : `readed`} key={mail.id}>
                         <td>
-                            <StarIcon
+                            {/* <StarIcon
                                 filled={mail.starred}
                                 onClick={() => onStarrRow(mail)}
-                            />
+                            /> */}
+                            <div className="star-container">
+                                <StarIcon
+                                    filled={mail.starred}
+                                    onClick={() => onStarrRow(mail)}
+                                />
+                            </div>
                         </td>
-
-                        {/* <td onClick={() => onStarrRow(mail)} className='starred'>{!mail.starred ? '☆' : '⭐'}</td> */}
-                        {/* <td onClick={() => onStarrRow(mail)} className='starred'>{!mail.starred ? '☆' : '⭐'}</td> */}
-                        {/* <td >{FromDisplay(mail.from)}</td> */}
                         <td onClick={() => onSelectMailId(mail.id)}>{FromDisplay(mail.from)}</td>
                         <td onClick={() => onSelectMailId(mail.id)} >{mail.subject}</td>
                         <td >{mail.body}</td>
