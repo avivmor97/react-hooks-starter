@@ -143,8 +143,196 @@ function _saveNotes() {
 }
 
 function _loadNotes() {
-  return storageService.loadFromStorage(NOTE_KEY) || [];
+  return storageService.loadFromStorage(NOTE_KEY) || [
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteImg',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        url: 'https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&w=600',
+        title: 'Beautiful Landscape'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTxt',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        title: 'Love Letter',
+        txt: 'This is my Love Letter to you, my love. I wanted to reach out and say hello. Life has been busy on my end, but I always think about the good times we shared. Lets catch up soon over coffee or a video call. I\'d love to hear how you\'ve been.'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTodos',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        title: 'Grocery List',
+        todos: [
+          { txt: 'Buy milk', doneAt: null },
+          { txt: 'Buy bread', doneAt: Date.now() },
+          { txt: 'Buy eggs', doneAt: null },
+          { txt: 'Buy soda', doneAt: Date.now() },
+          { txt: 'Buy tomato', doneAt: Date.now() }
+        ]
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteImg',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        url: 'https://images.unsplash.com/photo-1533450718592-29d45635f0a9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anBnfGVufDB8fDB8fHww',
+        title: 'Tiger'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTodos',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        title: 'Workout Plan',
+        todos: [
+          { txt: 'Morning run', doneAt: null },
+          { txt: 'Evening yoga', doneAt: null },
+          { txt: 'Strength training', doneAt: Date.now() }
+        ]
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTxt',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#f4f4f4',
+      },
+      info: {
+        title: 'Meeting Notes',
+        txt: 'Discussed the project timeline and agreed on the next sprint. Tasks include frontend integration and backend API testing. Next meeting scheduled for next Wednesday.'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteImg',
+      isPinned: true,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#fff5e6',
+      },
+      info: {
+        url: 'https://img.pixers.pics/pho_wat(s3:700/FO/19/43/70/78/700_FO19437078_61e08d9f9a31cc9bd66dcea11d38fda9.jpg,700,467,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,417,jpg)/stickers-maine-coon-cat-stretching.jpg.jpg',
+        title: 'Cat Stretching'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTodos',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#e0f7fa',
+      },
+      info: {
+        title: 'Holiday Prep List',
+        todos: [
+          { txt: 'Book flight tickets', doneAt: null },
+          { txt: 'Pack luggage', doneAt: null },
+          { txt: 'Buy sunscreen', doneAt: Date.now() },
+          { txt: 'Check hotel reservations', doneAt: null }
+        ]
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTxt',
+      isPinned: true,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffebee',
+      },
+      info: {
+        title: 'Favorite Quote',
+        txt: '“The only limit to our realization of tomorrow is our doubts of today.” – Franklin D. Roosevelt'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteImg',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#f0f4c3',
+      },
+      info: {
+        url: 'https://cdn.cheapism.com/images/Focus-on-a-Slice-of-Avocado-Toast.2e16d0ba.fill-1440x605.png',
+        title: 'Delicious Breakfast'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteTodos',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#e8f5e9',
+      },
+      info: {
+        title: 'Weekend Chores',
+        todos: [
+          { txt: 'Clean the kitchen', doneAt: null },
+          { txt: 'Wash the car', doneAt: Date.now() },
+          { txt: 'Mow the lawn', doneAt: null },
+          { txt: 'Laundry', doneAt: null }
+        ]
+      }
+    }
+  ];
 }
+
+
 
 function saveNoteColor(noteId, color) {
   const note = notes.find(note => note.id === noteId);

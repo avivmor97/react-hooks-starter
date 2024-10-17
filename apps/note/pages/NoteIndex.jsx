@@ -135,15 +135,8 @@ export function NoteIndex() {
                 </a>
             </div>
 
-            <div className="main-content">
-                {isEditing && (
-                    <NoteEdit
-                        onSaveNote={handleSaveNote}
-                        note={selectedNote}
-                        onClose={handleCloseEdit}
-                    />
-                )}
-
+            {/* Add backdrop class when editing */}
+            <div className={`main-content ${isEditing ? 'blur-backdrop' : ''}`}>
                 {!isEditing && (
                     <input
                         type="text"
@@ -194,6 +187,17 @@ export function NoteIndex() {
                     )}
                 </div>
             </div>
+
+            {/* Show the modal when editing */}
+            {isEditing && (
+                <div className="edit-modal">
+                    <NoteEdit
+                        onSaveNote={handleSaveNote}
+                        note={selectedNote}
+                        onClose={handleCloseEdit}
+                    />
+                </div>
+            )}
         </div>
     );
 }
