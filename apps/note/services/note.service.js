@@ -16,7 +16,8 @@ export const noteService = {
   getArchivedNotes,
   getTrashNotes,
   saveNoteColor,
-  updateNote
+  updateNote,
+  toggleTodoStatus // Add this function to toggle todo status
 };
 
 function getNotes() {
@@ -119,6 +120,20 @@ function togglePin(noteId) {
       resolve(note);
     } else {
       reject(new Error('Note not found'));
+    }
+  });
+}
+
+// New function to toggle the status of a todo
+function toggleTodoStatus(noteId, todoIdx) {
+  return new Promise((resolve, reject) => {
+    const note = notes.find(note => note.id === noteId);
+    if (note && note.type === 'NoteTodos') {
+      note.info.todos[todoIdx].doneAt = note.info.todos[todoIdx].doneAt ? null : Date.now();
+      _saveNotes();
+      resolve(note);
+    } else {
+      reject(new Error('Note not found or not a todo note'));
     }
   });
 }

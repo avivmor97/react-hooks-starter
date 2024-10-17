@@ -1,7 +1,7 @@
 const { useState } = React;
 import { noteService } from '../services/note.service.js';
 
-export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, onSelectNote }) {
+export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, onSelectNote, refreshNotes }) {
     const [bgColor, setBgColor] = useState(note.style.backgroundColor);
 
     function onMoveToArchive() {
@@ -12,7 +12,26 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
         const newColor = event.target.value;
         setBgColor(newColor);
         note.style.backgroundColor = newColor;
-        noteService.saveNoteColor(note.id, newColor);
+        noteService.saveNoteColor(note.id, newColor)
+            .then(() => refreshNotes()); // Ensure the UI reflects the change immediately
+    }
+
+    // Toggle done/undone status of a todo when clicked
+    function toggleTodoStatus(todoIdx) {
+        const updatedTodos = note.info.todos.map((todo, idx) => {
+            if (idx === todoIdx) {
+                return {
+                    ...todo,
+                    doneAt: todo.doneAt ? null : Date.now(), // Toggle the done status
+                };
+            }
+            return todo;
+        });
+
+        // Update the note's todos
+        const updatedNote = { ...note, info: { ...note.info, todos: updatedTodos } };
+        noteService.updateNote(updatedNote)
+            .then(() => refreshNotes()); // Update and refresh notes
     }
 
     function getNoteComponent(note) {
@@ -37,7 +56,14 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
                         <h1 className="note-title">{note.info.title}</h1>
                         <ul>
                             {note.info.todos.map((todo, idx) => (
-                                <li key={idx}>
+                                <li
+                                    key={idx}
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent selecting the note
+                                        toggleTodoStatus(idx); // Toggle done/undone status
+                                    }}
+                                    style={{ cursor: 'pointer', textDecoration: todo.doneAt ? 'line-through' : 'none' }}
+                                >
                                     {todo.txt} {todo.doneAt ? '✔' : ''}
                                 </li>
                             ))}

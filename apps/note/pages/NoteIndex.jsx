@@ -39,10 +39,14 @@ export function NoteIndex() {
         setUnPinnedNotes(unPinned);
     }
 
+    function refreshNotes() {
+        loadNotes(); // Re-fetch the notes after an update (e.g., toggle todo status)
+    }
+
     function onTrashNote(noteId) {
         noteService.trashNote(noteId)
             .then(() => {
-                loadNotes();
+                refreshNotes();
             })
             .catch(err => {
                 console.error('Error moving note to trash:', err);
@@ -52,7 +56,7 @@ export function NoteIndex() {
     function onDuplicateNote(noteId) {
         noteService.duplicateNote(noteId)
             .then(() => {
-                loadNotes();
+                refreshNotes();
             })
             .catch(err => {
                 console.error('Error duplicating note:', err);
@@ -62,7 +66,7 @@ export function NoteIndex() {
     function onPinNote(noteId) {
         noteService.togglePin(noteId)
             .then(() => {
-                loadNotes();
+                refreshNotes();
             })
             .catch(err => {
                 console.error('Error toggling pin status:', err);
@@ -72,7 +76,7 @@ export function NoteIndex() {
     function onArchiveNote(noteId) {
         noteService.archiveNote(noteId)
             .then(() => {
-                loadNotes();
+                refreshNotes();
             })
             .catch(err => {
                 console.error('Error archiving note:', err);
@@ -88,11 +92,11 @@ export function NoteIndex() {
         if (selectedNote) {
             updatedNote.id = selectedNote.id;
             noteService.updateNote(updatedNote)
-                .then(() => loadNotes())
+                .then(() => refreshNotes())
                 .catch(err => console.error('Error updating note:', err));
         } else {
             noteService.createNote(updatedNote);
-            loadNotes();
+            refreshNotes();
         }
         setIsEditing(false);
     }
@@ -131,7 +135,6 @@ export function NoteIndex() {
                 </a>
             </div>
 
-
             <div className="main-content">
                 {isEditing && (
                     <NoteEdit
@@ -165,6 +168,7 @@ export function NoteIndex() {
                                     onPin={onPinNote}
                                     onArchiveNote={onArchiveNote}
                                     onSelectNote={onSelectNote}
+                                    refreshNotes={refreshNotes}
                                 />
                             ))}
                         </div>
@@ -183,6 +187,7 @@ export function NoteIndex() {
                                     onPin={onPinNote}
                                     onArchiveNote={onArchiveNote}
                                     onSelectNote={onSelectNote}
+                                    refreshNotes={refreshNotes}
                                 />
                             ))}
                         </div>
