@@ -74,8 +74,9 @@
  }
 
  .mail-table td {
-    padding: 16px;
+    padding: 8px;
     text-align: left;
+    vertical-align: middle;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -86,7 +87,9 @@
     color: #202124;
     width: 40%;
  }
-
+ .mail-table td:first-child {
+   width: 27px;
+}
  .mail-table td:nth-child(2) {
    width: 200px;
 }
@@ -112,24 +115,62 @@
    color: #5F6368;
 }
 
-.starred{
-   padding: 0px;
-   width: 9px;
-}
+
 
 .extra{
-   display: none;
+   visibility: hidden; /* Hidden but still takes space */
+   width: 30px; /* Fixed width to maintain table structure */
+   transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+   padding: 5px; /* Padding for clickable area */
+   border-radius: 4px; /* Rounded corners */
 }
+
+tr:hover .extra{
+   /* display: table-cell;
+   width: 30px; */
+   visibility: visible;
+}
+
+.extra:hover {
+   background-color: #E0E0E0; /* Light gray background on hover */
+}
+
+/* Optionally, change the color of the icon on hover */
+.extra:hover svg {
+   fill: #007BFF; /* Change icon color on hover (if you use SVGs) */
+}
+
 
 tr:hover .td-hidden{
    display: none;
 }
 
-tr:hover .extra{
-   display: table-cell;
-   width: 30px;
+
+.star-icon {
+   cursor: pointer;
+   width: 25px; /* Set the desired width */
+   height: 24px; /* Set the desired height */
+   transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+.star-icon:hover {
+   transform: scale(1.2); /* Slightly enlarge the icon on hover */
+}
+
+.star-icon.filled {
+   fill: gold; /* Fill color for filled star */
+}
+
+.star-icon:not(.filled) {
+   fill: none; /* No fill for unfilled star */
+}
+
+.starred{
+   padding: 0px;
+   width: 9px;
 }
 
 .starred{
    color: rgb(229, 229, 23);
 }
+

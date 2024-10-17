@@ -1,0 +1,138 @@
+dialog {
+    width: 600px; /* Width of the dialog */
+    max-width: 90%; /* Responsive design */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Inner padding */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    background-color: white; /* Background color */
+    z-index: 1000; /* Ensure it overlays above other content */
+
+}
+
+/* Style the close button in the dialog header */
+dialog h1 {
+    font-size: 24px; /* Font size for the header */
+    margin-bottom: 20px; /* Space below the header */
+    display: flex;
+    justify-content: space-between; /* Align close button */
+    align-items: center; /* Center vertically */
+}
+
+/* Close button styling */
+dialog button {
+    background: transparent; /* Transparent background */
+    border: none; /* No border */
+    font-size: 24px; /* Close button size */
+    cursor: pointer; /* Pointer on hover */
+}
+
+/* Label styling */
+dialog label {
+    font-weight: bold; /* Bold labels for fields */
+    margin-top: 10px; /* Space above labels */
+}
+
+/* Input field styling */
+dialog input[type="text"] {
+    padding: 10px; /* Inner padding */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    margin-top: 5px; /* Space above input */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* Style for the Body input */
+#body {
+    height: 500px; /* Set height for the Body input */
+    resize: none; /* Prevent resizing if desired */
+}
+
+/* General input field styling */
+dialog input[type="text"]:not(#body) {
+    margin-bottom: 20px; /* Space below subject input */
+}
+
+input[type="text"] {
+    font-size: 25px; /* Adjust font size */
+    padding: 10px; /* Add padding for comfort */
+    width: 100%; /* Make input full width */
+    border: 1px solid #ccc; /* Border for visibility */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in total width/height */
+    margin-bottom: 10px; /* Space between inputs */
+}
+
+textarea {
+    font-size: 25px; /* Adjust font size for the body input */
+    padding: 10px; /* Add padding for comfort */
+    width: 100%; /* Make textarea full width */
+    height: 500px; /* Set fixed height */
+    border: 1px solid #ccc; /* Border for visibility */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in total width/height */
+    resize: none; /* Prevent resizing if desired */
+    overflow: auto; /* Enable scrolling */
+}
+
+/* Optional: to ensure all inputs have similar styles */
+input, textarea {
+    font-family: inherit; /* Match font family with the rest of the app */
+}
+
+.send-toolbar {
+    display: flex;
+    justify-content: space-between; /* Space between items */
+    margin-top: 20px; /* Space above toolbar */
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    background: white; /* White background for the toolbar */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Inner padding for the toolbar */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.toolbar-item {
+    margin-left: 10px; /* Space between toolbar items */
+    padding: 10px 20px; /* Padding for buttons */
+    border: none; /* No border */
+    border-radius: 25px; /* More rounded corners */
+    color: gray; /* Default text color */
+    cursor: pointer; /* Pointer on hover */
+    transition: background 0.3s, color 0.3s; /* Transition for hover effect */
+    display: flex; /* Flexbox for icon alignment */
+    align-items: center; /* Center icon vertically */
+}
+
+/* Send button styles */
+.toolbar-item.send {
+    background: #007BFF; /* Blue color for the Send button */
+    color: white; /* Text color for the Send button */
+}
+
+.toolbar-item.send:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+/* Delete button styles */
+.toolbar-item.delete {
+    background: white; /* White background for Delete button */
+    color: gray; /* Gray text color */
+}
+
+/* Hover effect for the Delete button */
+.toolbar-item.delete:hover {
+    background: red; /* Red background on hover */
+}
+
+/* Icon styles */
+.toolbar-item svg {
+    fill: gray; /* Gray color for the icon */
+    transition: fill 0.3s; /* Transition for icon color */
+}
+
+/* Change icon color on hover */
+.toolbar-item.delete:hover svg {
+    fill: white; /* Change icon color to white on hover */
+}

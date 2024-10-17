@@ -27,20 +27,19 @@ export function MailContainer() {
     function onSelectMailId(mailId) {
         setSelectedMailId(mailId)
         loadEmails()
-        // console.log('onBack mails', mails);
     }
     function onStarredRow(mail){
-        mail.starred=true
-        emailsService.save(mail)
+        const updatedMail = { ...mail, starred: !mail.starred }
+        const updatedMails = mails.map(m => (m.id === mail.id ? updatedMail : m))
+        setEmails(updatedMails)
+        emailsService.save(updatedMail)
     }
+
     if (!mails) return
     
     return (
         <Fragment>
-            {/* <button className="new-email">Compose</button> */}
-            
             <button className="new-email" onClick={() => setIsDialogOpen(true)}>
-                {/* {console.log('click')} */}
                 Compose
             </button>
             {isDialogOpen && (
