@@ -20,15 +20,21 @@
     animation: openModal 0.6s ease forwards; /* Extended animation time */
 }
 
+.new-note-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Make sure container takes full width */
+}
+
 .new-note-input {
     margin-top: 10px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: none;
-    margin-left: 40%;
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; /* Maximum width */
     padding: 12px;
     font-size: 16px;
     margin-bottom: 40px;

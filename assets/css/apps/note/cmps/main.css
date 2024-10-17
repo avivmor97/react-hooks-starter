@@ -6,11 +6,10 @@
   overflow-y: auto;
 }
 
-  .main-content-wrapper {
-    display: flex;
-    flex: 1;
-    margin-top: 60px; 
-    justify-content: center; 
-    align-items: center;    
-    margin-top: 60px; 
-  }
+.main-content-wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+  justify-content: center;
+  align-items: center;
+}
