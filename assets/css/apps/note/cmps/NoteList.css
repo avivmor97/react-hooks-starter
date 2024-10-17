@@ -1,8 +1,60 @@
-.notes-list {
+.pinned-notes-section{
     columns: 4;
-    column-gap: 5px;
+    column-gap: 20px;
+    justify-content: center; 
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+.unpinned-notes-section{
+    columns: 4;
+    column-gap: 20px;
     justify-content: center; 
     max-width: 1200px;
     margin: 0 auto; 
 }
 
+
+
+@media screen and (max-width: 1442px) {
+    .pinned-notes-section {
+        columns: 3; 
+    }
+    .unpinned-notes-section{
+        columns: 3; 
+    }
+
+    .new-note-input{
+
+        margin-left: 30%;
+
+    }
+}
+
+@media screen and (max-width: 1181px) {
+    .pinned-notes-section {
+        columns: 2; 
+    }
+    .unpinned-notes-section{
+        columns: 2; 
+    }
+
+
+    .new-note-input{
+        margin-left: 20%;
+    }
+}
+
+@media screen and (max-width: 996px) {
+    .pinned-notes-section {
+        columns: 1; 
+    }
+    .unpinned-notes-section{
+        columns: 1; 
+    }
+
+
+    .new-note-input{
+        margin-left: 10%;
+
+    }
+}

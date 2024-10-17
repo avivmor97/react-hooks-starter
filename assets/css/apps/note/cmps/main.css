@@ -1,10 +1,10 @@
 .main-content {
-    flex: 1;
-    margin-left: 250px; 
-    padding: 20px;
-    overflow-y: auto;
-    
-  }
+  margin-left: 250px; /* Account for the width of the sidenav */
+  padding: 20px;
+  padding-top: 80px; /* Ensure main content is below the header */
+  flex: 1; /* Makes the content fill available space */
+  overflow-y: auto;
+}
 
   .main-content-wrapper {
     display: flex;

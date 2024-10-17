@@ -1,11 +1,12 @@
-const { useState, useEffect } = React
+const { useState, useEffect } = React;
 
-import { noteService } from '../services/note.service.js'
-import { NotePreview } from '../cmps/NotePreview.jsx'
-import { NoteEdit } from '../cmps/NoteEdit.jsx'
+import { noteService } from '../services/note.service.js';
+import { NotePreview } from '../cmps/NotePreview.jsx';
+import { NoteEdit } from '../cmps/NoteEdit.jsx';
 
 export function NoteIndex() {
-    const [notes, setNotes] = useState([]);
+    const [pinnedNotes, setPinnedNotes] = useState([]);
+    const [unPinnedNotes, setUnPinnedNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
     const [currentView, setCurrentView] = useState('notes');
@@ -15,30 +16,36 @@ export function NoteIndex() {
     }, [currentView]);
 
     function loadNotes() {
-        let filteredNotes;
+        let allNotes;
         switch (currentView) {
             case 'pinned':
-                filteredNotes = noteService.getPinnedNotes();
+                allNotes = noteService.getPinnedNotes();
                 break;
             case 'archive':
-                filteredNotes = noteService.getArchivedNotes();
+                allNotes = noteService.getArchivedNotes();
                 break;
             case 'trash':
-                filteredNotes = noteService.getTrashNotes();
+                allNotes = noteService.getTrashNotes();
                 break;
             default:
-                filteredNotes = noteService.getNotes();
+                allNotes = noteService.getNotes();
         }
-        setNotes(filteredNotes);
+
+        // Separate pinned and unpinned notes
+        const pinned = allNotes.filter(note => note.isPinned);
+        const unPinned = allNotes.filter(note => !note.isPinned);
+
+        setPinnedNotes(pinned);
+        setUnPinnedNotes(unPinned);
     }
 
-    function onDeleteNote(noteId) {
-        noteService.deleteNote(noteId)
+    function onTrashNote(noteId) {
+        noteService.trashNote(noteId)
             .then(() => {
                 loadNotes();
             })
             .catch(err => {
-                console.error('Error removing note:', err);
+                console.error('Error moving note to trash:', err);
             });
     }
 
@@ -79,7 +86,6 @@ export function NoteIndex() {
 
     function handleSaveNote(updatedNote) {
         if (selectedNote) {
-            // Ensure the updated note keeps the same ID as the selected note
             updatedNote.id = selectedNote.id;
             noteService.updateNote(updatedNote)
                 .then(() => loadNotes())
@@ -125,6 +131,7 @@ export function NoteIndex() {
                 </a>
             </div>
 
+
             <div className="main-content">
                 {isEditing && (
                     <NoteEdit
@@ -144,18 +151,42 @@ export function NoteIndex() {
                     />
                 )}
 
-                <div className="notes-list">
-                    {notes.map(note => (
-                        <NotePreview
-                            key={note.id}
-                            note={note}
-                            onDelete={onDeleteNote}
-                            onDuplicate={onDuplicateNote}
-                            onPin={onPinNote}
-                            onArchiveNote={onArchiveNote}
-                            onSelectNote={onSelectNote}
-                        />
-                    ))}
+                <div className="notes-container">
+                    {/* Pinned Notes Section */}
+                    {pinnedNotes.length > 0 && (
+                        <div className="pinned-notes-section">
+                            <h2>Pinned</h2>
+                            {pinnedNotes.map(note => (
+                                <NotePreview
+                                    key={note.id}
+                                    note={note}
+                                    onTrash={onTrashNote}
+                                    onDuplicate={onDuplicateNote}
+                                    onPin={onPinNote}
+                                    onArchiveNote={onArchiveNote}
+                                    onSelectNote={onSelectNote}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Unpinned Notes Section */}
+                    {unPinnedNotes.length > 0 && (
+                        <div className="unpinned-notes-section">
+                            <h2>Others</h2>
+                            {unPinnedNotes.map(note => (
+                                <NotePreview
+                                    key={note.id}
+                                    note={note}
+                                    onTrash={onTrashNote}
+                                    onDuplicate={onDuplicateNote}
+                                    onPin={onPinNote}
+                                    onArchiveNote={onArchiveNote}
+                                    onSelectNote={onSelectNote}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

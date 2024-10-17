@@ -84,7 +84,7 @@
   }
 
 /* Responsive behavior */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .note-preview {
         max-width: 100%; 
         margin: 10px 0; 
@@ -101,4 +101,4 @@
     .note-preview {
         max-width: 238px; 
     }
-}
+} */
