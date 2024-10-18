@@ -20,6 +20,7 @@
 @import './apps/note/cmps/note-container.css';
 @import './apps/note/cmps/note-edit.css';
 @import './apps/note/cmps/side-nav.css';
+@import './apps/note/mq.css';
 
 /* @import './apps/mail/pages/MailIndex.css'; */
 @import '/assets/css/apps/mail/pages/MailDetails.css';

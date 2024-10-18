@@ -1,0 +1,93 @@
+@media screen and (max-width: 1442px) {
+    .pinned-notes-section {
+        columns: 3;
+    }
+
+    .unpinned-notes-section {
+        columns: 3;
+    }
+
+    .new-note-input {
+
+        margin-left: 30%;
+
+    }
+}
+
+@media screen and (max-width: 1181px) {
+    .pinned-notes-section {
+        columns: 2;
+    }
+
+    .unpinned-notes-section {
+        columns: 2;
+    }
+
+
+    .new-note-input {
+        margin-left: 20%;
+    }
+}
+
+@media screen and (max-width: 890px) {
+    .pinned-notes-section {
+        columns: 1;
+    }
+
+    .unpinned-notes-section {
+        columns: 1;
+    }
+
+    .main-content {
+        margin-left: 70px; /* Adjust margin to match the sidenav width */
+        padding: 20px;
+        padding-top: 80px;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .sidenav {
+        height: calc(100vh - 60px); 
+        width: 60px !important; /* Ensure sidenav width changes */
+        background-color: #ffffff;
+        position: fixed;
+        left: 0;
+        padding-top: 20px;
+        z-index: 500;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: width 0.3s ease; /* Smooth transition */
+    }
+
+    .sidenav a {
+        padding: 10px; /* Reduce padding for the smaller sidenav */
+    }
+
+    .nav-text {
+        display: none; /* Hide text to fit within smaller width */
+    }
+
+    .new-note-input {
+        margin-left: 10%;
+        max-width: 280px !important;
+    }
+
+
+    .edit-modal {
+        position: fixed;
+        top: 50%;
+        left: 20% !important;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 24px;
+        z-index: 1000;
+        width: 90%;
+        max-width: 280px !important;
+        height: auto;
+        overflow: auto;
+        animation: openModal 0.6s ease forwards; /* Modal opening animation */
+    }
+}
+
