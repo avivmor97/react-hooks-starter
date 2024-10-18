@@ -40,17 +40,9 @@
     font-size: 20px; /* Font size */
 }
 
-
-
-textarea {
-    font-size: 25px; /* Adjust font size for the body input */
-    padding: 10px; /* Add padding for comfort */
-    width: 100%; /* Make textarea full width */
-    height: 500px; /* Set fixed height */
-    border: 1px solid #ccc; /* Border for visibility */
-    border-radius: 4px; /* Rounded corners */
-    box-sizing: border-box; /* Include padding and border in total width/height */
-    resize: none; /* Prevent resizing if desired */
+.new-mail-dialog textarea {
+    height: 500px; /* Fixed height */
+    resize: none; /* Prevent resizing */
     overflow: auto; /* Enable scrolling */
 }
 
@@ -72,7 +64,7 @@ textarea {
     border-radius: 25px; /* More rounded corners */
     color: gray; /* Default text color */
     cursor: pointer; /* Pointer on hover */
-    transition: 0.3s, color 0.3s; /* Transition for hover effect */
+    transition:  0.3s, color 0.3s; /* Transition for hover effect */
     display: flex; /* Flexbox for icon alignment */
     align-items: center; /* Center icon vertically */
 }
