@@ -7,13 +7,19 @@ import { NoteEdit } from '../cmps/NoteEdit.jsx';
 export function NoteIndex() {
     const [pinnedNotes, setPinnedNotes] = useState([]);
     const [unPinnedNotes, setUnPinnedNotes] = useState([]);
+    const [filteredNotes, setFilteredNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(''); // State to handle search input
     const [currentView, setCurrentView] = useState('notes');
 
     useEffect(() => {
         loadNotes();
     }, [currentView]);
+
+    useEffect(() => {
+        handleSearch();
+    }, [searchTerm, pinnedNotes, unPinnedNotes]); // Re-filter when searchTerm or notes change
 
     function loadNotes() {
         let allNotes;
@@ -37,6 +43,20 @@ export function NoteIndex() {
 
         setPinnedNotes(pinned);
         setUnPinnedNotes(unPinned);
+        setFilteredNotes([...pinned, ...unPinned]); // Show all notes initially
+    }
+
+    // Function to handle filtering notes based on search input
+    function handleSearch() {
+        if (!searchTerm) {
+            setFilteredNotes([...pinnedNotes, ...unPinnedNotes]);
+        } else {
+            const filtered = [...pinnedNotes, ...unPinnedNotes].filter(note =>
+                note.info.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (note.info.txt && note.info.txt.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            setFilteredNotes(filtered);
+        }
     }
 
     function refreshNotes() {
@@ -135,7 +155,17 @@ export function NoteIndex() {
                 </a>
             </div>
 
-            {/* Add backdrop class when editing */}
+            {/* Add Search Input Bar */}
+            <div className="search-input-container">
+                <input
+                    type="text"
+                    placeholder="Search notes..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
+                />
+            </div>
+
             <div className={`main-content ${isEditing ? 'blur-backdrop' : ''}`}>
                 {!isEditing && (
                     <input
@@ -148,11 +178,10 @@ export function NoteIndex() {
                 )}
 
                 <div className="notes-container">
-                    {/* Pinned Notes Section */}
-                    {pinnedNotes.length > 0 && (
-                        <div className="pinned-notes-section">
-                            <h2>Pinned</h2>
-                            {pinnedNotes.map(note => (
+                    {/* Filtered Notes Section */}
+                    {filteredNotes.length > 0 ? (
+                        <div className="filtered-notes-section">
+                            {filteredNotes.map(note => (
                                 <NotePreview
                                     key={note.id}
                                     note={note}
@@ -165,30 +194,12 @@ export function NoteIndex() {
                                 />
                             ))}
                         </div>
-                    )}
-
-                    {/* Unpinned Notes Section */}
-                    {unPinnedNotes.length > 0 && (
-                        <div className="unpinned-notes-section">
-                            <h2>Others</h2>
-                            {unPinnedNotes.map(note => (
-                                <NotePreview
-                                    key={note.id}
-                                    note={note}
-                                    onTrash={onTrashNote}
-                                    onDuplicate={onDuplicateNote}
-                                    onPin={onPinNote}
-                                    onArchiveNote={onArchiveNote}
-                                    onSelectNote={onSelectNote}
-                                    refreshNotes={refreshNotes}
-                                />
-                            ))}
-                        </div>
+                    ) : (
+                        <p>No matching notes found.</p>
                     )}
                 </div>
             </div>
 
-            {/* Show the modal when editing */}
             {isEditing && (
                 <div className="edit-modal">
                     <NoteEdit
