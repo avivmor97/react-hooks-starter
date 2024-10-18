@@ -14,11 +14,11 @@ export function MailContainer() {
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [readCount, setReadCount] = useState(0)
     const [starredCount, setStarredCount] = useState(0)
-    const [filterBy, setFilterBy] = useState(emailsService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState({ txt: '' })
     
     useEffect(() => {
         loadEmails()
-        
+
     }, [filterBy])
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export function MailContainer() {
 
 
     function loadEmails() {
-        emailsService.query().then(setEmails).catch(err => {
+        emailsService.query(filterBy).then(setEmails).catch(err => {
             console.log('err', err)
         })
     }
@@ -77,21 +77,21 @@ export function MailContainer() {
     }
 
     function handleChange({ target }) {
-        const field = target.name
-        let value = target.value
-        // value += ','
-        switch (target.type) {
-            case 'number':
-            case 'range':
-                value = +value
-                break;
+        // const field = target.name
+        // let value = target.value
+        // switch (target.type) {
+        //     case 'number':
+        //     case 'range':
+        //         value = +value
+        //         break;
 
-            case 'checkbox':
-                value = target.checked
-                break
-        }
+        //     case 'checkbox':
+        //         value = target.checked
+        //         break
+        // }
 
-        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
+        // setFilterBy(prevFilter => ({ ...prevFilter, [field]: value }))
+        setFilterBy({ txt: target.value })
     } 
 
     if (!mails) return
@@ -102,7 +102,7 @@ export function MailContainer() {
                 <button className="new-email" onClick={() => setIsDialogOpen(true)}>
                     Compose
                 </button>
-                <input onChange={handleChange} className="filter-emails" type="text" />
+                <input onChange={handleChange}  className="filter-emails" type="text" placeholder="Filter by Subject, To, or Body"/>
             </div>
             {isDialogOpen && (
                 <MailNew onClose={() => setIsDialogOpen(false)} />

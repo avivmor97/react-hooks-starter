@@ -25,13 +25,21 @@ export const emailsService = {
 function query(filterBy = {}) {
     return storageService.query(EMAIL_KEY)
         .then(email => {
-            if (filterBy.title) {
-                const regex = new RegExp(filterBy.subject, 'i')
-                email = email.filter(book => regex.test(email.subject))
-            }
-            if (filterBy.description) {
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i');
+                email = email.filter(email => 
+                    regex.test(email.body) || 
+                    regex.test(email.subject) || 
+                    regex.test(email.to)
+                )
+            }          
+            if (filterBy.body) {
                 const regex = new RegExp(filterBy.body, 'i')
                 email = email.filter(book => regex.test(email.body))
+            }
+            if (filterBy.subject) {
+                const regex = new RegExp(filterBy.subject, 'i')
+                email = email.filter(book => regex.test(email.subject))
             }
             if (filterBy.createdAt) {
                 email = email.filter(email => email.createdAt >= filterBy.createdAt)

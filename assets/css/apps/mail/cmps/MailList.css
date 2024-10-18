@@ -178,10 +178,12 @@ tr:hover .td-hidden{
 }
 
 .new-email {
-   margin-right: 10px; 
+   margin: 0.8em;
 }
 
 .filter-emails {
+   padding-left: 15px;
+   font-size: 20px;
    height: 45px;
    border-radius: 25px;
    flex: 1; 
