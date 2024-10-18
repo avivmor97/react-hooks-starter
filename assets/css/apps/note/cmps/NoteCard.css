@@ -1,6 +1,6 @@
 .note-preview {
-    width: 100%; 
-    max-width: 238px; 
+    width: 100%;
+    max-width: 260px;
     padding: 24px;
     margin-top: 10px;
     background-color: #fff;
@@ -11,49 +11,53 @@
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-size: 16px;
     letter-spacing: 0.1px;
-    overflow: hidden; 
-    height: auto; 
+    overflow: hidden;
+    height: auto;
 }
 
 .note-title {
-    margin-bottom: 12px; 
+    margin-bottom: 12px;
     font-weight: bold;
     font-size: 1.2em;
 }
 
 .note-content {
-    margin-bottom: 16px; 
+    margin-bottom: 16px;
     line-height: 1.4;
-    white-space: normal; 
+    white-space: normal;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds spacing between buttons */
 }
 
 .note-preview-btn {
     width: 38px;
     opacity: 0;
     transform: translateY(10px);
-    padding: 8px ;
+    padding: 8px;
     border: none;
     border-radius: 4px;
     background-color: #e7e7e7ab;
     color: white;
     cursor: pointer;
-    margin-right: 8px;
+    margin-right: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .note-preview:hover .note-preview-btn {
     opacity: 1;
     transform: translateY(0);
-    
     display: inline-block;
 }
-
 
 .note-preview-btn img {
     width: 24px;
     height: 20px;
     vertical-align: middle;
-  }
+}
 
 .note-preview-btn:last-child {
     margin-right: 0;
@@ -71,23 +75,41 @@
 .color-picker-container {
     position: relative;
     display: inline-block;
-  }
-  
-  .color-input {
-    position: fixed;
+    width: 35px;
+    height: 38px;
+    border-radius: 4px;
+    background-color: #e7e7e7ab;
+    cursor: pointer;
+}
+
+.color-input {
+    position: absolute;
     top: 0;
     left: 0;
-    opacity: 0; /* Hide the input, but keep it clickable */
-    width: 24px; /* Adjust width to match icon size */
-    height: 24px; /* Adjust height to match icon size */
-    cursor: pointer; /* Make the cursor consistent with clickable input */
-  }
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
 
-  .note-video-iframe {
-    width: 100%; /* Make the iframe take full width of the container */
-    max-width: 238px; /* Same as the max-width of .note-preview */
-    height: 178px; /* Maintain a 4:3 aspect ratio, so 238px width results in ~178px height */
-    border-radius: 10px; /* Match the border radius of images */
-    border: none; /* Remove default iframe border */
-    margin-bottom: 16px; /* Add space below the iframe */
+/* Ensure the color picker icon is aligned with other buttons */
+.color-picker-container img {
+    width: 24px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.note-video-iframe {
+    width: 100%;
+    /* Make the iframe take full width of the container */
+    max-width: 238px;
+    /* Same as the max-width of .note-preview */
+    height: 178px;
+    /* Maintain a 4:3 aspect ratio, so 238px width results in ~178px height */
+    border-radius: 10px;
+    /* Match the border radius of images */
+    border: none;
+    /* Remove default iframe border */
+    margin-bottom: 16px;
+    /* Add space below the iframe */
 }
