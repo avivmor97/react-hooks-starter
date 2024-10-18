@@ -7,50 +7,38 @@
     text-align: center; /* Center text horizontally */
 }
 
-.home-header {
+.home-header{
     margin-top: 40px;
-    color: #1a73e8;
-    font-size: 2.5em; /* Default font size */
+    color:#1a73e8;
 }
 
-/* Home Image Styling */
 .home-img {
     width: 250px;
     height: auto;
     margin: 10px; 
 }
 
-/* Media Query for Tablets and Smaller Screens */
+/* Media Query for Mobile Devices */
 @media (max-width: 768px) {
     .home {
-        padding: 20px;
-    }
-
-    .home-header {
-        font-size: 2em; /* Scale down the font size */
-        margin-top: 30px;
+        padding: 20px; 
     }
 
     .home-img {
-        width: 120px;
+        width: 120px; 
         margin-top: 20px;
         margin-bottom: 20px;
     }
 }
 
-/* Media Query for Small Mobile Devices */
 @media (max-width: 480px) {
     .home {
-        padding: 15px;
-    }
-
-    .home-header {
-        font-size: 1.5em; /* Further scale down the font size */
-        margin-top: 20px;
+        padding: 15px; 
     }
 
     .home-img {
-        width: 100px;
+        width: 100px; 
+
         margin-top: 20px;
         margin-bottom: 20px;
     }

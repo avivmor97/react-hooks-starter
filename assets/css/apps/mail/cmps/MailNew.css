@@ -43,26 +43,7 @@ dialog input[type="text"] {
     box-sizing: border-box; /* Include padding in width */
 }
 
-/* Style for the Body input */
-#body {
-    height: 500px; /* Set height for the Body input */
-    resize: none; /* Prevent resizing if desired */
-}
 
-/* General input field styling */
-dialog input[type="text"]:not(#body) {
-    margin-bottom: 20px; /* Space below subject input */
-}
-
-input[type="text"] {
-    font-size: 25px; /* Adjust font size */
-    padding: 10px; /* Add padding for comfort */
-    width: 100%; /* Make input full width */
-    border: 1px solid #ccc; /* Border for visibility */
-    border-radius: 4px; /* Rounded corners */
-    box-sizing: border-box; /* Include padding and border in total width/height */
-    margin-bottom: 10px; /* Space between inputs */
-}
 
 textarea {
     font-size: 25px; /* Adjust font size for the body input */
