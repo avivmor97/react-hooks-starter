@@ -34,6 +34,14 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
             .then(() => refreshNotes()); // Update and refresh notes
     }
 
+    // Helper function to extract YouTube video ID from URL
+    function getYouTubeId(url) {
+        const regex = /(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|e)\/|.*[?&]v=)|\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+    }
+
+    // Renders the note content based on its type
     function getNoteComponent(note) {
         switch (note.type) {
             case 'NoteTxt':
@@ -48,6 +56,25 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
                     <div>
                         <h1 className="note-title">{note.info.title}</h1>
                         <img className="note-btn-img" src={note.info.url} alt={note.info.title} />
+                    </div>
+                );
+            case 'NoteVideo':
+                const videoId = getYouTubeId(note.info.url);
+                return videoId ? (
+                    <div>
+                        <h1 className="note-title">{note.info.title}</h1>
+                        <iframe
+                            className="note-video-iframe"
+                            src={`https://www.youtube.com/embed/${videoId}`}
+                            title={note.info.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                ) : (
+                    <div>
+                        <h1 className="note-title">{note.info.title}</h1>
+                        <p>Invalid YouTube URL</p>
                     </div>
                 );
             case 'NoteTodos':

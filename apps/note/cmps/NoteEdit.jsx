@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState } = React;
 
 export function NoteEdit({ onSaveNote, note = null, onClose }) {
     const [noteType, setNoteType] = useState(note ? note.type : 'NoteTxt');
@@ -19,7 +19,7 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             newNote.info.txt = noteText;
             newNote.info.title = noteHeader;
         } else if (noteType === 'NoteImg' || noteType === 'NoteVideo') {
-            newNote.info.url = noteText;
+            newNote.info.url = noteText; // Use the `noteText` for image/video URL
             newNote.info.title = noteHeader;
         } else if (noteType === 'NoteTodos') {
             newNote.info.title = noteHeader;
@@ -29,17 +29,12 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
         onSaveNote(newNote);
     }
 
-    // Handle changes to the todos textarea
-    function handleTodosChange(event) {
-        setTodosText(event.target.value);
-    }
-
     return (
         <div className="note-edit">
             <input
                 className="note-edit-cmp"
                 type="text"
-                placeholder="Note Header"
+                placeholder="Note Title"
                 value={noteHeader}
                 onChange={(e) => setNoteHeader(e.target.value)}
             />
@@ -48,12 +43,12 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
                     className="note-edit-cmp"
                     placeholder="Enter todos, one per line"
                     value={todosText}
-                    onChange={handleTodosChange}
+                    onChange={(e) => setTodosText(e.target.value)}
                 />
             ) : (
                 <textarea
                     className="note-edit-cmp"
-                    placeholder={noteType === 'NoteTodos' ? 'Todos (comma separated)' : 'Note Content'}
+                    placeholder={noteType === 'NoteVideo' ? 'YouTube Video URL' : 'Note Content'}
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
                 />

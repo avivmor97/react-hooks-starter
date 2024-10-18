@@ -312,6 +312,21 @@ function _loadNotes() {
     {
       id: utilService.makeId(),
       createdAt: Date.now(),
+      type: 'NoteVideo',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        url: 'https://www.youtube.com/watch?v=XWCpKH7hgTk&ab_channel=%D7%99%D7%95%D7%91%D7%9C%D7%94%D7%9E%D7%91%D7%95%D7%9C%D7%91%D7%9C',
+        title: 'My Favorite Video'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
       type: 'NoteTodos',
       isPinned: false,
       isArchived: false,

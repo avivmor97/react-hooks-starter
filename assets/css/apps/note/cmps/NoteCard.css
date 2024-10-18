@@ -83,3 +83,11 @@
     cursor: pointer; /* Make the cursor consistent with clickable input */
   }
 
+  .note-video-iframe {
+    width: 100%; /* Make the iframe take full width of the container */
+    max-width: 238px; /* Same as the max-width of .note-preview */
+    height: 178px; /* Maintain a 4:3 aspect ratio, so 238px width results in ~178px height */
+    border-radius: 10px; /* Match the border radius of images */
+    border: none; /* Remove default iframe border */
+    margin-bottom: 16px; /* Add space below the iframe */
+}
