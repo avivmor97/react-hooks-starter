@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState } = React;
 
 export function NoteEdit({ onSaveNote, note = null, onClose }) {
     const [noteType, setNoteType] = useState(note ? note.type : 'NoteTxt');
@@ -10,7 +10,7 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             type: noteType,
             info: {},
             style: {
-                backgroundColor: '#ffffff', // Default background color
+                backgroundColor: '#ffffff',
             },
         };
 
@@ -33,16 +33,25 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             <input
                 className="note-edit-cmp"
                 type="text"
-                placeholder="Note Header"
+                placeholder="Note Title"
                 value={noteHeader}
                 onChange={(e) => setNoteHeader(e.target.value)}
             />
-            <textarea
-                className="note-edit-cmp"
-                placeholder={noteType === 'NoteTodos' ? 'Todos (comma separated)' : 'Note Content'}
-                value={noteText}
-                onChange={(e) => setNoteText(e.target.value)}
-            />
+            {noteType === 'NoteTodos' ? (
+                <textarea
+                    className="note-edit-cmp"
+                    placeholder="Enter todos, one per line"
+                    value={noteText} // Reuse noteText for todos as well
+                    onChange={(e) => setNoteText(e.target.value)} // Use setNoteText
+                />
+            ) : (
+                <textarea
+                    className="note-edit-cmp"
+                    placeholder={noteType === 'NoteImg' ? 'Image URL' : noteType === 'NoteVideo' ? 'YouTube Video URL' : 'Note Content'}
+                    value={noteText}
+                    onChange={(e) => setNoteText(e.target.value)}
+                />
+            )}
             <select
                 className="note-type-selector"
                 value={noteType}
