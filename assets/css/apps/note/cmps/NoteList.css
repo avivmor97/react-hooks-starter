@@ -1,29 +1,31 @@
-.pinned-notes-section{
+.pinned-notes-section {
     columns: 4;
     column-gap: 20px;
-    justify-content: center; 
+    justify-content: center;
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
-.unpinned-notes-section{
+
+.unpinned-notes-section {
     columns: 4;
     column-gap: 20px;
-    justify-content: center; 
+    justify-content: center;
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 
 
 
 @media screen and (max-width: 1442px) {
     .pinned-notes-section {
-        columns: 3; 
-    }
-    .unpinned-notes-section{
-        columns: 3; 
+        columns: 3;
     }
 
-    .new-note-input{
+    .unpinned-notes-section {
+        columns: 3;
+    }
+
+    .new-note-input {
 
         margin-left: 30%;
 
@@ -32,31 +34,60 @@
 
 @media screen and (max-width: 1181px) {
     .pinned-notes-section {
-        columns: 2; 
+        columns: 2;
     }
-    .unpinned-notes-section{
-        columns: 2; 
+
+    .unpinned-notes-section {
+        columns: 2;
     }
 
 
-    .new-note-input{
+    .new-note-input {
         margin-left: 20%;
     }
 }
 
-@media screen and (max-width: 996px) {
+@media screen and (max-width: 890px) {
     .pinned-notes-section {
-        columns: 1; 
-    }
-    .unpinned-notes-section{
-        columns: 1; 
+        columns: 1;
     }
 
+    .unpinned-notes-section {
+        columns: 1;
+    }
 
-    .new-note-input{
+    .main-content {
+        margin-left: 70px; /* Adjust margin to match the sidenav width */
+        padding: 20px;
+        padding-top: 80px;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .sidenav {
+        height: calc(100vh - 60px); 
+        width: 60px !important; /* Ensure sidenav width changes */
+        background-color: #ffffff;
+        position: fixed;
+        left: 0;
+        padding-top: 20px;
+        z-index: 500;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: width 0.3s ease; /* Smooth transition */
+    }
+
+    .sidenav a {
+        padding: 10px; /* Reduce padding for the smaller sidenav */
+    }
+
+    .nav-text {
+        display: none; /* Hide text to fit within smaller width */
+    }
+
+    .new-note-input {
         margin-left: 10%;
-
-        width: 60%;
-
+        max-width: 280px !important;
     }
 }
+

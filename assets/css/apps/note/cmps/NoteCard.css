@@ -83,22 +83,3 @@
     cursor: pointer; /* Make the cursor consistent with clickable input */
   }
 
-/* Responsive behavior */
-/* @media (max-width: 768px) {
-    .note-preview {
-        max-width: 100%; 
-        margin: 10px 0; 
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .note-preview {
-        max-width: 45%; 
-    }
-}
-
-@media (min-width: 1025px) {
-    .note-preview {
-        max-width: 238px; 
-    }
-} */

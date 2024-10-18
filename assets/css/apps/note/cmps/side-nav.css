@@ -1,65 +1,68 @@
 .app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #333;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000; /* Ensure the header stays above the sidenav */
-  }
-    
-  .sidenav {
-    height: calc(100vh - 60px); /* Adjust to account for the header height */
-    width: 250px;
-    background-color: #ffffff;
-    position: fixed;
-    left: 0;
-    padding-top: 20px;
-    z-index: 500;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  
-  .sidenav a {
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #202124;
-    display: block;
-    position: relative;
-  }
-  
-  .nav-text {
-    margin-top: 2px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    position: absolute;
-    left: 50px; 
-    white-space: nowrap; 
-    color: #5f6368;
-  }
-  
-  .sidenav a:hover .nav-text {
-    opacity: 1;
-  }
-  
-  .sidenav a:hover {
-    border-radius: 20px;
-    background-color: #feefc3;
-  }
-  
-  .nav-icons {
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
-    vertical-align: middle;
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  /* Ensure the header stays above the sidenav */
+}
+
+.sidenav {
+  height: calc(100vh - 60px);
+  /* Adjust to account for the header height */
+  width: 250px;
+  background-color: #ffffff;
+  position: fixed;
+  left: 0;
+  padding-top: 20px;
+  z-index: 500;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidenav a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #202124;
+  display: block;
+  position: relative;
+}
+
+.nav-text {
+  margin-top: 2px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute;
+  left: 50px;
+  white-space: nowrap;
+  color: #5f6368;
+}
+
+.sidenav a:hover .nav-text {
+  opacity: 1;
+}
+
+.sidenav a:hover {
+  border-radius: 20px;
+  background-color: #feefc3;
+}
+
+.nav-icons {
+  width: 25px;
+  height: 25px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
