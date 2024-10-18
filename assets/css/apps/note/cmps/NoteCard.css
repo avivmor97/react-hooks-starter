@@ -28,6 +28,7 @@
 }
 
 .btn-container {
+    margin-top: 5px;
     display: flex;
     align-items: center;
     gap: 8px; /* Adds spacing between buttons */
@@ -75,8 +76,8 @@
 .color-picker-container {
     position: relative;
     display: inline-block;
-    width: 35px;
-    height: 38px;
+    width: 39px;
+    height: 35px;
     border-radius: 4px;
     background-color: #e7e7e7ab;
     cursor: pointer;
