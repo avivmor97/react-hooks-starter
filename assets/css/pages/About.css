@@ -1,0 +1,78 @@
+.about {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.2em; /* Slightly smaller heading */
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.programmer-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f9f9f9;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+}
+
+.programmer-img {
+    width: 180px; /* Increased size for larger images */
+    height: 180px;
+    border-radius: 50%;
+    margin-right: 30px;
+    object-fit: cover;
+}
+
+.programmer-info h2 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    color: #1a73e8;
+}
+
+.programmer-info p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    .programmer-card {
+        flex-direction: column; /* Stack the image and text vertically */
+        padding: 15px;
+    }
+
+    .programmer-img {
+        margin-right: 0;
+        margin-bottom: 15px; /* Add some space below the image */
+        width: 140px; /* Reduce image size for smaller screens */
+        height: 140px;
+    }
+
+    .programmer-info h2 {
+        font-size: 1.4em; /* Slightly smaller name size on mobile */
+    }
+
+    .programmer-info p {
+        font-size: 0.85em; /* Reduce paragraph text size */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em; /* Smaller heading size on very small screens */
+    }
+
+    .programmer-info h2 {
+        font-size: 1.2em; /* Even smaller name size on smaller mobile screens */
+    }
+
+    .programmer-info p {
+        font-size: 0.8em; /* Smaller paragraph text for smaller screens */
+    }
+}
