@@ -22,7 +22,7 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             newNote.info.title = noteHeader;
         } else if (noteType === 'NoteTodos') {
             newNote.info.title = noteHeader;
-            newNote.info.todos = noteText.split(',').map(todo => ({ txt: todo.trim(), doneAt: null }));
+            newNote.info.todos = noteText.split('\n').map(todo => ({ txt: todo.trim(), doneAt: null })); // Split by new lines
         }
 
         onSaveNote(newNote);
@@ -40,9 +40,10 @@ export function NoteEdit({ onSaveNote, note = null, onClose }) {
             {noteType === 'NoteTodos' ? (
                 <textarea
                     className="note-edit-cmp"
-                    placeholder="Enter todos, one per line"
-                    value={noteText} // Reuse noteText for todos as well
-                    onChange={(e) => setNoteText(e.target.value)} // Use setNoteText
+                    placeholder="Enter todos, press Enter to add a new line"
+                    value={noteText}
+                    onChange={(e) => setNoteText(e.target.value)} // Using setNoteText for handling todos
+                    rows={noteText.split('\n').length + 1} // Dynamically adjust rows based on the number of lines
                 />
             ) : (
                 <textarea
