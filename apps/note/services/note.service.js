@@ -321,7 +321,22 @@ function _loadNotes() {
       },
       info: {
         url: 'https://www.youtube.com/watch?v=XWCpKH7hgTk&ab_channel=%D7%99%D7%95%D7%91%D7%9C%D7%94%D7%9E%D7%91%D7%95%D7%9C%D7%91%D7%9C',
-        title: 'My Favorite Video'
+        title: 'Confused Yuval is so mevulbal'
+      }
+    },
+    {
+      id: utilService.makeId(),
+      createdAt: Date.now(),
+      type: 'NoteVideo',
+      isPinned: false,
+      isArchived: false,
+      isTrash: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        url: 'https://www.youtube.com/watch?v=mHttJbesbps&ab_channel=%D7%94%D7%A4%D7%A7%D7%95%D7%AA%D7%90%D7%A7%D7%99%D7%9C%D7%95%D7%91',
+        title: 'Romy favorite song'
       }
     },
     {

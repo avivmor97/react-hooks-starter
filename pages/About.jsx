@@ -21,7 +21,7 @@ export function About() {
                 <img className="programmer-img" src="assets\img\Leon avatar.png" alt="Leon Pri-Mor" />
                 <div className="programmer-info">
                     <h2>Leon Pri-Mor</h2>
-                    <p>52 years old</p>
+                    <p>55 years old</p>
                     <p>
                         Leon is a seasoned data programmer with decades of experience, specializing in building robust, data-driven solutions. 
                         Known for his analytical mindset and problem-solving skills, Leon has successfully delivered countless projects in his career. 
