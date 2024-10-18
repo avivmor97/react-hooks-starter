@@ -7,20 +7,16 @@ import { NoteEdit } from '../cmps/NoteEdit.jsx';
 export function NoteIndex() {
     const [pinnedNotes, setPinnedNotes] = useState([]);
     const [unPinnedNotes, setUnPinnedNotes] = useState([]);
-    const [filteredNotes, setFilteredNotes] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(''); // State to handle search input
+    const [searchTerm, setSearchTerm] = useState(''); // State to manage search input
     const [currentView, setCurrentView] = useState('notes');
 
     useEffect(() => {
         loadNotes();
     }, [currentView]);
 
-    useEffect(() => {
-        handleSearch();
-    }, [searchTerm, pinnedNotes, unPinnedNotes]); // Re-filter when searchTerm or notes change
-
+    // Function to load all notes
     function loadNotes() {
         let allNotes;
         switch (currentView) {
@@ -43,21 +39,18 @@ export function NoteIndex() {
 
         setPinnedNotes(pinned);
         setUnPinnedNotes(unPinned);
-        setFilteredNotes([...pinned, ...unPinned]); // Show all notes initially
     }
 
-    // Function to handle filtering notes based on search input
-    function handleSearch() {
-        if (!searchTerm) {
-            setFilteredNotes([...pinnedNotes, ...unPinnedNotes]);
-        } else {
-            const filtered = [...pinnedNotes, ...unPinnedNotes].filter(note =>
-                note.info.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                (note.info.txt && note.info.txt.toLowerCase().includes(searchTerm.toLowerCase()))
-            );
-            setFilteredNotes(filtered);
-        }
-    }
+    // Filter notes based on search input
+    const filteredPinnedNotes = pinnedNotes.filter(note => 
+        note.info.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        (note.info.txt && note.info.txt.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+
+    const filteredUnpinnedNotes = unPinnedNotes.filter(note => 
+        note.info.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        (note.info.txt && note.info.txt.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
     function refreshNotes() {
         loadNotes(); // Re-fetch the notes after an update (e.g., toggle todo status)
@@ -155,18 +148,20 @@ export function NoteIndex() {
                 </a>
             </div>
 
-            {/* Add Search Input Bar */}
-            <div className="search-input-container">
-                <input
-                    type="text"
-                    placeholder="Search notes..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-input"
-                />
-            </div>
-
+            {/* Add backdrop class when editing */}
             <div className={`main-content ${isEditing ? 'blur-backdrop' : ''}`}>
+
+                {/* Search Input Bar */}
+                <div className="search-bar-container">
+                    <input
+                        type="text"
+                        placeholder="Search notes..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="search-input"
+                    />
+                </div>
+
                 {!isEditing && (
                     <input
                         type="text"
@@ -178,10 +173,11 @@ export function NoteIndex() {
                 )}
 
                 <div className="notes-container">
-                    {/* Filtered Notes Section */}
-                    {filteredNotes.length > 0 ? (
-                        <div className="filtered-notes-section">
-                            {filteredNotes.map(note => (
+                    {/* Pinned Notes Section */}
+                    {filteredPinnedNotes.length > 0 && (
+                        <div className="pinned-notes-section">
+                            <h2>Pinned</h2>
+                            {filteredPinnedNotes.map(note => (
                                 <NotePreview
                                     key={note.id}
                                     note={note}
@@ -194,12 +190,30 @@ export function NoteIndex() {
                                 />
                             ))}
                         </div>
-                    ) : (
-                        <p>No matching notes found.</p>
+                    )}
+
+                    {/* Unpinned Notes Section */}
+                    {filteredUnpinnedNotes.length > 0 && (
+                        <div className="unpinned-notes-section">
+                            <h2>Others</h2>
+                            {filteredUnpinnedNotes.map(note => (
+                                <NotePreview
+                                    key={note.id}
+                                    note={note}
+                                    onTrash={onTrashNote}
+                                    onDuplicate={onDuplicateNote}
+                                    onPin={onPinNote}
+                                    onArchiveNote={onArchiveNote}
+                                    onSelectNote={onSelectNote}
+                                    refreshNotes={refreshNotes}
+                                />
+                            ))}
+                        </div>
                     )}
                 </div>
             </div>
 
+            {/* Show the modal when editing */}
             {isEditing && (
                 <div className="edit-modal">
                     <NoteEdit
