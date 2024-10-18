@@ -1,1 +1,14 @@
- /* home */
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height to center vertically */
+    text-align: center; /* Center text horizontally */
+}
+
+.home-img {
+    width: 300px; /* Adjust the size as needed */
+    height: auto;
+    margin: 10px; /* Space between the images */
+}
