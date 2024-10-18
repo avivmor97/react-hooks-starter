@@ -1,24 +1,51 @@
 
-const { useState, useEffect } = React
+const { useState } = React
+import { emailsService } from "../services/mail.service.js"
 
 export function MailNew({ onClose }) {
 
+    const [emailData, setEmailData] = useState(emailsService.getEmail('', '', '', false,
+                                                                      Date.now(), null, 'user@appsus.com',
+                                                                      '', false))
+
     function handleChange({ target }) {
-        const field = target.name
-        let value = target.value
-
-        switch (target.type) {
-            case 'number':
-            case 'range':
-                value = +value
-                break;
-
-            case 'checkbox':
-                value = target.checked
-                break
-        }
-        // setCarToEdit(prevCar => ({ ...prevCar, [field]: value }))
+        const { name, value } = target
+        setEmailData(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
     }
+
+    function handleSend() {
+        const { to, subject, messageBody } = emailData; 
+        if (!to || !subject || !messageBody) {
+            alert('Please fill in all fields')
+            return
+        }
+
+        const newEmail = emailsService.getEmail(
+            Date.now(), 
+            subject, 
+            messageBody, 
+            false, 
+            Date.now(), 
+            null, 
+            'user@appsus.com', 
+            to,
+            false 
+        )
+
+        emailsService.save(newEmail)
+            .then(() => {
+                console.log('Email sent successfully')
+                onClose();
+            })
+            .catch(err => {
+                console.log('Error sending email',err)
+            })
+    }
+
+
     return (
         <dialog className="new-mail new-mail-dialog" open>
             <h1>
@@ -26,7 +53,7 @@ export function MailNew({ onClose }) {
                 <button onClick={onClose}>x</button>
             </h1>
             <label htmlFor="to">To</label>
-            <input onChange={handleChange} type="text" name="to" id="to" />
+            <input onChange={handleChange} type="email" name="to" id="to" />
 
             <label htmlFor="subject">Subject</label>
             <input onChange={handleChange} type="text" name="subject" id="subject" />
@@ -36,7 +63,7 @@ export function MailNew({ onClose }) {
             <textarea onChange={handleChange} name="messageBody" id="messageBody"></textarea>
 
             <ul className="send-toolbar">
-                <li className="toolbar-item send" onClick={onClose}>
+                <li className="toolbar-item send" onClick={handleSend}>
                     Send
                 </li>
                 <li className="toolbar-item" onClick={onClose}>

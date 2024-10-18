@@ -53,7 +53,11 @@
  .new-email:hover {
     background-color: #0056B3;
  }
- 
+
+ .filter-emails{
+   height: 45px;
+   border-radius: 25px;
+ }
  .mail-table {
     width: 100%;
     background-color: white;
@@ -167,6 +171,21 @@ tr:hover .td-hidden{
    align-items: flex-end; 
 }
 
+.new-filter {
+   display: flex;
+   align-items: center; 
+   margin-bottom: 16px; 
+}
+
+.new-email {
+   margin-right: 10px; 
+}
+
+.filter-emails {
+   height: 45px;
+   border-radius: 25px;
+   flex: 1; 
+}
 
 @media (max-width: 840px) {
    .mail-table {

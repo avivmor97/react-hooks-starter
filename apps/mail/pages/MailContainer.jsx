@@ -1,6 +1,5 @@
 const { Fragment } = React
 const { useState, useEffect } = React
-const { Link, Outlet } = ReactRouterDOM
 
 import { emailsService } from "../services/mail.service.js"
 import { MailSideNav } from "../cmps/SideNav.jsx"
@@ -12,11 +11,25 @@ export function MailContainer() {
 
     const [selectedMailId, setSelectedMailId] = useState(null)
     const [mails, setEmails] = useState(null)
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [readCount, setReadCount] = useState(0)
+    const [starredCount, setStarredCount] = useState(0)
+    const [filterBy, setFilterBy] = useState(emailsService.getDefaultFilter())
+    
     useEffect(() => {
         loadEmails()
-    }, [])
+        
+    }, [filterBy])
+
+    useEffect(() => {
+        if (mails) {
+            const readEmailsCount = mails.filter(mail => !mail.isRead).length
+            setReadCount(readEmailsCount)
+            const starredEmailsCount = mails.filter(mail => mail.isStarred).length
+            setStarredCount(starredEmailsCount)
+        }
+    }, [mails])
+
 
     function loadEmails() {
         emailsService.query().then(setEmails).catch(err => {
@@ -42,10 +55,8 @@ export function MailContainer() {
     }
 
     function onStarredRow(mail) {
-        console.log('Starmail', mail);
-        const updatedMail = { ...mail, starred: !mail.starred }
+        const updatedMail = { ...mail, isStarred: !mail.isStarred }
         const updatedMails = mails.map(m => (m.id === mail.id ? updatedMail : m))
-        console.log('Starred updatedMails', updatedMails);
         setEmails(updatedMails)
         emailsService.save(updatedMail)
     }
@@ -65,25 +76,45 @@ export function MailContainer() {
             })
     }
 
+    function handleChange({ target }) {
+        const field = target.name
+        let value = target.value
+        // value += ','
+        switch (target.type) {
+            case 'number':
+            case 'range':
+                value = +value
+                break;
+
+            case 'checkbox':
+                value = target.checked
+                break
+        }
+
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
+    } 
+
     if (!mails) return
 
     return (
         <Fragment>
-            <button className="new-email" onClick={() => setIsDialogOpen(true)}>
-                Compose
-            </button>
+            <div className="new-filter">
+                <button className="new-email" onClick={() => setIsDialogOpen(true)}>
+                    Compose
+                </button>
+                <input onChange={handleChange} className="filter-emails" type="text" />
+            </div>
             {isDialogOpen && (
                 <MailNew onClose={() => setIsDialogOpen(false)} />
             )}
 
             <section className="mail-list">
-                <MailSideNav mails={mails} />
+                <MailSideNav readCount={readCount} starredCount={starredCount} />
                 {!selectedMailId
                     ? <MailList onDeleteMail={onDeleteMail} onSelectMailId={onSelectMailId} onStarrRow={onStarredRow} onUnReadRow={onUnReadRow} mails={mails} />
                     : <MailDetails onUnReadRow={onUnReadRow} onBack={() => setSelectedMailId(null)} emailId={selectedMailId} loadEmails={loadEmails} />
                 }
             </section>
-            <Outlet />
         </Fragment>
     )
 }
