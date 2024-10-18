@@ -20,7 +20,7 @@ export function MailNew({ onClose }) {
         // setCarToEdit(prevCar => ({ ...prevCar, [field]: value }))
     }
     return (
-        <dialog className="new-mail" open>
+        <dialog className="new-mail new-mail-dialog" open>
             <h1>
                 New Message
                 <button onClick={onClose}>x</button>
@@ -32,8 +32,8 @@ export function MailNew({ onClose }) {
             <input onChange={handleChange} type="text" name="subject" id="subject" />
 
 
-            <label htmlFor="body">Body</label>
-            <textarea onChange={handleChange} name="body" id="body"></textarea>
+            <label htmlFor="messageBody">Body</label>
+            <textarea onChange={handleChange} name="messageBody" id="messageBody"></textarea>
 
             <ul className="send-toolbar">
                 <li className="toolbar-item send" onClick={onClose}>
