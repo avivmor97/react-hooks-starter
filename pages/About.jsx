@@ -18,7 +18,7 @@ export function About() {
             </div>
 
             <div className="programmer-card">
-                <img className="programmer-img" src="path-to-leon-image.png" alt="Leon Pri-Mor" />
+                <img className="programmer-img" src="assets\img\Leon avatar.png" alt="Leon Pri-Mor" />
                 <div className="programmer-info">
                     <h2>Leon Pri-Mor</h2>
                     <p>52 years old</p>

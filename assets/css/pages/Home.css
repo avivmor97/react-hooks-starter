@@ -7,6 +7,10 @@
     text-align: center; /* Center text horizontally */
 }
 
+.home-header{
+    color:#1a73e8;
+}
+
 .home-img {
     width: 250px;
     height: auto;
@@ -20,7 +24,9 @@
     }
 
     .home-img {
-        width: 200px; 
+        width: 120px; 
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
 
@@ -30,6 +36,9 @@
     }
 
     .home-img {
-        width: 150px; 
+        width: 100px; 
+
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
