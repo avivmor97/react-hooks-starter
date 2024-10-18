@@ -18,7 +18,7 @@ export function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/mail" element={<MailContainer />} >
-               <Route path="/mail/new" element={<MailNew />} />
+               {/* <Route path="/mail/new" element={<MailNew />} /> */}
             </Route>
             <Route path="/note" element={<NoteIndex />} />
             <Route path="/note/pinned" element={<NoteIndex view="pinned" />} />
