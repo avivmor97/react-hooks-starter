@@ -1,24 +1,58 @@
 header {
-    background: lightcyan;
-    border-bottom: 2px solid white;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
 }
 
 nav a {
-    margin: .5em;
+    margin: 0 1.5em;
+    color: #5f6368;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+nav a:hover {
+    color: #1a73e8;
+    text-decoration: none;
 }
 
 nav a:active {
-    color: purple;
+    color: #1a73e8;
 }
 
 nav a.active {
-    color: darkblue;
+    color: #1a73e8;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.app-header .logo {
+    font-size: 1.5em;
     font-weight: bold;
-    text-decoration: overline;
+    color: #1a73e8;
+}
+
+.app-header .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.app-header .nav-right img {
+    margin-left: 1em;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }
