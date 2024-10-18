@@ -30,7 +30,7 @@ export function MailList({ mails, onSelectMailId, onStarrRow, onDeleteMail,onUnR
                         <td>
                             <div className="star-container">
                                 <StarIcon
-                                    filled={mail.starred}
+                                    filled={mail.isStarred}
                                     onClick={() => onStarrRow(mail)}
                                 />
                             </div>

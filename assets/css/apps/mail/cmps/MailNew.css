@@ -1,97 +1,97 @@
 .new-mail-dialog {
-    width: 600px; /* Width of the dialog */
-    max-width: 90%; /* Responsive design */
-    border: none; /* Remove default border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Inner padding */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-    background-color: white; /* Background color */
-    z-index: 1000; /* Ensure it overlays above other content */
+    width: 600px; 
+    max-width: 90%;
+    border: none; 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    background-color: white; 
+    z-index: 1000;
 }
 
 .new-mail-dialog h1 {
-    font-size: 24px; /* Font size for the header */
-    margin-bottom: 20px; /* Space below the header */
+    font-size: 24px; 
+    margin-bottom: 20px; 
     display: flex;
-    justify-content: space-between; /* Align close button */
-    align-items: center; /* Center vertically */
+    justify-content: space-between; 
+    align-items: center; 
 }
 
 .new-mail-dialog button {
-    background: transparent; /* Transparent background */
-    border: none; /* No border */
-    font-size: 24px; /* Close button size */
-    cursor: pointer; /* Pointer on hover */
+    background: transparent; 
+    border: none; 
+    font-size: 24px; 
+    cursor: pointer; 
 }
 
 .new-mail-dialog label {
-    font-weight: bold; /* Bold labels for fields */
-    margin-top: 10px; /* Space above labels */
+    font-weight: bold; 
+    margin-top: 10px; 
 }
 
-.new-mail-dialog input[type="text"],
+.new-mail-dialog input[type="text"],.new-mail-dialog input[type="email"],
 .new-mail-dialog textarea {
-    padding: 10px; /* Inner padding */
-    border: 1px solid #ccc; /* Border color */
-    border-radius: 4px; /* Rounded corners */
-    margin-top: 5px; /* Space above input */
-    width: 100%; /* Full width */
-    box-sizing: border-box; /* Include padding in width */
-    font-size: 20px; /* Font size */
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    margin-top: 5px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    font-size: 20px; 
 }
 
 .new-mail-dialog textarea {
-    height: 500px; /* Fixed height */
-    resize: none; /* Prevent resizing */
-    overflow: auto; /* Enable scrolling */
+    height: 500px; 
+    resize: none; 
+    overflow: auto;
 }
 
 .send-toolbar {
     display: flex;
-    justify-content: space-between; /* Space between items */
-    margin-top: 20px; /* Space above toolbar */
-    list-style-type: none; /* Remove bullet points */
-    padding: 10px; /* Inner padding for the toolbar */
-    background: white; /* White background for the toolbar */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    justify-content: space-between; 
+    margin-top: 20px; 
+    list-style-type: none; 
+    padding: 10px; 
+    background: white; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .toolbar-item {
-    margin-left: 10px; /* Space between toolbar items */
-    padding: 10px 20px; /* Padding for buttons */
-    border: none; /* No border */
-    border-radius: 25px; /* More rounded corners */
-    color: gray; /* Default text color */
-    cursor: pointer; /* Pointer on hover */
-    transition:  0.3s, color 0.3s; /* Transition for hover effect */
-    display: flex; /* Flexbox for icon alignment */
-    align-items: center; /* Center icon vertically */
+    margin-left: 10px; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 25px; 
+    color: gray; 
+    cursor: pointer; 
+    transition: background 0.3s, color 0.3s; 
+    display: flex; 
+    align-items: center; 
 }
 
 .toolbar-item.send {
-    background: #007BFF; /* Blue color for the Send button */
-    color: white; /* Text color for the Send button */
+    background: #007BFF; 
+    color: white;
 }
 
 .toolbar-item.send:hover {
-    background: #0056b3; /* Darker blue on hover */
+    background: #0056b3; 
 }
 
 .toolbar-item.delete {
-    background: white; /* White background for Delete button */
-    color: gray; /* Gray text color */
+    background: white; 
+    color: gray; 
 }
 
 .toolbar-item.delete:hover {
-    background: red; /* Red background on hover */
+    background: red; 
 }
 
 .toolbar-item svg {
-    fill: gray; /* Gray color for the icon */
-    transition: fill 0.3s; /* Transition for icon color */
+    fill: gray; 
+    transition: fill 0.3s; 
 }
 
 .toolbar-item.delete:hover svg {
-    fill: white; /* Change icon color to white on hover */
+    fill: white; 
 }
