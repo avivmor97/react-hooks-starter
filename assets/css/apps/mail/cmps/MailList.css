@@ -5,9 +5,11 @@
     background-color: #F1F3F4;
     padding: 20px;
  }
+
  .mail-list,body{
     font-size: 20px;
  }
+
  .side-nav {
     width: 250px;
     background-color: white;
@@ -60,33 +62,138 @@
     height: 1em;
     margin-top: 20px;
  }
+
  .mail-table tbody tr {
     border-bottom: 1px solid #E0E0E0;
     cursor: pointer;
     transition: background-color 0.3s ease;
  }
+
  .mail-table tbody tr:hover {
     background-color: #F1F3F4;
  }
+
  .mail-table td {
-    padding: 16px;
+    padding: 8px;
     text-align: left;
+    vertical-align: middle;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
  }
+
  .mail-table td:first-child:nth-child(2) {
     font-weight: bold;
     color: #202124;
     width: 40%;
  }
- .mail-table td:last-child {
-    color: #5F6368;
- }
+ .mail-table td:first-child {
+   width: 27px;
+}
+ .mail-table td:nth-child(2) {
+   width: 200px;
+}
+
+ .mail-table td:nth-child(4){
+   color: #5F6368;
+}
+
+.mail-table td:nth-child(6){
+   width: 30px;
+}
+
+.mail-table td:nth-child(7){
+   width: 100px;
+}
+
 .menu-item{
     display: flex;
     justify-content: space-between;
 }
+
 .readed{
    color: #5F6368;
+}
+
+.extra{
+   visibility: hidden; 
+   width: 30px; 
+   transition: background-color 0.3s ease; 
+   padding: 5px; 
+   border-radius: 4px; 
+}
+
+tr:hover .extra{
+   visibility: visible;
+}
+
+.extra:hover {
+   background-color: #E0E0E0; 
+}
+
+
+.extra:hover svg {
+   fill: #007BFF; 
+}
+
+
+tr:hover .td-hidden{
+   display: none;
+}
+
+
+.star-icon {
+   cursor: pointer;
+   width: 25px; 
+   height: 24px; 
+   transition: transform 0.3s ease; 
+}
+
+.star-icon:hover {
+   transform: scale(1.2); /* Slightly enlarge the icon on hover */
+}
+
+.star-icon.filled {
+   fill: gold; 
+}
+
+.star-icon:not(.filled) {
+   fill: none; 
+}
+
+.star-container {
+   display: flex; 
+   flex-direction: column;
+   align-items: flex-end; 
+}
+
+
+@media (max-width: 840px) {
+   .mail-table {
+       display: block; 
+   }
+
+   .mail-table tbody tr {
+       display: block; 
+       width: 100%; 
+       margin-bottom: 10px; 
+       position: relative; /
+   }
+
+   .mail-table td {
+       display: flex; 
+       justify-content: space-between; 
+       width: 100%; 
+       padding: 8px 5px; 
+       box-sizing: border-box; 
+   }
+
+   .starred {
+       margin-left: auto; 
+   }
+
+   .td-hidden {
+       position: relative; 
+       padding-bottom: 20px; 
+   }
 }

@@ -1,32 +1,41 @@
 const { useState, useEffect } = React
-
 import { emailsService } from "../services/mail.service.js"
 
-export function MailDetails({ emailId, onBack }) {
-
-
+export function MailDetails({ emailId, onBack,loadEmails  }) {
     const [mail, setMail] = useState(null)
 
     useEffect(() => {
         emailsService.get(emailId)
-            .then(setMail)
+            .then(email => {
+                setMail({ ...email, isRead: true })
+                return emailsService.save({ ...email, isRead: true })
+            })
             .catch(err => {
                 console.log('Problem getting Email:', err)
-            })
-    }, [])
+            });
+    }, [emailId])
+
+    function unreadMail() {
+        if (!mail) return;
+
+        const updatedMail = { ...mail, isRead: false }; // Set isRead to false
+        emailsService.save(updatedMail)
+            .then(() => setMail(updatedMail)) // Update state only after saving
+            .catch(err => {
+                console.error('Failed to mark as unread:', err);
+                // Add user feedback here, e.g., alert or notification
+            });
+    }
 
     if (!mail) return <div>Loading...</div>
-    mail.isRead=true
-    emailsService.save(mail)
+    // mail.isRead=true
+    // emailsService.save(mail)
 
-    function unreadMail(){
-        mail.isRead=false
-        emailsService.save(mail)
-    }
+
     return (
             <section>
                 <ul className="nav-toolbar">
-                    <li onClick={onBack} className="toolbar-item back">Back</li>
+                    <li onClick={() => { onBack(); loadEmails(); }} className="toolbar-item back">Back</li>
                     <li onClick={unreadMail}  className="toolbar-item">Unread</li>
                     <li className="toolbar-item">Notes</li>
                     <li className="toolbar-item">Delete</li>
