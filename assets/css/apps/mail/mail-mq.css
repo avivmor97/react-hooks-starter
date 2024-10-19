@@ -1,77 +1,186 @@
-@media (max-width: 767px) {
-    /* mail list container */
+/* Mobile styles (up to 767px width) */
+@media only screen and (max-width: 767px) {
+
+    /* Side navigation */
+    .side-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around; /* Space items evenly */
+        width: 100vw !important; /* Full viewport width */
+        max-width: 100%; /* Ensure no width constraints */
+        margin: 0;
+        padding: 10px 0; /* Padding for top and bottom */
+        border-bottom: 1px solid #E0E0E0; /* Optional: Keep bottom border */
+        background-color: white; /* Ensure consistent background */
+        font-size: 12px; /* Adjust font size for mobile */
+        box-sizing: border-box; /* Include padding/border in width calculation */
+    }
+    
+    .side-nav li {
+        gap: 3em;
+        flex-grow: 1; /* Allow the items to grow and take available space */
+        padding: 10px 20px; /* Add padding to make it look spacious */
+        font-size: 14px;
+        text-align: center; /* Center text */
+        list-style: none; /* Remove default list styling */
+    }
+    
+    .side-nav li span {
+        display: block; /* Stack icon and text vertically */
+        margin-top: 5px; /* Add margin between icon and text */
+    }
+    
+    
+    
+    .side-nav li {
+        flex-basis: 20%; /* Makes each item wider (adjust percentage as needed) */
+        padding: 10px 20px; /* Add more padding for a wider look */
+        font-size: 14px;
+        text-align: center; /* Center text */
+        list-style: none; /* Remove default list styling */
+    }
+    
+    .side-nav li span {
+        display: block; /* Stack icon and text vertically */
+        margin-top: 5px; /* Add margin between icon and text */
+    }
+    
+
+    /* Toolbar responsiveness */
+    .send-toolbar {
+        display: flex;
+        justify-content: space-between;
+        /* Flexible layout */
+        gap: 10px;
+        /* Add space between buttons */
+        flex-wrap: wrap;
+        /* Allow toolbar items to wrap on smaller screens */
+        padding: 10px 0;
+        /* Adjust padding */
+    }
+    
+    .menu-item{
+        margin-left: 5px;
+    }
+
+    span{
+        margin-bottom: 5px;
+    }
+
+    .toolbar-item {
+        flex: 1 1 auto;
+        /* Allow items to grow or shrink as needed */
+        min-width: 100px;
+        /* Ensure a minimum width for each item */
+        margin-bottom: 10px;
+        /* Add margin for spacing */
+        padding: 8px 12px;
+        /* Adjust padding */
+        text-align: center;
+        /* Center content */
+        transition: background 0.3s, color 0.3s;
+        /* Add transition for hover effects */
+    }
+
+    .toolbar-item.send {
+        background: #007BFF;
+        color: white;
+        flex-basis: calc(50% - 10px);
+        /* Each item takes up half the width */
+    }
+
+    .toolbar-item.delete {
+        background: white;
+        color: gray;
+        flex-basis: calc(50% - 10px);
+        /* Each item takes up half the width */
+    }
+
+    .toolbar-item:hover {
+        background-color: #e0e0e0;
+        /* Add hover effect */
+    }
+
+    .toolbar-item svg {
+        margin-right: 5px;
+        /* Adjust spacing between icons and text */
+    }
+
+
+
+    /* Compose button */
+    .new-email {
+        width: 100%;
+        /* Full width for mobile */
+        height: 40px;
+        /* Adjust button size */
+        font-size: 14px;
+    }
+
+    /* Mail list container */
     .mail-list {
         flex-direction: column;
-        padding: 5px;
-    }
- 
-    /* side navigation */
-    .side-nav {
-        width: 100%;
+        /* Stack content vertically */
         padding: 10px;
-        margin-right: 0;
-        border-right: none;
-        border-bottom: 1px solid #E0E0E0;
+        height: auto;
+        /* Adjust height for mobile */
     }
- 
-    /* Adjust side-nav for mobile */
-    .side-nav li {
-        font-size: 16px;
-        padding: 10px 5px;
-        text-align: center;
-    }
- 
-    /* mail table */
+
+    /* Mail table */
     .mail-table {
-        margin-top: 5px;
-        display: block; /* Stack rows vertically */
-    }
- 
-    .mail-table tbody tr {
-        display: block;
-        border-bottom: 1px solid #E0E0E0;
-        margin-bottom: 10px;
-        cursor: pointer;
-    }
- 
-    .mail-table td {
-        display: block;
+        margin-top: 10px;
         width: 100%;
-        padding: 10px 5px;
-        box-sizing: border-box;
-        text-align: left;
-        font-size: 14px;
-        font-weight: bold;
-    }
- 
-    .mail-table td:first-child {
-        width: auto;
-    }
- 
-    .mail-table td:nth-child(2),
-    .mail-table td:nth-child(4) {
-        font-size: 13px;
-    }
- 
-    /* Star and extra actions on mobile */
-    .extra {
-        width: 100%;
-        visibility: visible;
-        text-align: right;
-        padding: 5px;
-    }
- 
-    .star-icon {
-        width: 20px;
-        height: 20px;
-    }
- 
-    /* Date column becomes visible on mobile */
-    .td-hidden {
-        display: block;
         font-size: 12px;
-        color: #5F6368;
     }
- 
-    
- }
+
+    .mail-table td {
+        padding: 8px;
+        /* Reduce padding for mobile */
+        font-size: 12px;
+    }
+
+    /* Mail dialog */
+    .new-mail-dialog {
+        width: 100%;
+        /* Full-width for mobile */
+        padding: 15px;
+    }
+
+    .new-mail-dialog h1 {
+        font-size: 20px;
+        /* Adjust heading size */
+    }
+
+    .new-mail-dialog input[type="text"],
+    .new-mail-dialog input[type="email"],
+    .new-mail-dialog textarea {
+        font-size: 16px;
+        /* Adjust input font size */
+    }
+
+    .new-mail-dialog textarea {
+        height: 300px;
+        /* Reduce height for textarea */
+    }
+
+    /* Send toolbar */
+    .send-toolbar {
+        flex-direction: column;
+        /* Stack toolbar items vertically */
+        padding: 10px;
+        gap: 10px;
+        /* Add gap between toolbar items */
+    }
+
+    .toolbar-item {
+        width: 100%;
+        /* Full-width for toolbar items */
+        margin-bottom: 10px;
+        /* Space between toolbar items */
+    }
+
+    .toolbar-item svg {
+        margin-right: 5px;
+        /* Adjust spacing between icons and text */
+    }
+}

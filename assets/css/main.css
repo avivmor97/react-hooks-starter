@@ -26,7 +26,7 @@
 /* @import './apps/mail/pages/MailIndex.css'; */
 @import '/assets/css/apps/mail/pages/MailDetails.css';
 
-@import 'assets/css/apps/mail/mail-mq.css';
+@import '/assets/css/apps/mail/mail-mq.css';
 @import '/assets/css/apps/mail/cmps/mail-toolbar.css';
 @import '/assets/css/apps/mail/cmps/mail-sideNav.css';
 /* Cmps */
