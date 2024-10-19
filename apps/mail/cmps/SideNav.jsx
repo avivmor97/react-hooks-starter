@@ -8,7 +8,7 @@ export function MailSideNav({ readCount , starredCount,onFilter }) {
             <li className="menu-item">Important</li>
             <li className="menu-item" onClick={() => onFilter('sent')}>Sent</li>
             <li className="menu-item">Draft</li>
-            <li className="menu-item">Trash</li>
+            <li className="menu-item" onClick={() => onFilter('trash')} >Trash</li>
         </ul>
     )
 }
