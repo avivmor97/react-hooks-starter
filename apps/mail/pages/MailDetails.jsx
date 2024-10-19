@@ -16,20 +16,17 @@ export function MailDetails({ emailId, onBack,loadEmails  }) {
     }, [emailId])
 
     function unreadMail() {
-        if (!mail) return;
+        if (!mail) return
 
-        const updatedMail = { ...mail, isRead: false }; // Set isRead to false
+        const updatedMail = { ...mail, isRead: false }
         emailsService.save(updatedMail)
-            .then(() => setMail(updatedMail)) // Update state only after saving
+            .then(() => setMail(updatedMail)) 
             .catch(err => {
-                console.error('Failed to mark as unread:', err);
-                // Add user feedback here, e.g., alert or notification
-            });
+                console.error('Failed to mark as unread:', err)
+            })
     }
 
     if (!mail) return <div>Loading...</div>
-    // mail.isRead=true
-    // emailsService.save(mail)
 
 
     return (

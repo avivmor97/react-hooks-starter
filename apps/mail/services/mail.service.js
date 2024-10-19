@@ -50,6 +50,11 @@ function query(filterBy = {}, sortBy = 'date') {
             if (filterBy.isStarred) {
                 email = email.filter(email => email.isStarred)
             }
+            if (filterBy.isTrashed) {
+                email = email.filter(email => email.removedAt !== null) 
+            } else {
+                email = email.filter(email => email.removedAt === null) 
+            }
             if (sortBy) {
                 if (sortBy === 'date') {
                     email.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
