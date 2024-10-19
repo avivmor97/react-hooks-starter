@@ -118,15 +118,15 @@ export function MailContainer() {
                     placeholder="Filter by Subject, To, or Body"
                 />
                 <div className="filter-options">
-                    <label>
-                        <input
+                    <label  className="filter-option-1">
+                        <input className="input-list"
                             type="checkbox"
                             onChange={(e) => setFilterBy(prev => ({ ...prev, isRead: e.target.checked }))}
                         />
                         Read
                     </label>
 
-                    <label>
+                    <label className="filter-option-2">
                         Sort by:
                         <select onChange={(e) => setSortBy(e.target.value)}  className="sort-select">
                             <option value="date">Date</option>

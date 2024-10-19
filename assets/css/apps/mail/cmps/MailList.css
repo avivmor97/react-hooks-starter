@@ -1,7 +1,8 @@
 /* mail list container */
 .mail-list {
+
    display: flex;
-   height: 100vh;
+   height: 5.26vh;
    background-color: #F1F3F4;
    padding: 20px;
    font-family: Arial, sans-serif;
@@ -10,14 +11,25 @@
 
 /* mail table */
 .mail-table {
+
    width: 100%;
    background-color: white;
    border-collapse: collapse;
    table-layout: fixed;
-   margin-top: 20px;
+   margin-top: 40px;
+}
+
+.mail-table tbody tr:hover .td-hidden {
+   visibility: hidden;
+}
+
+tbody {
+   
+   max-height: 30px !important;
 }
 
 .mail-table tbody tr {
+   
    border-bottom: 1px solid #E0E0E0;
    cursor: pointer;
    transition: background-color 0.3s ease;
@@ -29,6 +41,7 @@
 
 /* Default unread emails (bold) */
 .mail-table td {
+   
    padding: 12px;
    text-align: left;
    vertical-align: middle;
@@ -41,6 +54,7 @@
 }
 
 .mail-table td:first-child {
+   
    width: 35px;
 }
 
@@ -72,6 +86,7 @@
 
 tr:hover .extra {
    visibility: visible;
+   
 }
 
 .extra:hover {
@@ -80,8 +95,11 @@ tr:hover .extra {
 
 /* Date column */
 .td-hidden {
-   display: none;
+   display: block;
+   
 }
+
+
 
 /* Star icon */
 .star-icon {
@@ -101,8 +119,5 @@ tr:hover .extra {
 .star-icon.filled {
    fill: gold;
 }
-
-/* Responsive styles */
-/* Mobile view (up to 767px) */
 
 
