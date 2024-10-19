@@ -15,6 +15,32 @@ export function MailDetails({ emailId, onBack,loadEmails  }) {
             });
     }, [emailId])
 
+
+    function trashMail() {
+        if (!mail) return
+        
+        if (!mail.removedAt) {
+            const updatedMail = { ...mail, removedAt: Date.now() }
+            emailsService.save(updatedMail)
+                .then(() => {
+                    console.log('Email moved to trash');
+                    loadEmails()
+                    onBack()
+                })
+                .catch(err => console.log('Error moving email to trash:', err))
+        } else {
+            emailsService.remove(mail.id)
+                .then(() => {
+                    console.log('Email deleted permanently');
+                    loadEmails()
+                    onBack()
+                })
+                .catch(err => {
+                    console.log('Error deleting email:', err);
+                })
+        }
+    }
+
     function unreadMail() {
         if (!mail) return
 
@@ -35,7 +61,8 @@ export function MailDetails({ emailId, onBack,loadEmails  }) {
                     <li onClick={() => { onBack(); loadEmails(); }} className="toolbar-item back">←</li>
                     <li onClick={unreadMail}  className="toolbar-item">📬</li>
                     <li className="toolbar-item">🖆</li>
-                    <li className="toolbar-item">🗑</li>
+                    <li onClick={() => { onBack(); trashMail(); loadEmails();} }  className="toolbar-item">🗑</li>
+                    {/* <li onClick={trashMail}  className="toolbar-item">🗑</li> */}
                 </ul>
                 <div className="email-body">
                     <p className="subject-header">{mail.subject}</p>
