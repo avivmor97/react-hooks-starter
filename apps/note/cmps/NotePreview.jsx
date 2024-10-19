@@ -13,35 +13,59 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
     setBgColor(newColor);
     note.style.backgroundColor = newColor;
     noteService.saveNoteColor(note.id, newColor)
-      .then(() => refreshNotes()); // Ensure the UI reflects the change immediately
+      .then(() => refreshNotes());
   }
 
-  // Toggle done/undone status of a todo when clicked
   function toggleTodoStatus(todoIdx) {
     const updatedTodos = note.info.todos.map((todo, idx) => {
       if (idx === todoIdx) {
         return {
           ...todo,
-          doneAt: todo.doneAt ? null : Date.now(), // Toggle the done status
+          doneAt: todo.doneAt ? null : Date.now(),
         };
       }
       return todo;
     });
 
-    // Update the note's todos
     const updatedNote = { ...note, info: { ...note.info, todos: updatedTodos } };
     noteService.updateNote(updatedNote)
-      .then(() => refreshNotes()); // Update and refresh notes
+      .then(() => refreshNotes());
   }
 
-  // Helper function to extract YouTube video ID from URL
   function getYouTubeId(url) {
     const regex = /(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|e)\/|.*[?&]v=)|\.be\/)([a-zA-Z0-9_-]{11})/;
     const match = url.match(regex);
     return match ? match[1] : null;
   }
 
-  // Renders the note content based on its type
+  function formatNoteForEmail(note) {
+    if (!note || !note.info) return 'Unknown note content';
+    switch (note.type) {
+      case 'NoteTxt':
+        return `Title: ${note.info.title || 'No Title'}\n\n${note.info.txt || ''}`;
+      case 'NoteImg':
+        return `Title: ${note.info.title || 'No Title'}\n\nImage URL: ${note.info.url || ''}`;
+      case 'NoteVideo':
+        return `Title: ${note.info.title || 'No Title'}\n\nVideo URL: ${note.info.url || ''}`;
+      case 'NoteTodos':
+        return `Title: ${note.info.title || 'No Title'}\n\nTodos:\n` + 
+               note.info.todos.map(todo => `- ${todo.txt} ${todo.doneAt ? '(✔)' : ''}`).join('\n');
+      default:
+        return 'Unknown note type';
+    }
+  }
+
+  // Function to send the note content to the email compose page
+  function sendToEmail() {
+    const emailSubject = encodeURIComponent(note.info.title || 'No Title');
+    const emailBody = encodeURIComponent(formatNoteForEmail(note));
+
+    // Redirect to the email compose page with encoded subject and body in the URL
+    const mailUrl = `#/mail/new?subject=${emailSubject}&body=${emailBody}`;
+    console.log('Redirecting to:', mailUrl); // Debug log to check if the URL is correctly formatted
+    window.location.href = mailUrl;
+  }
+
   function getNoteComponent(note) {
     switch (note.type) {
       case 'NoteTxt':
@@ -86,8 +110,8 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
                 <li
                   key={idx}
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent selecting the note
-                    toggleTodoStatus(idx); // Toggle done/undone status
+                    e.stopPropagation();
+                    toggleTodoStatus(idx);
                   }}
                   style={{ cursor: 'pointer', textDecoration: todo.doneAt ? 'line-through' : 'none' }}
                 >
@@ -104,7 +128,18 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
 
   return (
     <div className="note-preview" onClick={() => onSelectNote(note)} style={{ backgroundColor: bgColor }}>
+      <button
+        className="note-preview-pin-btn"
+        onClick={(e) => { e.stopPropagation(); onPin(note.id); }}
+      >
+        <img
+          src={note.isPinned ? 'assets/css/apps/note/icons/UnPin.png' : 'assets/css/apps/note/icons/Pin.png'}
+          alt="Pin/Unpin"
+        />
+      </button>
+
       {getNoteComponent(note)}
+
       <div className="btn-container">
         <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onTrash(note.id); }}>
           <img src="assets/css/apps/note/icons/Delete.png" alt="Move to Trash" />
@@ -112,26 +147,24 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
         <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onDuplicate(note.id); }}>
           <img src="assets/css/apps/note/icons/Duplicate.png" alt="Duplicate" />
         </button>
-        <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onPin(note.id); }}>
-          <img src={note.isPinned ? 'assets/css/apps/note/icons/UnPin.png' : 'assets/css/apps/note/icons/Pin.png'} alt="Pin/Unpin" />
-        </button>
         <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onMoveToArchive(); }}>
           <img src="assets/css/apps/note/icons/Archive.png" alt="Archive" />
         </button>
+        <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); sendToEmail(); }}>
+          <img src="assets/img/Mail.png" alt="Send to Email" />
+        </button>
 
-        {/* Prevent the color change action from triggering the onSelectNote event */}
         <div className="note-preview-btn color-picker-container">
           <img src="assets/css/apps/note/icons/ColorPalette.png" alt="Change Background Color" />
           <input
             type="color"
             value={bgColor}
             onChange={handleColorChange}
-            onClick={(e) => e.stopPropagation()} /* Stop propagation for color input */
+            onClick={(e) => e.stopPropagation()}
             className="color-input"
           />
         </div>
       </div>
-
     </div>
   );
 }
