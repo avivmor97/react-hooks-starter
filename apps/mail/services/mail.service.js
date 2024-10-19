@@ -22,17 +22,17 @@ export const emailsService = {
     getEmail
 }
 
-function query(filterBy = {}) {
+function query(filterBy = {}, sortBy = 'date') {
     return storageService.query(EMAIL_KEY)
         .then(email => {
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i');
-                email = email.filter(email => 
-                    regex.test(email.body) || 
-                    regex.test(email.subject) || 
+                email = email.filter(email =>
+                    regex.test(email.body) ||
+                    regex.test(email.subject) ||
                     regex.test(email.to)
                 )
-            }          
+            }
             if (filterBy.body) {
                 const regex = new RegExp(filterBy.body, 'i')
                 email = email.filter(book => regex.test(email.body))
@@ -49,6 +49,13 @@ function query(filterBy = {}) {
             }
             if (filterBy.isStarred) {
                 email = email.filter(email => email.isStarred)
+            }
+            if (sortBy) {
+                if (sortBy === 'date') {
+                    email.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                } else if (sortBy === 'title') {
+                    email.sort((a, b) => a.subject.localeCompare(b.subject));
+                }
             }
             return email
         })

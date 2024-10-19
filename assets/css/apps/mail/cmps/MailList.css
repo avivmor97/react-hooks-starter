@@ -187,6 +187,45 @@ tr:hover .td-hidden{
    height: 45px;
    border-radius: 25px;
    flex: 1; 
+   border: 1px solid #ccc; /* Add a subtle border */
+   transition: border-color 0.3s;
+}
+
+.filter-emails:focus {
+   border-color: #007bff; /* Change border color on focus */
+   outline: none; /* Remove default outline */
+}
+
+.filter-options {
+   display: flex;
+   align-items: center;
+   margin-left: 10px; /* Add some spacing */
+   gap: 30px;
+}
+
+.checkbox-label {
+   /* margin-right: 50px; */
+   font-size: 16px; /* Slightly smaller font */
+}
+
+.sort-label {
+   /* margin-left: 15px; */
+   font-size: 16px; /* Slightly smaller font */
+}
+
+.sort-select {
+   margin-left: 5px;
+   padding: 10px; /* Add some padding */
+   border-radius: 12px; /* Rounded corners */
+   border: 1px solid #ccc; /* Add a subtle border */
+   font-size: 15px; /* Increase font size */
+   min-width: 120px; /* Set a minimum width for better visibility */
+   transition: border-color 0.3s;
+}
+
+.sort-select:focus {
+   border-color: #007bff; /* Change border color on focus */
+   outline: none; /* Remove default outline */
 }
 
 @media (max-width: 840px) {
