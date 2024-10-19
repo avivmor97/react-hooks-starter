@@ -55,7 +55,7 @@ export function MailContainer() {
             })
             .catch(err => {
                 console.log('Error deleting email:', err);
-            });
+            })
     }
 
     function onStarredRow(mail) {
@@ -104,7 +104,18 @@ export function MailContainer() {
         setFilteredMails(filtered);
     }
 
+    function sendMail(newMail) {
+        return emailsService.save(newMail) 
+            .then(savedMail => {
+                setEmails(prevMails => [...prevMails, savedMail])
+                return savedMail
+            })
+    }
+
+
     if (!mails) return
+
+
 
     return (
         <Fragment>
@@ -136,7 +147,7 @@ export function MailContainer() {
                 </div>
             </div>
             {isDialogOpen && (
-                <MailNew onClose={() => setIsDialogOpen(false)} />
+                <MailNew onClose={() => setIsDialogOpen(false)} onSendMail={sendMail} />
             )}
 
             <section className="mail-list">

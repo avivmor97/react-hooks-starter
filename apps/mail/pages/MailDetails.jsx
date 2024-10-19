@@ -28,8 +28,6 @@ export function MailDetails({ emailId, onBack,loadEmails  }) {
     }
 
     if (!mail) return <div>Loading...</div>
-    // mail.isRead=true
-    // emailsService.save(mail)
 
 
     return (
