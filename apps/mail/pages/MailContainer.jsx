@@ -32,7 +32,7 @@ export function MailContainer() {
     }, [mails])
 
     useEffect(() => {
-        filterMails('inbox'); // Default to inbox
+        filterMails('inbox'); 
     }, [mails])
 
     function loadEmails() {
@@ -85,7 +85,7 @@ export function MailContainer() {
     }
 
     const filterMails = (category) => {
-        let filtered = mails // Start with all mails
+        let filtered = mails 
 
         switch (category) {
             case 'inbox':

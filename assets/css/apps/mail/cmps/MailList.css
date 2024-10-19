@@ -154,7 +154,7 @@ tr:hover .td-hidden{
 }
 
 .star-icon:hover {
-   transform: scale(1.2); /* Slightly enlarge the icon on hover */
+   transform: scale(1.2); 
 }
 
 .star-icon.filled {
@@ -187,45 +187,62 @@ tr:hover .td-hidden{
    height: 45px;
    border-radius: 25px;
    flex: 1; 
-   border: 1px solid #ccc; /* Add a subtle border */
-   transition: border-color 0.3s;
+   border: 1px solid #ccc; 
 }
 
 .filter-emails:focus {
-   border-color: #007bff; /* Change border color on focus */
-   outline: none; /* Remove default outline */
+   border-color: #007bff; 
+   outline: none; 
 }
 
 .filter-options {
    display: flex;
    align-items: center;
-   margin-left: 10px; /* Add some spacing */
+   margin-left: 10px; 
    gap: 30px;
 }
 
 .checkbox-label {
-   /* margin-right: 50px; */
-   font-size: 16px; /* Slightly smaller font */
+   font-size: 16px; 
 }
 
 .sort-label {
-   /* margin-left: 15px; */
-   font-size: 16px; /* Slightly smaller font */
+   font-size: 16px; 
 }
 
 .sort-select {
    margin-left: 5px;
-   padding: 10px; /* Add some padding */
-   border-radius: 12px; /* Rounded corners */
-   border: 1px solid #ccc; /* Add a subtle border */
-   font-size: 15px; /* Increase font size */
-   min-width: 120px; /* Set a minimum width for better visibility */
+   padding: 10px;
+   border-radius: 12px; 
+   border: 1px solid #ccc; 
+   font-size: 15px; 
+   min-width: 120px; 
    transition: border-color 0.3s;
 }
 
 .sort-select:focus {
-   border-color: #007bff; /* Change border color on focus */
-   outline: none; /* Remove default outline */
+   border-color: #007bff; 
+   outline: none; 
+}
+
+.toolbar-item {
+   cursor: pointer; 
+   font-size: 24px; 
+   transition: color 0.3s ease, transform 0.2s; 
+   padding: 10px; 
+}
+
+.toolbar-item:hover {
+   color: #007bff;
+   transform: scale(1.1); 
+}
+
+.back {
+   color: #555; 
+}
+
+.back:hover {
+   color: #0056b3;
 }
 
 @media (max-width: 840px) {
