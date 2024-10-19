@@ -1,259 +1,108 @@
- /* mail list */
- .mail-list {
-    display: flex;
-    height: 100vh;
-    background-color: #F1F3F4;
-    padding: 20px;
- }
+/* mail list container */
+.mail-list {
+   display: flex;
+   height: 100vh;
+   background-color: #F1F3F4;
+   padding: 20px;
+   font-family: Arial, sans-serif;
+}
 
- .mail-list,body{
-    font-size: 20px;
- }
 
- .side-nav {
-    width: 250px;
-    background-color: white;
-    padding: 20px;
-    margin-right: 20px;
-    border-right: 1px solid #E0E0E0;
-    list-style-type: none;
- }
+/* mail table */
+.mail-table {
+   width: 100%;
+   background-color: white;
+   border-collapse: collapse;
+   table-layout: fixed;
+   margin-top: 20px;
+}
 
- .side-nav li {
-    padding: 12px 0;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    font-size: 20px;
- }
- .side-nav li:hover {
-    background-color: #E8F0FE;
-    border-radius: 4px;
-    padding-left: 10px;
- }
- .new-email {
-    display: block;
-    width: 250px;
-    height: 70px;
-    background-color:rgb(153, 210, 230);
-    color: black;
-    border: none;
-    border-radius: 20px;
-    padding: 0;
-    font-size: 16px;
-    margin-bottom: 16px;
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
- }
+.mail-table tbody tr {
+   border-bottom: 1px solid #E0E0E0;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
 
- .new-email:hover {
-    background-color: #0056B3;
- }
+.mail-table tbody tr:hover {
+   background-color: #F1F3F4;
+}
 
- .filter-emails{
-   height: 45px;
-   border-radius: 25px;
- }
- .mail-table {
-    width: 100%;
-    background-color: white;
-    border-collapse: collapse;
-    table-layout: fixed;
-    height: 1em;
-    margin-top: 20px;
- }
+/* Default unread emails (bold) */
+.mail-table td {
+   padding: 12px;
+   text-align: left;
+   vertical-align: middle;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   font-size: 14px;
+   font-weight: bold;
+   color: #202124;
+}
 
- .mail-table tbody tr {
-    border-bottom: 1px solid #E0E0E0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
- }
-
- .mail-table tbody tr:hover {
-    background-color: #F1F3F4;
- }
-
- .mail-table td {
-    padding: 8px;
-    text-align: left;
-    vertical-align: middle;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
- }
-
- .mail-table td:first-child:nth-child(2) {
-    font-weight: bold;
-    color: #202124;
-    width: 40%;
- }
- .mail-table td:first-child {
+.mail-table td:first-child {
    width: 35px;
 }
- .mail-table td:nth-child(2) {
+
+.mail-table td:nth-child(2) {
+   font-weight: bold;
+   color: #000000;
    width: 200px;
 }
 
- .mail-table td:nth-child(4){
+.mail-table td:nth-child(4) {
    color: #5F6368;
+   font-size: 13px;
 }
 
-.mail-table td:nth-child(6){
+/* Read emails (lighter color, normal weight) */
+.mail-table tbody tr.readed td {
+   font-weight: normal;
+   color: #5F6368; /* Lighter color for read emails */
+}
+
+/* Extra action buttons (trash, unread) */
+.extra {
+   visibility: hidden;
    width: 30px;
+   transition: background-color 0.3s ease;
+   padding: 5px;
+   border-radius: 50%;
 }
 
-.mail-table td:nth-child(7){
-   width: 100px;
-}
-
-.menu-item{
-    display: flex;
-    justify-content: space-between;
-}
-
-.readed{
-   color: #5F6368;
-}
-
-.extra{
-   visibility: hidden; 
-   width: 30px; 
-   transition: background-color 0.3s ease; 
-   padding: 5px; 
-   border-radius: 4px; 
-}
-
-tr:hover .extra{
+tr:hover .extra {
    visibility: visible;
 }
 
 .extra:hover {
-   background-color: #E0E0E0; 
+   background-color: #E0E0E0;
 }
 
-
-.extra:hover svg {
-   fill: #007BFF; 
-}
-
-
-tr:hover .td-hidden{
+/* Date column */
+.td-hidden {
    display: none;
 }
 
-
+/* Star icon */
 .star-icon {
    cursor: pointer;
-   width: 25px; 
-   height: 24px; 
-   transition: transform 0.3s ease; 
+   width: 24px;
+   height: 24px;
+   fill: none;
+   stroke: #70757a;
+   stroke-width: 2;
+   transition: transform 0.3s ease, fill 0.3s ease;
 }
 
 .star-icon:hover {
-   transform: scale(1.2); /* Slightly enlarge the icon on hover */
+   transform: scale(1.1);
 }
 
 .star-icon.filled {
-   fill: gold; 
+   fill: gold;
 }
 
-.star-icon:not(.filled) {
-   fill: none; 
-}
+/* Responsive styles */
+/* Mobile view (up to 767px) */
 
-.star-container {
-   display: flex; 
-   flex-direction: column;
-   align-items: flex-end; 
-}
 
-.new-filter {
-   display: flex;
-   align-items: center; 
-   margin-bottom: 16px; 
-}
-
-.new-email {
-   margin: 0.8em;
-}
-
-.filter-emails {
-   padding-left: 15px;
-   font-size: 20px;
-   height: 45px;
-   border-radius: 25px;
-   flex: 1; 
-   border: 1px solid #ccc; /* Add a subtle border */
-   transition: border-color 0.3s;
-}
-
-.filter-emails:focus {
-   border-color: #007bff; /* Change border color on focus */
-   outline: none; /* Remove default outline */
-}
-
-.filter-options {
-   display: flex;
-   align-items: center;
-   margin-left: 10px; /* Add some spacing */
-   gap: 30px;
-}
-
-.checkbox-label {
-   /* margin-right: 50px; */
-   font-size: 16px; /* Slightly smaller font */
-}
-
-.sort-label {
-   /* margin-left: 15px; */
-   font-size: 16px; /* Slightly smaller font */
-}
-
-.sort-select {
-   margin-left: 5px;
-   padding: 10px; /* Add some padding */
-   border-radius: 12px; /* Rounded corners */
-   border: 1px solid #ccc; /* Add a subtle border */
-   font-size: 15px; /* Increase font size */
-   min-width: 120px; /* Set a minimum width for better visibility */
-   transition: border-color 0.3s;
-}
-
-.sort-select:focus {
-   border-color: #007bff; /* Change border color on focus */
-   outline: none; /* Remove default outline */
-}
-
-@media (max-width: 840px) {
-   .mail-table {
-       display: block; 
-   }
-
-   .mail-table tbody tr {
-       display: block; 
-       width: 100%; 
-       margin-bottom: 10px; 
-       position: relative; /
-   }
-
-   .mail-table td {
-       display: flex; 
-       justify-content: space-between; 
-       width: 100%; 
-       padding: 8px 5px; 
-       box-sizing: border-box; 
-   }
-
-   .starred {
-       margin-left: auto; 
-   }
-
-   .td-hidden {
-       position: relative; 
-       padding-bottom: 20px; 
-   }
-}

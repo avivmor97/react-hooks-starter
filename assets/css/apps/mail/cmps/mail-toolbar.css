@@ -1,0 +1,66 @@
+/* ///////////////////////////      filter bar         ///////////////////////////////////  */
+
+.new-filter {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 16px;
+    padding: 0 16px;
+    
+ }
+
+.filter-emails {
+    margin-left: 15px;
+    padding-left: 15px;
+    font-size: 16px;
+    height: 40px;
+    border-radius: 24px;
+    flex: 1; 
+    border: 1px solid #e0e0e0; /* Lighter border */
+    background-color: #f1f3f4; /* Light background like Gmail */
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.filter-emails:focus {
+    border-color: #4285f4; /* Gmail's blue */
+    background-color: #ffffff; /* White background on focus */
+    outline: none; /* Remove default outline */
+}
+
+.filter-options {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Add some spacing */
+    gap: 20px; /* Adjust the gap to look more like Gmail */
+}
+
+/* ///////////////////////////      compose button         ///////////////////////////////////  */
+
+.new-email {
+    display: block;
+    width: 140px;
+    height: 48px;
+    background-color: #4285f4; /* Gmail blue */
+
+    margin-top: 15px;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 0;
+    font-size: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.new-email:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+}
+
+.new-email:active {
+    background-color: #2a65c4; /* Even darker on click */
+}

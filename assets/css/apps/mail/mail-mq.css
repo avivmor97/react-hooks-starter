@@ -1,0 +1,77 @@
+@media (max-width: 767px) {
+    /* mail list container */
+    .mail-list {
+        flex-direction: column;
+        padding: 5px;
+    }
+ 
+    /* side navigation */
+    .side-nav {
+        width: 100%;
+        padding: 10px;
+        margin-right: 0;
+        border-right: none;
+        border-bottom: 1px solid #E0E0E0;
+    }
+ 
+    /* Adjust side-nav for mobile */
+    .side-nav li {
+        font-size: 16px;
+        padding: 10px 5px;
+        text-align: center;
+    }
+ 
+    /* mail table */
+    .mail-table {
+        margin-top: 5px;
+        display: block; /* Stack rows vertically */
+    }
+ 
+    .mail-table tbody tr {
+        display: block;
+        border-bottom: 1px solid #E0E0E0;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+ 
+    .mail-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 5px;
+        box-sizing: border-box;
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+    }
+ 
+    .mail-table td:first-child {
+        width: auto;
+    }
+ 
+    .mail-table td:nth-child(2),
+    .mail-table td:nth-child(4) {
+        font-size: 13px;
+    }
+ 
+    /* Star and extra actions on mobile */
+    .extra {
+        width: 100%;
+        visibility: visible;
+        text-align: right;
+        padding: 5px;
+    }
+ 
+    .star-icon {
+        width: 20px;
+        height: 20px;
+    }
+ 
+    /* Date column becomes visible on mobile */
+    .td-hidden {
+        display: block;
+        font-size: 12px;
+        color: #5F6368;
+    }
+ 
+    
+ }
