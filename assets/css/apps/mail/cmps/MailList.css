@@ -64,10 +64,10 @@
 /* Extra action buttons (trash, unread) */
 .extra {
    visibility: hidden;
-   width: 30px;
+   width: 40px;
    transition: background-color 0.3s ease;
    padding: 5px;
-   border-radius: 50%;
+   
 }
 
 tr:hover .extra {

@@ -1,7 +1,7 @@
 
 import { utilService } from "../../../services/util.service.js"
 
-export function MailList({ mails, onSelectMailId, onStarrRow, onDeleteMail,onUnReadRow }) {
+export function MailList({ mails, onSelectMailId, onStarrRow, onDeleteMail, onUnReadRow }) {
 
     const StarIcon = ({ filled, onClick }) => (
         <svg
@@ -38,8 +38,12 @@ export function MailList({ mails, onSelectMailId, onStarrRow, onDeleteMail,onUnR
                         <td onClick={() => onSelectMailId(mail.id)}>{FromDisplay(mail.from)}</td>
                         <td onClick={() => onSelectMailId(mail.id)} >{mail.subject}</td>
                         <td >{mail.body}</td>
-                        <td className="extra" onClick={() => onDeleteMail(mail.id)}>🗑</td>
-                        <td className="extra" onClick={() => onUnReadRow(mail.id)}>🖆</td>
+                        <td className="extra" onClick={() => onDeleteMail(mail.id)}>
+                            <img src="assets\img\Delete.png" alt="Delete" />
+                        </td>
+                        <td className="extra" onClick={() => onUnReadRow(mail.id)}>
+                            <img src="assets\img\UpdateIcon.png" alt="Mark as Unread" />
+                        </td>
                         <td className="td-hidden" >{utilService.getEmailDate(mail.createdAt)}</td>
                     </tr></tbody>))}
         </table>
@@ -48,7 +52,7 @@ export function MailList({ mails, onSelectMailId, onStarrRow, onDeleteMail,onUnR
 }
 
 function FromDisplay(email) {
-    if(!email) return
+    if (!email) return
     const indx = email.indexOf('@')
     return email.substring(0, indx)
 
