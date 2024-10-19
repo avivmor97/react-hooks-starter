@@ -48,11 +48,37 @@
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.note-preview:hover .note-preview-btn {
+.note-preview-pin-btn {
+    width: 38px;
+    opacity: 0;
+    transform: translateY(10px);
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e7e7e7ab;
+    color: white;
+    cursor: pointer;
+    margin-right: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Adjusted to position it at the top-right */
+}
+
+/* Hover effects */
+.note-preview-pin-btn:hover, 
+.note-preview-btn:hover {
     opacity: 1;
     transform: translateY(0);
-    display: inline-block;
 }
+
+/* Show all buttons (including the pin button) on hover of the note */
+.note-preview:hover .note-preview-btn,
+.note-preview:hover .note-preview-pin-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 .note-preview-btn img {
     width: 24px;

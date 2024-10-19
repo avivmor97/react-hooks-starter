@@ -41,6 +41,14 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
     return match ? match[1] : null;
   }
 
+  // Function to send the note content to the email compose page
+  function sendToEmail() {
+    const emailSubject = encodeURIComponent(note.info.title || 'No Title');
+    const emailBody = encodeURIComponent(note.info.txt || '');
+    // Navigate to the email compose page with query params
+    window.location.href = `#/mail/new?subject=${emailSubject}&body=${emailBody}`;
+  }
+
   // Renders the note content based on its type
   function getNoteComponent(note) {
     switch (note.type) {
@@ -104,6 +112,18 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
 
   return (
     <div className="note-preview" onClick={() => onSelectNote(note)} style={{ backgroundColor: bgColor }}>
+      
+      {/* Pin Button positioned at top-right */}
+      <button
+        className="note-preview-pin-btn"
+        onClick={(e) => { e.stopPropagation(); onPin(note.id); }}
+      >
+        <img
+          src={note.isPinned ? 'assets/css/apps/note/icons/UnPin.png' : 'assets/css/apps/note/icons/Pin.png'}
+          alt="Pin/Unpin"
+        />
+      </button>
+
       {getNoteComponent(note)}
       <div className="btn-container">
         <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onTrash(note.id); }}>
@@ -112,26 +132,24 @@ export function NotePreview({ note, onTrash, onDuplicate, onPin, onArchiveNote, 
         <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onDuplicate(note.id); }}>
           <img src="assets/css/apps/note/icons/Duplicate.png" alt="Duplicate" />
         </button>
-        <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onPin(note.id); }}>
-          <img src={note.isPinned ? 'assets/css/apps/note/icons/UnPin.png' : 'assets/css/apps/note/icons/Pin.png'} alt="Pin/Unpin" />
-        </button>
         <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); onMoveToArchive(); }}>
           <img src="assets/css/apps/note/icons/Archive.png" alt="Archive" />
         </button>
+        <button className="note-preview-btn" onClick={(e) => { e.stopPropagation(); sendToEmail(); }}>
+          <img src="assets\img\Mail.png" alt="Send to Email" />
+        </button>
 
-        {/* Prevent the color change action from triggering the onSelectNote event */}
         <div className="note-preview-btn color-picker-container">
           <img src="assets/css/apps/note/icons/ColorPalette.png" alt="Change Background Color" />
           <input
             type="color"
             value={bgColor}
             onChange={handleColorChange}
-            onClick={(e) => e.stopPropagation()} /* Stop propagation for color input */
+            onClick={(e) => e.stopPropagation()} 
             className="color-input"
           />
         </div>
       </div>
-
     </div>
   );
 }

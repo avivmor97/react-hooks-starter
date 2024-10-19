@@ -1,13 +1,12 @@
-const { Route, Routes } = ReactRouterDOM
-const Router = ReactRouterDOM.HashRouter
+const { Route, Routes } = ReactRouterDOM;
+const Router = ReactRouterDOM.HashRouter;
 
-import { AppHeader } from "./cmps/AppHeader.jsx"
-import { About } from "./pages/About.jsx"
-import { Home } from "./pages/Home.jsx"
-// import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
-import { MailContainer} from "./apps/mail/pages/MailContainer.jsx"
-import { MailNew } from "./apps/mail/pages/MailNew.jsx"
-import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
+import { AppHeader } from "./cmps/AppHeader.jsx";
+import { About } from "./pages/About.jsx";
+import { Home } from "./pages/Home.jsx";
+import { MailContainer } from "./apps/mail/pages/MailContainer.jsx";
+import { MailNew } from "./apps/mail/pages/MailNew.jsx";
+import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx";
 
 export function App() {
     return (
@@ -17,9 +16,14 @@ export function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+
+            {/* Mail related routes */}
             <Route path="/mail" element={<MailContainer />} >
-               {/* <Route path="/mail/new" element={<MailNew />} /> */}
+              {/* Adding the /mail/new route for composing an email */}
+              <Route path="new" element={<MailNew />} />
             </Route>
+
+            {/* Note related routes */}
             <Route path="/note" element={<NoteIndex />} />
             <Route path="/note/pinned" element={<NoteIndex view="pinned" />} />
             <Route path="/note/archive" element={<NoteIndex view="archive" />} />

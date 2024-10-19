@@ -1,50 +1,57 @@
-
-const { useState } = React
-import { emailsService } from "../services/mail.service.js"
+const { useState, useEffect } = React;
+import { emailsService } from "../services/mail.service.js";
 
 export function MailNew({ onClose }) {
+    const [emailData, setEmailData] = useState(emailsService.getEmail('', '', '', false, Date.now(), null, 'user@appsus.com', '', false));
 
-    const [emailData, setEmailData] = useState(emailsService.getEmail('', '', '', false,
-                                                                      Date.now(), null, 'user@appsus.com',
-                                                                      '', false))
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const subject = params.get('subject') || '';
+        const body = params.get('body') || '';
+
+        setEmailData(prevState => ({
+            ...prevState,
+            subject,
+            messageBody: body
+        }));
+    }, []);
 
     function handleChange({ target }) {
-        const { name, value } = target
+        const { name, value } = target;
         setEmailData(prevState => ({
             ...prevState,
             [name]: value
-        }))
+        }));
     }
 
     function handleSend() {
-        const { to, subject, messageBody } = emailData; 
+        const { to, subject, messageBody } = emailData;
         if (!to || !subject || !messageBody) {
-            alert('Please fill in all fields')
-            return
+            alert('Please fill in all fields');
+            return;
         }
 
         const newEmail = emailsService.getEmail(
-            Date.now(), 
-            subject, 
-            messageBody, 
-            false, 
-            Date.now(), 
-            null, 
-            'user@appsus.com', 
+            Date.now(),
+            subject,
+            messageBody,
+            false,
+            Date.now(),
+            null,
+            'user@appsus.com',
             to,
-            false 
-        )
+            false
+        );
 
         emailsService.save(newEmail)
             .then(() => {
-                console.log('Email sent successfully')
+                console.log('Email sent successfully');
                 onClose();
             })
             .catch(err => {
-                console.log('Error sending email',err)
-            })
+                console.log('Error sending email', err);
+            });
     }
-
 
     return (
         <dialog className="new-mail new-mail-dialog" open>
@@ -56,11 +63,10 @@ export function MailNew({ onClose }) {
             <input onChange={handleChange} type="email" name="to" id="to" />
 
             <label htmlFor="subject">Subject</label>
-            <input onChange={handleChange} type="text" name="subject" id="subject" />
-
+            <input onChange={handleChange} type="text" name="subject" id="subject" value={emailData.subject} />
 
             <label htmlFor="messageBody">Body</label>
-            <textarea onChange={handleChange} name="messageBody" id="messageBody"></textarea>
+            <textarea onChange={handleChange} name="messageBody" id="messageBody" value={emailData.messageBody}></textarea>
 
             <ul className="send-toolbar">
                 <li className="toolbar-item send" onClick={handleSend}>
@@ -79,5 +85,5 @@ export function MailNew({ onClose }) {
                 </li>
             </ul>
         </dialog>
-    )
+    );
 }
