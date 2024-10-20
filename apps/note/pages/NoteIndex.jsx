@@ -176,7 +176,7 @@ export function NoteIndex() {
                     {/* Pinned Notes Section */}
                     {filteredPinnedNotes.length > 0 && (
                         <div className="pinned-notes-section">
-                            <h2>Pinned</h2>
+                            <h2 className="pinned-notes-header">Pinned</h2>
                             {filteredPinnedNotes.map(note => (
                                 <NotePreview
                                     key={note.id}
@@ -195,7 +195,7 @@ export function NoteIndex() {
                     {/* Unpinned Notes Section */}
                     {filteredUnpinnedNotes.length > 0 && (
                         <div className="unpinned-notes-section">
-                            <h2>Others</h2>
+                            <h2 className="pinned-notes-header" >Others</h2>
                             {filteredUnpinnedNotes.map(note => (
                                 <NotePreview
                                     key={note.id}

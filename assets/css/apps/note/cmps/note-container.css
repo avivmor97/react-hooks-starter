@@ -39,3 +39,14 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+
+.pinned-notes-header {
+    font-size: 0.85rem; 
+    color: #5f6368; 
+    font-weight: 600; 
+    letter-spacing: 0.5px; 
+    padding: 8px 12px; 
+    border-radius: 4px; 
+    
+}
