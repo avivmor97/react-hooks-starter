@@ -32,7 +32,7 @@ export function MailContainer() {
     }, [mails])
 
     useEffect(() => {
-        filterMails('inbox'); // Default to inbox
+        filterMails('inbox');
     }, [mails])
 
     function loadEmails() {
@@ -45,22 +45,36 @@ export function MailContainer() {
         setSelectedMailId(mailId)
     }
 
+
     function onDeleteMail(mailId) {
-        emailsService.remove(mailId)
-            .then(() => {
-                setEmails(prevMails => prevMails.filter(mail => mail.id !== mailId));
-                if (selectedMailId === mailId) {
-                    setSelectedMailId(null);
-                }
-            })
-            .catch(err => {
-                console.log('Error deleting email:', err);
-            });
+        const mail = mails.find(m => m.id === mailId)
+        if (!mail) return
+
+        if (!mail.removedAt) {
+            // Move to trash
+            const updatedMail = { ...mail, removedAt: Date.now() }
+            const updatedMails = mails.map(email => (email.id === mail.id ? updatedMail : email))
+
+            setEmails(updatedMails);
+            emailsService.save(updatedMail) 
+                .then(() => console.log('Email moved to trash'))
+                .catch(err => console.log('Error moving email to trash:', err))
+        } else {
+            // total delete
+            emailsService.remove(mailId)
+                .then(() => {
+                    setEmails(prevMails => prevMails.filter(mail => mail.id !== mailId))
+                    console.log('Email deleted permanently')
+                })
+                .catch(err => {
+                    console.log('Error deleting email:', err)
+                })
+        }
     }
 
     function onStarredRow(mail) {
         const updatedMail = { ...mail, isStarred: !mail.isStarred }
-        const updatedMails = mails.map(m => (m.id === mail.id ? updatedMail : m))
+        const updatedMails = mails.map(email => (email.id === mail.id ? updatedMail : email))
         setEmails(updatedMails)
         emailsService.save(updatedMail)
     }
@@ -69,7 +83,7 @@ export function MailContainer() {
         const mail = mails.find(m => m.id === mailId)
         if (!mail) return;
         const updatedMail = { ...mail, isRead: !mail.isRead }
-        const updatedMails = mails.map(m => (m.id === mail.id ? updatedMail : m))
+        const updatedMails = mails.map(email => (email.id === mail.id ? updatedMail : email))
         setEmails(updatedMails)
         emailsService.save(updatedMail)
             .then(() => {
@@ -85,17 +99,20 @@ export function MailContainer() {
     }
 
     const filterMails = (category) => {
-        let filtered = mails // Start with all mails
+        let filtered = mails
 
         switch (category) {
             case 'inbox':
-                filtered = mails.filter(mail => mail.from !== 'user@appsus.com')
+                filtered = mails.filter(mail => mail.from !== 'user@appsus.com' && mail.removedAt === null)
                 break
             case 'starred':
-                filtered = mails.filter(mail => mail.isStarred && mail.from !== 'user@appsus.com')
+                filtered = mails.filter(mail => mail.isStarred && mail.from !== 'user@appsus.com' && mail.removedAt === null)
                 break
             case 'sent':
-                filtered = mails.filter(mail => mail.from === 'user@appsus.com')
+                filtered = mails.filter(mail => mail.from === 'user@appsus.com' && mail.removedAt === null)
+                break
+            case 'trash':
+                filtered = mails.filter(mail => mail.removedAt !== null)
                 break
             default:
                 break
@@ -104,7 +121,18 @@ export function MailContainer() {
         setFilteredMails(filtered);
     }
 
+    function sendMail(newMail) {
+        return emailsService.save(newMail)
+            .then(savedMail => {
+                setEmails(prevMails => [...prevMails, savedMail])
+                return savedMail
+            })
+    }
+
+
     if (!mails) return
+
+
 
     return (
         <Fragment>
@@ -118,7 +146,7 @@ export function MailContainer() {
                     placeholder="Filter by Subject, To, or Body"
                 />
                 <div className="filter-options">
-                    <label  className="filter-option-1">
+                    <label className="filter-option-1">
                         <input className="input-list"
                             type="checkbox"
                             onChange={(e) => setFilterBy(prev => ({ ...prev, isRead: e.target.checked }))}
@@ -128,7 +156,7 @@ export function MailContainer() {
 
                     <label className="filter-option-2">
                         Sort by:
-                        <select onChange={(e) => setSortBy(e.target.value)}  className="sort-select">
+                        <select onChange={(e) => setSortBy(e.target.value)} className="sort-select">
                             <option value="date">Date</option>
                             <option value="title">Title</option>
                         </select>
@@ -136,7 +164,7 @@ export function MailContainer() {
                 </div>
             </div>
             {isDialogOpen && (
-                <MailNew onClose={() => setIsDialogOpen(false)} />
+                <MailNew onClose={() => setIsDialogOpen(false)} onSendMail={sendMail} />
             )}
 
             <section className="mail-list">

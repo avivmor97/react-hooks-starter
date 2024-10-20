@@ -1,7 +1,7 @@
 const { useState, useEffect } = React;
 import { emailsService } from "../services/mail.service.js";
 
-export function MailNew({ onClose }) {
+export function MailNew({ onClose , onSendMail}) {
   const [emailData, setEmailData] = useState({
     to: '',
     subject: '',
@@ -14,12 +14,12 @@ export function MailNew({ onClose }) {
     const hash = window.location.hash;
     const params = new URLSearchParams(hash.split('?')[1]); // Extract part after `?` in the hash
 
-    const subject = params.get('subject') || '';
-    const body = params.get('body') || '';
+    const subject = params.get('subject') || ''
+    const body = params.get('body') || ''
 
     // Log decoded values for debugging
-    console.log('Decoded Subject:', decodeURIComponent(subject));
-    console.log('Decoded Body:', decodeURIComponent(body));
+    console.log('Decoded Subject:', decodeURIComponent(subject))
+    console.log('Decoded Body:', decodeURIComponent(body))
 
     // Update state with decoded values
     setEmailData({
@@ -27,21 +27,21 @@ export function MailNew({ onClose }) {
       subject: decodeURIComponent(subject),
       messageBody: decodeURIComponent(body)
     });
-  }, []);
+  }, [])
 
   function handleChange({ target }) {
     const { name, value } = target;
     setEmailData(prevState => ({
       ...prevState,
       [name]: value
-    }));
+    }))
   }
 
   function handleSend() {
     const { to, subject, messageBody } = emailData;
     if (!to || !subject || !messageBody) {
-      alert('Please fill in all fields');
-      return;
+      alert('Please fill in all fields')
+      return
     }
 
     const newEmail = emailsService.getEmail(
@@ -54,17 +54,19 @@ export function MailNew({ onClose }) {
       'user@appsus.com',
       to,
       false
-    );
+    )
 
-    emailsService.save(newEmail)
+    onSendMail(newEmail)
       .then(() => {
-        console.log('Email sent successfully');
-        onClose();
+        console.log('Email sent successfully')
+        onClose() // Close the dialog after sending
       })
       .catch(err => {
-        console.log('Error sending email', err);
-      });
+        console.log('Error sending email', err)
+      })
+
   }
+
 
   return (
     <dialog className="new-mail new-mail-dialog" open>
